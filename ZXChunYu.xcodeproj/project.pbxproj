@@ -30,6 +30,8 @@
 		E07E2AF01C698C1C00D572B3 /* ZXProfileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E07E2AEF1C698C1C00D572B3 /* ZXProfileTool.m */; };
 		E08ADEC81C5502C900984867 /* ZXRegistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E08ADEC61C5502C900984867 /* ZXRegistVC.m */; };
 		E08ADEDB1C550D3B00984867 /* ZXConfirmPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E08ADEDA1C550D3B00984867 /* ZXConfirmPasswordVC.m */; };
+		E0BF591D1C8591630043AB78 /* ZXAd.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BF591C1C8591630043AB78 /* ZXAd.m */; };
+		E0BF59201C8591EB0043AB78 /* ZXAdTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BF591F1C8591EB0043AB78 /* ZXAdTool.m */; };
 		E0E928531C7AF70B009BB8F2 /* ZXButtomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E928521C7AF70B009BB8F2 /* ZXButtomCell.m */; };
 		E0E928691C802BAC009BB8F2 /* ZXHorizonalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E928641C802BAC009BB8F2 /* ZXHorizonalTableViewController.m */; };
 		E0E9286A1C802BAC009BB8F2 /* ZXSwipableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E928661C802BAC009BB8F2 /* ZXSwipableViewController.m */; };
@@ -159,6 +161,10 @@
 		E08ADEC61C5502C900984867 /* ZXRegistVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXRegistVC.m; sourceTree = "<group>"; };
 		E08ADED91C550D3B00984867 /* ZXConfirmPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXConfirmPasswordVC.h; sourceTree = "<group>"; };
 		E08ADEDA1C550D3B00984867 /* ZXConfirmPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXConfirmPasswordVC.m; sourceTree = "<group>"; };
+		E0BF591B1C8591630043AB78 /* ZXAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXAd.h; sourceTree = "<group>"; };
+		E0BF591C1C8591630043AB78 /* ZXAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXAd.m; sourceTree = "<group>"; };
+		E0BF591E1C8591EB0043AB78 /* ZXAdTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXAdTool.h; sourceTree = "<group>"; };
+		E0BF591F1C8591EB0043AB78 /* ZXAdTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXAdTool.m; sourceTree = "<group>"; };
 		E0E928511C7AF70B009BB8F2 /* ZXButtomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXButtomCell.h; sourceTree = "<group>"; };
 		E0E928521C7AF70B009BB8F2 /* ZXButtomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXButtomCell.m; sourceTree = "<group>"; };
 		E0E928631C802BAC009BB8F2 /* ZXHorizonalTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXHorizonalTableViewController.h; sourceTree = "<group>"; };
@@ -441,6 +447,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		E0BF59191C8590FE0043AB78 /* HomeModel */ = {
+			isa = PBXGroup;
+			children = (
+				E0BF591B1C8591630043AB78 /* ZXAd.h */,
+				E0BF591C1C8591630043AB78 /* ZXAd.m */,
+			);
+			path = HomeModel;
+			sourceTree = "<group>";
+		};
+		E0BF591A1C8590FE0043AB78 /* HomeTool */ = {
+			isa = PBXGroup;
+			children = (
+				E0BF591E1C8591EB0043AB78 /* ZXAdTool.h */,
+				E0BF591F1C8591EB0043AB78 /* ZXAdTool.m */,
+			);
+			path = HomeTool;
+			sourceTree = "<group>";
+		};
 		E0E928621C802BAC009BB8F2 /* SwipableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -666,8 +690,9 @@
 		E9B5E3C31C05B2F400660774 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E0BF59191C8590FE0043AB78 /* HomeModel */,
+				E0BF591A1C8590FE0043AB78 /* HomeTool */,
 				E9B5E3C41C05B2F400660774 /* Controller */,
-				E9B5E3C51C05B2F400660774 /* Model */,
 				E9B5E3C61C05B2F400660774 /* View */,
 			);
 			path = Home;
@@ -680,13 +705,6 @@
 				E9D4F9741C118F56005A81BE /* ZXHomeTVC.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		E9B5E3C51C05B2F400660774 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		E9B5E3C61C05B2F400660774 /* View */ = {
@@ -1220,6 +1238,7 @@
 				E9E5F1EB1C200CE400670B4A /* ZXLoginParams.m in Sources */,
 				E9A571301C16DDE600537BE5 /* ZXHomeAdView.m in Sources */,
 				E0E9287B1C805143009BB8F2 /* ZXHealthNewsTool.m in Sources */,
+				E0BF591D1C8591630043AB78 /* ZXAd.m in Sources */,
 				E9CD8B8C1C43A3C100DF169C /* TYGSelectMenuEntity.m in Sources */,
 				E9E5F1F61C20113B00670B4A /* ZXAccountTool.m in Sources */,
 				E9E5F1F91C213F7300670B4A /* ZXHTTPTool.m in Sources */,
@@ -1233,6 +1252,7 @@
 				E9D4F9611C0EE885005A81BE /* ZXTableViewGroup.m in Sources */,
 				E05F35001C5263D000DC0EA4 /* ZXHosTitleCell.m in Sources */,
 				E9CD1FEA1C4E112B006947EF /* ZXNetworkStatusTool.m in Sources */,
+				E0BF59201C8591EB0043AB78 /* ZXAdTool.m in Sources */,
 				E9D4F96F1C1031AF005A81BE /* UIView+ZX.m in Sources */,
 				E9FF623E1C4746DB006D05B0 /* UIImageView+ZXBorder.m in Sources */,
 				E0E928991C8220A6009BB8F2 /* ZXTreatmentsTool.m in Sources */,

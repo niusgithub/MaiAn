@@ -31,14 +31,14 @@
 @property (nonatomic, strong) NSMutableArray *serverResponseObjects;
 @property (nonatomic, assign) int allCount;
 
-@property (nonatomic, strong) ZXButtomCell *buttomCell;
+//@property (nonatomic, strong) ZXButtomCell *buttomCell;
 //@property (nonatomic, strong) UILabel *label;
 @property (nonatomic, assign) NSUInteger page;
 
 @property (nonatomic, copy) void (^anotherNetWorking)();
 
 //- (NSArray *)parseXML:(ONOXMLDocument *)xml;
-- (void)fetchMore;
+//- (void)fetchMore;
 - (void)refresh;
 
 @end

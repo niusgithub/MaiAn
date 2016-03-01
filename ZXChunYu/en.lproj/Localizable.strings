@@ -7,8 +7,8 @@
 */
 
 "password" = "Password";
-"UNMARRIED" = "unmarried";
-"MARRIED" = "married";
+"UNMARRIED" = "Unmarried";
+"MARRIED" = "Married";
 "MAN" = "Male";
 "WOMAN" = "Female";
 

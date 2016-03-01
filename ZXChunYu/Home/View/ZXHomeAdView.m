@@ -7,23 +7,38 @@
 //
 
 #import "ZXHomeAdView.h"
+#import "ZXAd.h"
 
+#import "NSString+ZX.h"
 #import "UIColor+ZX.h"
 #import "NSTimer+ZXBlockSupport.h"
 #import "ZXCommon.h"
+#import "ZXChunYuAPI.h"
 
-#define ImageCount 3
+#import <SafariServices/SafariServices.h>
+
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ZXHomeAdView() <UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSMutableArray *ads;
 @end
 
-@implementation ZXHomeAdView 
+@implementation ZXHomeAdView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (NSMutableArray *)ads {
+    if (!_ads) {
+        _ads = [[NSMutableArray alloc] init];
+    }
+    return _ads;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame  andAds:(NSMutableArray *)ads{
     if (self = [super initWithFrame:frame]) {
+        
+        _ads = ads;
         
         _scrollView = [[UIScrollView alloc] initWithFrame:frame];
         [self addSubview:_scrollView];
@@ -34,18 +49,29 @@
         _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(width/2-15, height-23, 30, 30)];
         [self addSubview:_pageControl];
         
-        for (int i = 1; i < ImageCount + 1; i++) {
-            CGFloat imageX = (i - 1) * width;
+        for (int i = 0; i < ads.count; i++) {
+            
+            ZXAd *ad = ads[i];
+            
+            CGFloat imageX = i * width;
             CGFloat imageY = 0.f;
-            UIButton *imageBtn = [[UIButton alloc] initWithFrame:CGRectMake(imageX, imageY, width, height)];
-            [imageBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"img_%02d", i]] forState:UIControlStateNormal];
-            [imageBtn addTarget:self action:@selector(AdOnClick) forControlEvents:UIControlEventTouchUpInside];
+            
+            UIImageView *adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageX, imageY, width, height)];
+            
+            adImageView.userInteractionEnabled = YES;
+            
+            NSString *adImageURL = [[ZXChunYu_RESOURCE_PREFIX stringByAppendingString:ad.img_path] stringTransToUTF8];
+            
+            [adImageView sd_setImageWithURL:[NSURL URLWithString:adImageURL] placeholderImage:nil];
+            
+            [adImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(adOnClick)]];
 
-            imageBtn.imageView.contentMode = UIViewContentModeScaleToFill;
-            [self.scrollView addSubview:imageBtn];
+            adImageView.contentMode = UIViewContentModeScaleToFill;
+            //imageBtn.imageView.contentMode = UIViewContentModeScaleToFill;
+            [self.scrollView addSubview:adImageView];
         }
         
-        self.scrollView.contentSize = CGSizeMake(ImageCount * width, 0);
+        self.scrollView.contentSize = CGSizeMake(ads.count * width, 0);
         
         self.scrollView.bounces = NO;
         self.scrollView.showsHorizontalScrollIndicator = NO;
@@ -54,7 +80,7 @@
         // 设置代理
         self.scrollView.delegate = self;
         // 设置总页数
-        self.pageControl.numberOfPages = ImageCount;
+        self.pageControl.numberOfPages = ads.count;
         
         self.pageControl.currentPageIndicatorTintColor = [UIColor themeColor];
         self.pageControl.pageIndicatorTintColor = ZXGrayColor;
@@ -64,12 +90,17 @@
     return self;
 }
 
-- (void)AdOnClick {
-    XZXLog(@"click!");
+- (void)adOnClick {
+    ZXAd *ad = _ads[_pageControl.currentPage];
+    
+    NSString *adURL = [ZXChunYu_RESOURCE_PREFIX stringByAppendingString:ad.html_path];
+    
+    if ([self.delegate respondsToSelector:@selector(jumpAdPage:)]) {
+        [self.delegate jumpAdPage:adURL];
+    }
 }
 
-- (void)addScrollTimer
-{
+- (void)addScrollTimer {
     // 创建定时器（两种方式：timerWithTimeInterval）
     // self.timer = [NSTimer scheduledTimerWithTimeInterval:1.f target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
 //    self.timer = [NSTimer timerWithTimeInterval:5.f target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
@@ -82,15 +113,13 @@
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
-- (void)removeScrollTimer
-{
+- (void)removeScrollTimer {
     [_timer invalidate];
     _timer = nil;
 }
 
 // 下一页
-- (void)nextPage
-{
+- (void)nextPage {
     NSInteger currentPage = self.pageControl.currentPage;
     currentPage++;
     if (currentPage == 3) {

@@ -18,9 +18,11 @@
 #import <SafariServices/SafariServices.h>
 
 #import "ZXDoctor.h"
+#import "ZXAd.h"
 
 #import "ZXGetDocsTool.h"
 #import "ZXGetDocExtraInfo.h"
+#import "ZXAdTool.h"
 
 #import "ZXChunYuAPI.h"
 #import "ZXCommon.h"
@@ -28,25 +30,24 @@
 #import "YYModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface ZXHomeTVC ()
+@interface ZXHomeTVC () <ZXHomeAdViewDelegate>
 @property (nonatomic, strong) NSMutableArray *recommendedDoctors;
+@property (nonatomic, strong) NSMutableArray *ads;
 @end
 
 @implementation ZXHomeTVC
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    self.title = @"首页";
+    
+    [self.tableView registerNib:[UINib nibWithNibName:kRDTableCellNibName bundle:nil] forCellReuseIdentifier:kRDCellIdentifier];
     
     // 获取默认推荐医生(只要5个)
     [self getDocs];
     
-    [self.tableView registerNib:[UINib nibWithNibName:kRDTableCellNibName bundle:nil] forCellReuseIdentifier:kRDCellIdentifier];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.title = @"首页";
+    [self fetchAdsData];
     
     [self configureGroups];
 }
@@ -59,6 +60,33 @@
         _recommendedDoctors = [[NSMutableArray alloc] init];
     }
     return _recommendedDoctors;
+}
+
+- (NSMutableArray *)ads {
+    if (!_ads) {
+        _ads = [[NSMutableArray alloc] init];
+    }
+    return _ads;
+}
+
+/**
+ *  联网请求广告数据
+ */
+- (void)fetchAdsData {
+    [self.ads removeAllObjects];
+    
+    [ZXAdTool getAdsWithSuccessBlock:^(id responseObject) {
+        NSDictionary *adInfoJson = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        
+        for (NSDictionary *adDict in adInfoJson) {
+            @autoreleasepool {
+                ZXAd *ad = [ZXAd yy_modelWithDictionary:adDict];
+                [self.ads addObject:ad];
+            }
+        }
+    } failureBlock:^(NSError *error) {
+        NSLog(@"fetchAdsData_ERR:%@",error);
+    }];
 }
 
 /**
@@ -231,7 +259,9 @@
  */
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 1) {
-        ZXHomeAdView *view = [[ZXHomeAdView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 130)];
+        CGRect frame = CGRectMake(0, 0, Main_Screen_Width, 130);
+        ZXHomeAdView *view = [[ZXHomeAdView alloc] initWithFrame:frame andAds:_ads];
+        view.delegate = self;
         return view;
     }
     return nil;
@@ -295,6 +325,18 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
+}
+
+
+#pragma mark - ZXHomeAdViewDelegate 
+
+- (void)jumpAdPage:(NSString *)URL {
+    if (System_Version >= 9.0) {
+        SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:URL]  entersReaderIfAvailable:YES];
+        [self presentViewController:safariViewController animated:YES completion:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URL]];
     }
 }
 

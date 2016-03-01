@@ -44,4 +44,7 @@ static NSString *const getArticlesByType = @"/encyclopedia/getArticlesByType.do"
 // 产品
 static NSString *const getGoods = @"/goods/getGoods.do";
 
+// 首页广告
+static NSString *const getAds = @"/ads/getOnceAds.do";
+
 #endif /* ZXChunYuAPI_h */

@@ -73,9 +73,9 @@
     }
     
     // 上拉加载
-    _buttomCell = [[ZXButtomCell alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 44)];
-    [_buttomCell addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fetchMore)]];
-    self.tableView.tableFooterView = _buttomCell;
+//    _buttomCell = [[ZXButtomCell alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 44)];
+//    [_buttomCell addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fetchMore)]];
+//    self.tableView.tableFooterView = _buttomCell;
     
     //if (!_shouldFetchDataAfterLoaded) {return;}
 }
@@ -109,19 +109,19 @@
 
 #pragma mark - 上拉加载更多
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.size.height - 150)) {
-        [self fetchMore];
-    }
-}
-
-- (void)fetchMore {
-    NSLog(@"加载更多");
-    if (!_buttomCell.shouldResponseToTouch) {return;}
-    
-    _buttomCell.type = ZXButtomCellTypeLoading;
-    //_manager.requestSerializer.cachePolicy = NSURLRequestUseProtocolCachePolicy;
-    //[self fetchObjectsOnPage:++_page refresh:NO];
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    if (scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.size.height - 150)) {
+//        [self fetchMore];
+//    }
+//}
+//
+//- (void)fetchMore {
+//    NSLog(@"加载更多");
+//    if (!_buttomCell.shouldResponseToTouch) {return;}
+//    
+//    _buttomCell.type = ZXButtomCellTypeLoading;
+//    //_manager.requestSerializer.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+//    //[self fetchObjectsOnPage:++_page refresh:NO];
+//}
 
 @end

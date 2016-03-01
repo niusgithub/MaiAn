@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ZXHomeAdViewDelegate <NSObject>
+
+- (void)jumpAdPage:(NSString *)URL;
+
+@end
+
+
 @interface ZXHomeAdView : UIView
+
+@property (nonatomic, weak) id<ZXHomeAdViewDelegate> delegate;
+
+- (instancetype)initWithFrame:(CGRect)frame  andAds:(NSMutableArray *)ads;
 
 @end
