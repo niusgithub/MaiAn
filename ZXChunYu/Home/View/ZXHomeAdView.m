@@ -46,7 +46,7 @@
         CGFloat width = frame.size.width;
         CGFloat height = frame.size.height;
         
-        _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(width/2-15, height-23, 30, 30)];
+        _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(width-45, height-25, 30, 30)];
         [self addSubview:_pageControl];
         
         for (int i = 0; i < ads.count; i++) {

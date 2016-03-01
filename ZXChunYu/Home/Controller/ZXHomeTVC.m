@@ -129,7 +129,7 @@
  *  初始化模型数据
  */
 - (void)configureGroups {
-    [self configureAdGroup];
+    //[self configureAdGroup];
     [self configureMainGroup];
     [self configureDocGroup];
 }
@@ -166,19 +166,18 @@
 /**
  *  广告条
  */
-- (void)configureAdGroup {
-    // 创建组
-    ZXTableViewGroup *group = [ZXTableViewGroup group];
-    [self.groups addObject:group];
-    
-    group.items = @[];
-}
+//- (void)configureAdGroup {
+//    // 创建组
+//    ZXTableViewGroup *group = [ZXTableViewGroup group];
+//    [self.groups addObject:group];
+//    
+//    group.items = @[];
+//}
 
 /**
  *  推荐医生
  */
 - (void)configureDocGroup {
-    
     // 创建组
     ZXTableViewGroup *group = [ZXTableViewGroup group];
     [self.groups addObject:group];
@@ -196,7 +195,7 @@
  *  @return return value description
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section != 2) {
+    if (indexPath.section != 1) {
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     } else {
         ZXRDTableViewCell *cell = (ZXRDTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:kRDCellIdentifier forIndexPath:indexPath];
@@ -233,7 +232,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section != 2) {
+    if (section != 1) {
         return [super tableView:tableView numberOfRowsInSection:section];
     } else {
         if (self.recommendedDoctors.count > 0) {
@@ -247,7 +246,7 @@
  *  广告条高度
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == 0) {
         return 130;
     }
     return 0;
@@ -257,7 +256,7 @@
  *  替换header，变为广告条
  */
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == 0) {
         CGRect frame = CGRectMake(0, 0, Main_Screen_Width, 130);
         ZXHomeAdView *view = [[ZXHomeAdView alloc] initWithFrame:frame andAds:_ads];
         view.delegate = self;
@@ -267,12 +266,12 @@
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 1) {
-        return 1;
-    }
-    return 20;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    if (section == 1) {
+//        return 1;
+//    }
+//    return 20;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
@@ -305,7 +304,6 @@
                 break;
                 
             case 3: {
-                NSString *selfCheckURL = @"http://114.215.136.156/html/jmqz_level/jmqz_djpd.html";
                 if (System_Version >= 9.0) {
                     SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:selfCheckURL]  entersReaderIfAvailable:YES];
                     [self presentViewController:safariViewController animated:YES completion:nil];
@@ -317,7 +315,7 @@
         }
     }
     
-    if (indexPath.section == 2) {
+    if (indexPath.section == 1) {
         // 打开对应的医生的诊所
         ZXDoctor *doc = self.recommendedDoctors[indexPath.row];
         ZXDocClinicTVC *vc = [[ZXDocClinicTVC alloc] initClinicWithDoctor:doc];
