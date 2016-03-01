@@ -129,9 +129,8 @@
  *  初始化模型数据
  */
 - (void)configureGroups {
-    [self configureMainGroup];
     [self configureAdGroup];
-    
+    [self configureMainGroup];
     [self configureDocGroup];
 }
 
