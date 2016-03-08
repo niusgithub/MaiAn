@@ -12,6 +12,13 @@
 "MAN" = "Male";
 "WOMAN" = "Female";
 
+//Home
+"recommendedDoctors" = "Recommended Doctors";
+"quickQuestions" = "Q&A";
+"search4Hos" = "Find Hospitals";
+"search4Doc" = "Find Doctors";
+"selfDignose" = "Self Dignose";
+
 // SMS
 "welcome"="Click on the screen to continue...";
 "RegisterBySMS"="Register By SMS";

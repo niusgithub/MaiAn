@@ -12,6 +12,13 @@
 "MAN" = "男";
 "WOMAN" = "女";
 
+//Home
+"recommendedDoctors" = "推荐医生";
+"quickQuestions" = "快速提问";
+"search4Hos" = "找医院";
+"search4Doc" = "找医生";
+"selfDignose" = "自我评估";
+
 // SMS
 "welcome"="点击屏幕继续...";
 "RegisterBySMS"="短信验证码注册";

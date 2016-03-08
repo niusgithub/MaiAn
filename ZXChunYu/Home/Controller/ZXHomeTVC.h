@@ -6,10 +6,8 @@
 //  Copyright © 2015年 陈知行. All rights reserved.
 //
 
-#import "ZXBasicStaticTableView.h"
+#import "ZXBasicDynamicTVC.h"
 
-@class ZXDoctor, ZXRDTableViewCell;
-
-@interface ZXHomeTVC : ZXBasicStaticTableView
+@interface ZXHomeTVC : ZXBasicDynamicTVC
 
 @end

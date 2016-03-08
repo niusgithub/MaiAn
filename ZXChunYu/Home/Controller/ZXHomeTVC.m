@@ -14,6 +14,8 @@
 #import "ZXSearch4HosTVC.h"
 #import "ZXRDTableViewCell.h"
 #import "ZXDocClinicTVC.h"
+#import "ZXInsetLabel.h"
+#import "ZXHomeMainCell.h"
 
 #import <SafariServices/SafariServices.h>
 
@@ -26,9 +28,12 @@
 
 #import "ZXChunYuAPI.h"
 #import "ZXCommon.h"
+#import "UIColor+ZX.h"
 
 #import "YYModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+
+const CGFloat kTitleCellHeight = 30;
 
 @interface ZXHomeTVC () <ZXHomeAdViewDelegate>
 @property (nonatomic, strong) NSMutableArray *recommendedDoctors;
@@ -43,13 +48,12 @@
     self.title = @"首页";
     
     [self.tableView registerNib:[UINib nibWithNibName:kRDTableCellNibName bundle:nil] forCellReuseIdentifier:kRDCellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:kHomeMainCellNibName bundle:nil] forCellReuseIdentifier:kHomeMainCellID];
     
     // 获取默认推荐医生(只要5个)
-    [self getDocs];
+    [self fetchDocsData];
     
     [self fetchAdsData];
-    
-    [self configureGroups];
 }
 
 
@@ -92,7 +96,7 @@
 /**
  *  联网请求医生数据（需要封装离线数据）
  */
-- (void)getDocs {
+- (void)fetchDocsData {
     //  判断是否有离线数据
 
     
@@ -123,205 +127,199 @@
 }
 
 
-#pragma mark - Group
-
-/**
- *  初始化模型数据
- */
-- (void)configureGroups {
-    //[self configureAdGroup];
-    [self configureMainGroup];
-    [self configureDocGroup];
-}
-
-- (void)configureMainGroup {
-    // 创建组
-    ZXTableViewGroup *group = [ZXTableViewGroup group];
-    [self.groups addObject:group];
-    
-    // 设置数据
-    // group.header = @""
-    
-    // 设置组的数据
-    // 快速提问
-    ZXTableViewItem *question = [ZXTableViewItem itemWithType:ZXTableViewCellTypeArrow title:@"快速提问" icon:@"question"];
-    question.subTitle = @"描述症状 快速解答";
-    
-    // 找医生cell
-    ZXTableViewItem *search4Doc = [ZXTableViewItem itemWithType:ZXTableViewCellTypeArrow title:@"找医生" icon:@"doctor"];
-    search4Doc.subTitle = @"咨询、预约指定医生";
-    // search4Doc.destVCClass = [ZXSearch4DocTVC class];
-    
-    // 找医院
-    ZXTableViewItem *search4Hos = [ZXTableViewItem itemWithType:ZXTableViewCellTypeArrow title:@"找医院" icon:@"hospital"];
-    search4Hos.subTitle = @"附近医院";
-    
-    // 自我评估
-    ZXTableViewItem *selfCheck = [ZXTableViewItem itemWithType:ZXTableViewCellTypeArrow title:@"自我评估" icon:@"selfCheck"];
-    selfCheck.subTitle = @"帮您判断身体的不适";
-    
-    group.items = @[question, search4Doc, search4Hos, selfCheck];
-}
-
-/**
- *  广告条
- */
-//- (void)configureAdGroup {
-//    // 创建组
-//    ZXTableViewGroup *group = [ZXTableViewGroup group];
-//    [self.groups addObject:group];
-//    
-//    group.items = @[];
-//}
-
-/**
- *  推荐医生
- */
-- (void)configureDocGroup {
-    // 创建组
-    ZXTableViewGroup *group = [ZXTableViewGroup group];
-    [self.groups addObject:group];
-}
-
-
 #pragma mark - TableView DataSource
 
-/**
- *  推荐医生的cell
- *
- *  @param tableView tableView description
- *  @param indexPath indexPath description
- *
- *  @return return value description
- */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section != 1) {
-        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    } else {
-        ZXRDTableViewCell *cell = (ZXRDTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:kRDCellIdentifier forIndexPath:indexPath];
-        
-        if (self.recommendedDoctors.count > 0) {
-            ZXDoctor *doc = self.recommendedDoctors[indexPath.row];
-            
-            //粉丝数
-            [ZXGetDocExtraInfo getDoctorFollowerNumberWithDID:doc.did successBlock:^(id responseObject) {
-//                NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-//                NSLog(@"followerNum:%@",rStr);
-                NSDictionary *followerNum = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-                // followerNum[@"num"] 类型为NSNumber 可以打印 不能赋值给NSString
-                doc.followerNum = [followerNum[@"num"] stringValue];
-            } failureBlock:^(NSError *error) {
-                NSLog(@"getDoctorExtraInfo--followerNum ERR:%@",error);
-            }];
-            
-            //服务人数
-            [ZXGetDocExtraInfo getDoctorServeNumberWithDID:doc.did successBlock:^(id responseObject) {
-//                NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-//                NSLog(@"serveNum:%@",rStr);
-                NSDictionary *serveNum = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-                // serveNum[@"num"] 类型为NSNumber 可以打印 不能赋值给NSString
-                doc.serveNum = [serveNum[@"num"] stringValue];
-            } failureBlock:^(NSError *error) {
-                NSLog(@"getDoctorExtraInfo--serveNum ERR:%@",error);
-            }];
-
-            [cell configureRDCellWithDoctor:doc];
-        }
-        return cell;
-    }
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section != 1) {
-        return [super tableView:tableView numberOfRowsInSection:section];
-    } else {
-        if (self.recommendedDoctors.count > 0) {
-            return 5;
+    
+    switch (section) {
+        case 0:
+            return 1;
+            break;
+        case 1:
+            return self.recommendedDoctors.count < 5 ? self.recommendedDoctors.count : 5;
+            break;
+            
+        default:
+            return 0;
+            break;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case 0: {
+            ZXHomeMainCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kHomeMainCellID];
+            cell.frame = CGRectMake(0, 0, Main_Screen_Width, kHomeMainCellHeight);
+            
+            [cell.questionBtn setImage:[UIImage imageNamed:@"question"] forState:UIControlStateNormal];
+            [cell.questionBtn setTitle:NSLocalizedString(@"quickQuestions", nil) forState:UIControlStateNormal];
+            [cell.questionBtn setTag:1];
+            [cell.questionBtn addTarget:self action:@selector(mainCellBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [cell.search4HosBtn setImage:[UIImage imageNamed:@"hospital"] forState:UIControlStateNormal];
+            [cell.search4HosBtn setTitle:NSLocalizedString(@"search4Hos", nil) forState:UIControlStateNormal];
+            [cell.search4HosBtn setTag:2];
+            [cell.search4HosBtn addTarget:self action:@selector(mainCellBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [cell.search4DocBtn setImage:[UIImage imageNamed:@"doctor"] forState:UIControlStateNormal];
+            [cell.search4DocBtn setTitle:NSLocalizedString(@"search4Doc", nil) forState:UIControlStateNormal];
+            [cell.search4DocBtn setTag:3];
+            [cell.search4DocBtn addTarget:self action:@selector(mainCellBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [cell.selfDigonseBtn setImage:[UIImage imageNamed:@"selfCheck"] forState:UIControlStateNormal];
+            [cell.selfDigonseBtn setTitle:NSLocalizedString(@"selfDignose", nil) forState:UIControlStateNormal];
+            [cell.selfDigonseBtn setTag:4];
+            [cell.selfDigonseBtn addTarget:self action:@selector(mainCellBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            return cell;
         }
-        return 0;
+            break;
+        case 1: {
+            ZXRDTableViewCell *cell = (ZXRDTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:kRDCellIdentifier forIndexPath:indexPath];
+            
+            if (self.recommendedDoctors.count > 0) {
+                ZXDoctor *doc = self.recommendedDoctors[indexPath.row];
+                
+                //粉丝数
+                [ZXGetDocExtraInfo getDoctorFollowerNumberWithDID:doc.did successBlock:^(id responseObject) {
+                    //                NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                    //                NSLog(@"followerNum:%@",rStr);
+                    NSDictionary *followerNum = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+                    // followerNum[@"num"] 类型为NSNumber 可以打印 不能赋值给NSString
+                    doc.followerNum = [followerNum[@"num"] stringValue];
+                } failureBlock:^(NSError *error) {
+                    NSLog(@"getDoctorExtraInfo--followerNum ERR:%@",error);
+                }];
+                
+                //服务人数
+                [ZXGetDocExtraInfo getDoctorServeNumberWithDID:doc.did successBlock:^(id responseObject) {
+                    //                NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                    //                NSLog(@"serveNum:%@",rStr);
+                    NSDictionary *serveNum = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+                    // serveNum[@"num"] 类型为NSNumber 可以打印 不能赋值给NSString
+                    doc.serveNum = [serveNum[@"num"] stringValue];
+                } failureBlock:^(NSError *error) {
+                    NSLog(@"getDoctorExtraInfo--serveNum ERR:%@",error);
+                }];
+                
+                [cell configureRDCellWithDoctor:doc];
+            }
+            return cell;
+        }
+            break;
+            
+        default:
+            return nil;
+            break;
     }
 }
-
-/**
- *  广告条高度
- */
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 130;
-    }
-    return 0;
-}
-
-/**
- *  替换header，变为广告条
- */
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        CGRect frame = CGRectMake(0, 0, Main_Screen_Width, 130);
-        ZXHomeAdView *view = [[ZXHomeAdView alloc] initWithFrame:frame andAds:_ads];
-        view.delegate = self;
-        return view;
-    }
-    return nil;
-}
-
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    if (section == 1) {
-//        return 1;
-//    }
-//    return 20;
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 60;
+        return kHomeMainCellHeight;
     }
     return kRDTableCellHeight;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return kRDTableCellHeight;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return 130; // 广告条高度
+            break;
+        case 1:
+            return kTitleCellHeight; // 标题高度
+            break;
+        default:
+            return 0;
+            break;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 0) {
+        return 15;
+    }
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0: {
+            CGRect frame = CGRectMake(0, 0, Main_Screen_Width, 130);
+            ZXHomeAdView *view = [[ZXHomeAdView alloc] initWithFrame:frame andAds:_ads];
+            view.delegate = self;
+            return view;
+        }
+            break;
+        case 1: {
+            CGRect frame = CGRectMake(0, 0, Main_Screen_Width, kTitleCellHeight);
+            UIEdgeInsets insets = UIEdgeInsetsMake(0, 10, 0, 0);
+            ZXInsetLabel *titleLabel = [[ZXInsetLabel alloc] initWithFrame:frame andInset:insets];
+            titleLabel.text = NSLocalizedString(@"recommendedDoctors", nil);
+            titleLabel.backgroundColor = [UIColor whiteColor];
+            titleLabel.font = [UIFont systemFontOfSize:15];
+            titleLabel.textColor = [UIColor darkGrayColor];
+            
+            UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, kTitleCellHeight -1, Main_Screen_Width, 1)];
+            seperator.backgroundColor = [UIColor blackColor];
+            seperator.alpha = 0.25;
+            
+            [titleLabel addSubview:seperator];
+            
+            return titleLabel;
+        }
+            break;
+        default:
+            return nil;
+            break;
+    }
+}
+
 
 #pragma mark - TableView Delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        
-        switch (indexPath.row) {
-            case 1: {
-                ZXSearch4DocTVC *tvc = [[ZXSearch4DocTVC alloc] init];
-                tvc.recommendedDoctors = [self.recommendedDoctors mutableCopy];
-                [self.navigationController pushViewController:tvc animated:YES];
-            }
-                break;
-                
-            case 2: {
-                ZXSearch4HosTVC *tvc = [[ZXSearch4HosTVC alloc] init];
-                [self.navigationController pushViewController:tvc animated:YES];
-            }
-                break;
-                
-            case 3: {
-                if (System_Version >= 9.0) {
-                    SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:selfCheckURL]  entersReaderIfAvailable:YES];
-                    [self presentViewController:safariViewController animated:YES completion:nil];
-                } else {
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:selfCheckURL]];
-                }
-            }
-                break;
+- (void)mainCellBtnClick:(ZXVerticalButton *)btn {
+    switch (btn.tag) {
+        case 1: {
+            NSLog(@"快速提问");
         }
+            break;
+            
+        case 2: {
+            ZXSearch4DocTVC *tvc = [[ZXSearch4DocTVC alloc] init];
+            tvc.recommendedDoctors = [self.recommendedDoctors mutableCopy];
+            [self.navigationController pushViewController:tvc animated:YES];
+        }
+            break;
+            
+        case 3: {
+            ZXSearch4HosTVC *tvc = [[ZXSearch4HosTVC alloc] init];
+            [self.navigationController pushViewController:tvc animated:YES];
+        }
+            break;
+            
+        case 4: {
+            if (System_Version >= 9.0) {
+                SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:selfCheckURL]  entersReaderIfAvailable:YES];
+                [self presentViewController:safariViewController animated:YES completion:nil];
+            } else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:selfCheckURL]];
+            }
+        }
+            break;
     }
-    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         // 打开对应的医生的诊所
         ZXDoctor *doc = self.recommendedDoctors[indexPath.row];
         ZXDocClinicTVC *vc = [[ZXDocClinicTVC alloc] initClinicWithDoctor:doc];
         [self.navigationController pushViewController:vc animated:YES];
-    } else {
-        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
 }
 

@@ -29,7 +29,7 @@
 - (CYLTabBarController *)tabBarController {
     if (!_tabBarcontroller) {
         // 主页
-        ZXHomeTVC *home = [[ZXHomeTVC alloc] init];
+        ZXHomeTVC *home = [[ZXHomeTVC alloc] initWithStyle:UITableViewStyleGrouped];
         home.view.backgroundColor = [UIColor themeBGColor];
         UIViewController *homeNC = [[UINavigationController alloc] initWithRootViewController:home];
         
