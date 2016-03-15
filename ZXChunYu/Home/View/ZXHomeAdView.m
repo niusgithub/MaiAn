@@ -93,10 +93,12 @@
 - (void)adOnClick {
     ZXAd *ad = _ads[_pageControl.currentPage];
     
-    NSString *adURL = [ZXChunYu_RESOURCE_PREFIX stringByAppendingString:ad.html_path];
-    
-    if ([self.delegate respondsToSelector:@selector(jumpAdPage:)]) {
-        [self.delegate jumpAdPage:adURL];
+    if (ad.html_path) {
+        NSString *adURL = [ZXChunYu_RESOURCE_PREFIX stringByAppendingString:ad.html_path];
+        
+        if ([self.delegate respondsToSelector:@selector(jumpAdPage:)]) {
+            [self.delegate jumpAdPage:adURL];
+        }
     }
 }
 

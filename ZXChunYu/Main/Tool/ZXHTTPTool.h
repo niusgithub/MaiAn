@@ -12,8 +12,31 @@
 
 + (void)POST:(NSString *)URL params:(NSObject *)paramsObj success:(void(^)(id))success failure:(void(^)(NSError *))failure;
 
++ (void)POST:(NSString *)URL
+         UID:(NSString *)uid
+         KEY:(NSString *)key
+      params:(NSObject *)paramsObj
+     success:(void (^)(id))success
+     failure:(void (^)(NSError *))failure;
+
 + (void)GET:(NSString *)URL params:(NSObject *)paramsObj success:(void(^)(id))success failure:(void(^)(NSError *))failure;
 
++ (void)GET:(NSString *)URL
+        UID:(NSString *)uid
+        KEY:(NSString *)key
+     params:(NSObject *)paramsObj
+    success:(void(^)(id))success
+    failure:(void(^)(NSError *))failure;
+
 + (void)UploadImageWithURL:(NSString *)URL params:(NSObject *)paramsObj imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure;
+
++ (void)UploadImageWithURL:(NSString *)URL
+                       UID:(NSString *)uid
+                       KEY:(NSString *)key
+                    params:(NSObject *)paramsObj
+                 imageName:(NSString *)imageName
+                 imageData:(NSData *)imageData
+                   success:(void(^)(id))success
+                   failure:(void(^)(NSError *))failure;
 
 @end

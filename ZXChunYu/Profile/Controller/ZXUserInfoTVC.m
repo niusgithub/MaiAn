@@ -72,7 +72,7 @@ static NSString *reuseCellId = @"userInfoCellId";
     hud.labelText = @"Loading";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        [ZXUserInfoTool getUserInfoWithUID:[ZXAccountTool shareAccount].uid successBlock:^(id responseObject) {
+        [ZXUserInfoTool getUserInfoWithAccount:[ZXAccountTool shareAccount] successBlock:^(id responseObject) {
 //            NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 //            NSLog(@"getUserInfoData:%@",rStr);
             NSDictionary *userInfoDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];

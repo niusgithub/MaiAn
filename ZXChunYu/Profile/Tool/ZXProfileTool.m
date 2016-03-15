@@ -8,18 +8,25 @@
 
 #import "ZXProfileTool.h"
 #import "ZXHTTPTool.h"
+#import "ZXAccount.h"
 
 #import "ZXChunYuAPI.h"
 
 @implementation ZXProfileTool
 
-+ (void)UploadAvatarWithUID:(NSString *)uid imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure {
++ (void)UploadAvatarWithAccount:(ZXAccount *)account imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure {
     
     NSDictionary *imageParam = @{
-                                 @"uid" : uid
+                                 @"uid" : account.uid
                                  };
     
-    [ZXHTTPTool UploadImageWithURL:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:uploadUserAvatar] params:imageParam imageName:imageName imageData:imageData success:^(id reponseObj) {
+    [ZXHTTPTool UploadImageWithURL:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:uploadUserAvatar]
+                               UID:(NSString *)account.uid
+                               KEY:(NSString *)account.key
+                            params:imageParam
+                         imageName:imageName
+                         imageData:imageData
+                           success:^(id reponseObj) {
         
     } failure:^(NSError *error) {
         

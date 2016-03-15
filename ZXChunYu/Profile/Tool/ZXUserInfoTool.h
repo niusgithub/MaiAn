@@ -6,11 +6,11 @@
 //  Copyright © 2016年 陈知行. All rights reserved.
 //
 
-@class ZXUserInfo;
+@class ZXUserInfo, ZXAccount;
 
 #import <Foundation/Foundation.h>
 
 @interface ZXUserInfoTool : NSObject
-+ (void)getUserInfoWithUID:(NSString *)uid successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock;
++ (void)getUserInfoWithAccount:(ZXAccount *)account successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock;
 + (void)updateUserInfoWithUserInfo:(ZXUserInfo *)userInfo successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock;
 @end

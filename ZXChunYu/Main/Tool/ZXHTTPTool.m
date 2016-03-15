@@ -35,6 +35,35 @@
     }];
 }
 
++ (void)POST:(NSString *)URL
+         UID:(NSString *)uid
+         KEY:(NSString *)key
+      params:(NSObject *)paramsObj
+     success:(void (^)(id))success
+     failure:(void (^)(NSError *))failure {
+    
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    
+    mgr.requestSerializer = [AFHTTPRequestSerializer serializer];
+    mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [mgr.requestSerializer setValue:uid forHTTPHeaderField:@"UID"];
+    [mgr.requestSerializer setValue:key forHTTPHeaderField:@"KEY"];
+    
+    [mgr POST:URL parameters:paramsObj progress:^(NSProgress * uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * task, id responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        //[NSException raise:NSGenericException format:@"ZXHTTPTool POST ERR"];
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
 
 + (void)GET:(NSString *)URL params:(NSObject *)paramsObj success:(void(^)(id))success failure:(void(^)(NSError *))failure {
     
@@ -56,12 +85,53 @@
     }];
 }
 
-+ (void)UploadImageWithURL:(NSString *)URL params:(NSObject *)paramsObj imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure {
++ (void)GET:(NSString *)URL
+        UID:(NSString *)uid
+        KEY:(NSString *)key
+     params:(NSObject *)paramsObj
+    success:(void(^)(id))success
+    failure:(void(^)(NSError *))failure {
+    
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    
+    mgr.requestSerializer = [AFHTTPRequestSerializer serializer];
+    mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [mgr.requestSerializer setValue:uid forHTTPHeaderField:@"UID"];
+    [mgr.requestSerializer setValue:key forHTTPHeaderField:@"KEY"];
+    
+    [mgr GET:URL parameters:paramsObj progress:^(NSProgress * downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+
+
+// UID:(NSString *)uid KEY:(NSString *)key
++ (void)UploadImageWithURL:(NSString *)URL
+                       UID:(NSString *)uid
+                       KEY:(NSString *)key
+                    params:(NSObject *)paramsObj
+                 imageName:(NSString *)imageName
+                 imageData:(NSData *)imageData
+                   success:(void(^)(id))success
+                   failure:(void(^)(NSError *))failure {
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager.requestSerializer setValue:uid forHTTPHeaderField:@"UID"];
+    [manager.requestSerializer setValue:key forHTTPHeaderField:@"KEY"];
     
     [manager POST:URL parameters:paramsObj constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
@@ -82,6 +152,24 @@
          [hud hide:YES];
          }];
          */
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"upload Success:%@", responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError * error) {
+        NSLog(@"upload failure:%@", error);
+    }];
+}
+
++ (void)UploadImageWithURL:(NSString *)URL params:(NSObject *)paramsObj imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure {
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager POST:URL parameters:paramsObj constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:imageName fileName:imageName mimeType:@"image/*"];
+    } progress:^(NSProgress *uploadProgress) {
+        NSLog(@"uploadProgress--%@", uploadProgress);
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"upload Success:%@", responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError * error) {

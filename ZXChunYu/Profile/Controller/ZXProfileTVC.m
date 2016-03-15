@@ -168,7 +168,7 @@ static NSString *const mineCellIdentifier = @"MCellID";
     
     NSLog(@"imageName:%@",imageName);
     
-    [ZXProfileTool UploadAvatarWithUID:[ZXAccountTool shareAccount].uid imageName:imageName imageData:imageData success:^(id responseObj) {
+    [ZXProfileTool UploadAvatarWithAccount:[ZXAccountTool shareAccount] imageName:imageName imageData:imageData success:^(id responseObj) {
 //FIXME:要服务器返回新的头像地址
         [self.tableView reloadData];
     } failure:^(NSError *error) {

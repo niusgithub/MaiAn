@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class ZXAccount;
+
 @interface ZXProfileTool : NSObject
 
 /**
@@ -20,6 +22,6 @@
  *  @param success   success block
  *  @param failure   failure block
  */
-+ (void)UploadAvatarWithUID:(NSString *)uid imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure;
++ (void)UploadAvatarWithAccount:(ZXAccount *)account imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure;
 
 @end

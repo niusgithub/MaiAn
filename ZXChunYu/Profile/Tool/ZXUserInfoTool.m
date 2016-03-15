@@ -11,6 +11,8 @@
 #import "ZXChunYuAPI.h"
 #import "ZXHTTPTool.h"
 #import "ZXUserInfo.h"
+#import "ZXAccount.h"
+#import "ZXAccountTool.h"
 
 #import "YYModel.h"
 
@@ -18,28 +20,37 @@
 
 @implementation ZXUserInfoTool
 
-+ (void)getUserInfoWithUID:(NSString *)uid successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock {
++ (void)getUserInfoWithAccount:(ZXAccount *)account successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock {
     
     // 根据uid获取用户信息
     NSDictionary *params = @{
-                             @"uid" : uid,
+                             @"uid" : account.uid,
                              };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getUserInfoByUID] params:params success:^(id responseObj) {
+//    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getUserInfoByUID] params:params success:^(id responseObj) {
+//        if (successBlock) {
+//            successBlock(responseObj);
+//        }
+//    } failure:^(NSError *error) {
+//        if (failureBlock) {
+//            failureBlock(error);
+//        }
+//    }];
+    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getUserInfoByUID] UID:account.uid KEY:account.key params:params success:^(id responseObj) {
         if (successBlock) {
-            successBlock(responseObj);
-        }
-    } failure:^(NSError *error) {
-        if (failureBlock) {
-            failureBlock(error);
-        }
-    }];
+                successBlock(responseObj);
+            }
+        } failure:^(NSError *error) {
+            if (failureBlock) {
+                failureBlock(error);
+            }
+        }];
 }
 
 + (void)updateUserInfoWithUserInfo:(ZXUserInfo *)userInfo successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock {
     
     NSDictionary *params = @{
-                             @"userInfo2" : [userInfo yy_modelToJSONString],
+                             @"userInfo2" : [userInfo yy_modelToJSONString]
                              };
 
     [ZXHTTPTool POST:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:updateUserInfo] params:params success:^(id responseObj) {

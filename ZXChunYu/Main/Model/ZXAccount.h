@@ -14,4 +14,5 @@
 @property (nonatomic, copy) NSString *passwd;
 @property (nonatomic, copy) NSString *token;
 @property (nonatomic, copy) NSString *u_portrait_path;
+@property (nonatomic, copy) NSString *key;
 @end
