@@ -34,7 +34,7 @@ static NSString *reuseCellId = @"userInfoCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"个人中心";
+    self.title = @"个人信息";
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
@@ -72,7 +72,7 @@ static NSString *reuseCellId = @"userInfoCellId";
     hud.labelText = @"Loading";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        [ZXUserInfoTool getUserInfoWithAccount:[ZXAccountTool shareAccount] successBlock:^(id responseObject) {
+        [ZXUserInfoTool getUserInfoWithSuccessBlock:^(id responseObject) {
 //            NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 //            NSLog(@"getUserInfoData:%@",rStr);
             NSDictionary *userInfoDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];

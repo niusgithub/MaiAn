@@ -15,6 +15,7 @@ static NSString *const ZXChunYu_HTTP_REQUEST_PREFIX = @"http://114.215.136.156/v
 static NSString *const ZXChunYu_RESOURCE_PREFIX = @"http://114.215.136.156";
 
 // 医生
+static NSString *const getDocsByID = @"/doctor/getDoctorById.do";
 static NSString *const getDocsURL = @"/doctor/getDoctorsByNum.do?start_num=0";
 static NSString *const getDocFollowerNumURL = @"/doctor/getFocusOnDoc.do?did=";
 static NSString *const getDocServeNumURL = @"/doctor/getTalkedUser.do?did=";
@@ -22,6 +23,10 @@ static NSString *const getDocCommentsURL = @"/doctor/getEvaluation2Doc.do?";
 static NSString *const getDocByNameURL = @"/doctor/getDoctorsByName.do?";
 static NSString *const getDocByAreaURL = @"/doctor/getDoctorsByArea.do?";
 static NSString *const getDocByTitleURl = @"/doctor/getDoctorsByTitle.do?";
+
+//
+static NSString *const followDoctor = @"/user2doctor/addFocus.do";
+static NSString *const cancelFollowDoctor = @"/user2doctor/delFocus.do";
 
 // 医院
 static NSString *const getHosByNum = @"/hospital/getHospitalsByNum.do?";
@@ -37,6 +42,7 @@ static NSString *const isUserRegistered = @"/user/isRegistered.do?";
 static NSString *const updateUserPwd = @"/user/updateUserPasswdByUsername.do";
 static NSString *const userRegist = @"/user/register.do";
 static NSString *const uploadUserAvatar = @"/user/uploadUserPortrait.do";
+static NSString *const getFocusedDoc = @"/user/getFocusedDoctors.do?";
 
 // 资讯
 static NSString *const getArticlesByType = @"/encyclopedia/getArticlesByType.do";

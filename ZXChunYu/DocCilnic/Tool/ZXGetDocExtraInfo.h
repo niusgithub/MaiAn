@@ -10,8 +10,12 @@
 
 @interface ZXGetDocExtraInfo : NSObject
 
-+ (void)getDoctorFollowerNumberWithDID:(NSString *)DID successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock;
++ (void)getDoctorFollowerNumberWithDID:(NSString *)DID
+                          successBlock:(void(^)(id))successBlock
+                          failureBlock:(void(^)(NSError *))failureBlock;
 
-+ (void)getDoctorServeNumberWithDID:(NSString *)DID successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock;
++ (void)getDoctorServeNumberWithDID:(NSString *)DID
+                       successBlock:(void(^)(id))successBlock
+                       failureBlock:(void(^)(NSError *))failureBlock;
 
 @end

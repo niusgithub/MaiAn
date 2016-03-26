@@ -129,6 +129,9 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
         case 0: {
             ZXDocClinicDoctorCell *cell = (ZXDocClinicDoctorCell *)[self.tableView dequeueReusableCellWithIdentifier:kDocClinicDoctorCellIdentifier];
             
+            // 判断是否关注该医生
+            
+            
             [cell configureDCDCellWithDoctor:self.doctor];
             
             return cell;
@@ -136,6 +139,7 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
             
         case 1: {
             ZXDocClinicServiceCell *cell = (ZXDocClinicServiceCell *)[self.tableView dequeueReusableCellWithIdentifier:kDocClinicServiceCellIdentifier];
+            
             return cell;
         }
         
@@ -143,6 +147,7 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
             if (indexPath.row == 0) {
                 ZXDocClinicTitleCell *cell = (ZXDocClinicTitleCell *)[self.tableView dequeueReusableCellWithIdentifier:kDocClinicTitleCellIdentifier];
                 [cell configureDCTCellWithTitle:@"医生详情" andMore:@"查看全部"];
+                
                 return cell;
             } else {
                 // 原版此处根据简介内容多少调整cell高度
@@ -151,6 +156,7 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
                 cell.textLabel.textColor = ZXGrayColor;
                 cell.textLabel.numberOfLines = 3;
                 cell.textLabel.text = self.doctor.dc_desc;
+                
                 return cell;
             }
             
@@ -233,8 +239,12 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
 #pragma mark - TableView Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // 医生详情由于信息不足 暂不实现
+    
+    // 评论列表
     if (indexPath.section == 3) {
-        if (indexPath.row == 0 && self.doctorComments.count > 0) { // 查看全部评价
+        if (indexPath.row == 0 && self.doctorComments.count > 0) {
+            // 查看全部评价
             ZXUserEvaluationTVC *tvc = [[ZXUserEvaluationTVC alloc] init];
             tvc.comments = self.doctorComments;
             [self.navigationController pushViewController:tvc animated:YES];

@@ -66,9 +66,9 @@
                             @"username" : phoneCode
                             };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:isUserRegistered] params:param success:^(id reponseObject) {
+    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:isUserRegistered] params:param success:^(id responseObject) {
         if (successBlock) {
-            successBlock(reponseObject);
+            successBlock(responseObject);
         }
     } failure:^(NSError *error) {
         if (failureBlock) {

@@ -10,6 +10,9 @@
 
 @interface ZXGetDocComments : NSObject
 
-+ (void)getDoctorCommentsWithDID:(NSString *)DID startNum:(NSNumber *)startNum successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock;
++ (void)getDoctorCommentsWithDID:(NSString *)DID
+                        startNum:(NSNumber *)startNum
+                    successBlock:(void(^)(id))successBlock
+                    failureBlock:(void(^)(NSError *))failureBlock;
 
 @end

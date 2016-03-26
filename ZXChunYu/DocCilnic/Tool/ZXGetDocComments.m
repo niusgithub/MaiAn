@@ -19,14 +19,18 @@
  *  @param successBlock successBlock description
  *  @param failureBlock failureBlock description
  */
-+ (void)getDoctorCommentsWithDID:(NSString *)DID startNum:(NSNumber *)startNum successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock {
++ (void)getDoctorCommentsWithDID:(NSString *)DID
+                        startNum:(NSNumber *)startNum
+                    successBlock:(void(^)(id))successBlock
+                    failureBlock:(void(^)(NSError *))failureBlock {
     
     NSDictionary *params = @{
                              @"did" : DID,
                              @"start_num" : startNum
                              };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getDocCommentsURL] params:params success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getDocCommentsURL]
+             params:params success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }

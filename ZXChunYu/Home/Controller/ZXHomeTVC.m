@@ -33,6 +33,11 @@
 #import "YYModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+
+#import "ZXDocClinicTool.h"
+#import "ZXAccountTool.h"
+
+
 const CGFloat kTitleCellHeight = 30;
 
 @interface ZXHomeTVC () <ZXHomeAdViewDelegate>
@@ -54,6 +59,61 @@ const CGFloat kTitleCellHeight = 30;
     [self fetchDocsData];
     
     [self fetchAdsData];
+    
+    
+    /*
+    // 添加成功返回Map<"msg", "add focus success">
+    // 添加失败返回Map("msg", "add talk fail")
+    [ZXDocClinicTool followDoctorWithAccout:[ZXAccountTool shareAccount] DID:@"1000000046"
+                               successBlock:^(id responseObject) {
+                                   NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+                                   if ([resonpseDict[@"msg"] isEqualToString:@"add focus success"]) {
+                                       //[MBProgressHUD showSuccess:@"修改成功"];
+                                       NSLog(@"关注成功");
+                                   } else if ([resonpseDict[@"msg"] isEqualToString:@"add talk fail"]) {
+                                       NSLog(@"关注失败");
+                                   }
+                               }
+                               failureBlock:^(NSError *error) {
+                                   NSLog(@"Follow Doctor ERR:%@",error);
+                               }
+     ];
+    
+    [ZXDocClinicTool followDoctorWithAccout:[ZXAccountTool shareAccount] DID:@"1000000008"
+                               successBlock:^(id responseObject) {
+                                   NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+                                   if ([resonpseDict[@"msg"] isEqualToString:@"add focus success"]) {
+                                       //[MBProgressHUD showSuccess:@"修改成功"];
+                                       NSLog(@"关注成功");
+                                   } else if ([resonpseDict[@"msg"] isEqualToString:@"add talk fail"]) {
+                                       NSLog(@"关注失败");
+                                   }
+                               }
+                               failureBlock:^(NSError *error) {
+                               }
+     ];
+     */
+    
+    
+    // 添加成功返回Map<"msg", "del focus success">
+    // 添加失败返回Map("msg", "del focus fail")
+//    [ZXDocClinicTool cancelFollowDoctorWithAccout:[ZXAccountTool shareAccount]
+//                                              DID:@"1000000008"
+//                                     successBlock:^(id responseObject) {
+//                                         NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+//                                         if ([resonpseDict[@"msg"] isEqualToString:@"del focus success"]) {
+//                                             //[MBProgressHUD showSuccess:@"修改成功"];
+//                                             NSLog(@"取消关注成功");
+//                                         } else if ([resonpseDict[@"msg"] isEqualToString:@"del focus fail"]) {
+//                                             NSLog(@"取消关注失败");
+//                                         }
+//                                     }
+//                                     failureBlock:^(NSError *error) {
+//                                         NSLog(@"Cancel Follow Doctor ERR:%@",error);
+//                                     }
+//     ];
+    
+    
 }
 
 
@@ -106,8 +166,8 @@ const CGFloat kTitleCellHeight = 30;
     [self.recommendedDoctors removeAllObjects];
     
     [ZXGetDocsTool getDocsInfoWithParam:nil successBlock:^(id responseObject) {
-        //NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        //NSLog(@"getDocs_responseObject:%@",rStr);
+        NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"getDocs_responseObject:%@",rStr);
     
         NSDictionary *docInfoJson = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         
@@ -186,8 +246,8 @@ const CGFloat kTitleCellHeight = 30;
                 
                 //粉丝数
                 [ZXGetDocExtraInfo getDoctorFollowerNumberWithDID:doc.did successBlock:^(id responseObject) {
-                    //                NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-                    //                NSLog(@"followerNum:%@",rStr);
+                    // NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                    // NSLog(@"followerNum:%@",rStr);
                     NSDictionary *followerNum = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
                     // followerNum[@"num"] 类型为NSNumber 可以打印 不能赋值给NSString
                     doc.followerNum = [followerNum[@"num"] stringValue];
@@ -197,8 +257,8 @@ const CGFloat kTitleCellHeight = 30;
                 
                 //服务人数
                 [ZXGetDocExtraInfo getDoctorServeNumberWithDID:doc.did successBlock:^(id responseObject) {
-                    //                NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-                    //                NSLog(@"serveNum:%@",rStr);
+                    // NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                    // NSLog(@"serveNum:%@",rStr);
                     NSDictionary *serveNum = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
                     // serveNum[@"num"] 类型为NSNumber 可以打印 不能赋值给NSString
                     doc.serveNum = [serveNum[@"num"] stringValue];
@@ -291,14 +351,15 @@ const CGFloat kTitleCellHeight = 30;
             break;
             
         case 2: {
-            ZXSearch4DocTVC *tvc = [[ZXSearch4DocTVC alloc] init];
-            tvc.recommendedDoctors = [self.recommendedDoctors mutableCopy];
+            ZXSearch4HosTVC *tvc = [[ZXSearch4HosTVC alloc] init];
             [self.navigationController pushViewController:tvc animated:YES];
         }
             break;
             
         case 3: {
-            ZXSearch4HosTVC *tvc = [[ZXSearch4HosTVC alloc] init];
+
+            ZXSearch4DocTVC *tvc = [[ZXSearch4DocTVC alloc] init];
+            tvc.recommendedDoctors = [self.recommendedDoctors mutableCopy];
             [self.navigationController pushViewController:tvc animated:YES];
         }
             break;

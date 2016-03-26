@@ -15,4 +15,7 @@
 @property (nonatomic, copy) NSString *token;
 @property (nonatomic, copy) NSString *u_portrait_path;
 @property (nonatomic, copy) NSString *key;
+
+// 关注的医生的did
+@property (nonatomic, strong) NSMutableArray *mDocIDs;
 @end

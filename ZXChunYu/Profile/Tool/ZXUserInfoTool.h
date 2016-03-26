@@ -11,6 +11,9 @@
 #import <Foundation/Foundation.h>
 
 @interface ZXUserInfoTool : NSObject
-+ (void)getUserInfoWithAccount:(ZXAccount *)account successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock;
+
++ (void)getUserInfoWithSuccessBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock;
+
 + (void)updateUserInfoWithUserInfo:(ZXUserInfo *)userInfo successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock;
+
 @end

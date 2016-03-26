@@ -8,7 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class ZXAccount;
+
 @interface ZXGetDocsTool : NSObject
 
-+ (void)getDocsInfoWithParam:(NSObject *)params successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock;
++ (void)getDocsInfoWithParam:(NSObject *)params
+                successBlock:(void(^)(id))successBlock
+                failureBlock:(void(^)(NSError *))failureBlock;
+
++ (void)getUserFollowDoctorWithAccount:(ZXAccount *)accout
+                           startNumber:(NSNumber *)startNum
+                          successBlock:(void(^)(id responseObject))successBlock
+                          failureBlock:(void(^)(NSError *error))failureBlock;
+
 @end

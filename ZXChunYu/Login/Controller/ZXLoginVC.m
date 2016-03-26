@@ -14,6 +14,7 @@
 #import "ZXLoginTool.h"
 #import "ZXAccount.h"
 #import "ZXAccountTool.h"
+#import "ZXGetDocsTool.h"
 
 #import "ZXRegistVC.h"
 
@@ -109,6 +110,25 @@
             [MBProgressHUD showError:@"账号/密码错误"];
         } else {
             // 登录成功，保存账号信息并更新个人中心的账户cell，然后退出当前界面
+            // 获取关注的医生的ID并保存在accout中
+            [ZXGetDocsTool getUserFollowDoctorWithAccount:account startNumber:@0 successBlock:^(id doctorObject) {
+                NSString *rStr = [[NSString alloc] initWithData:doctorObject encoding:NSUTF8StringEncoding];
+                NSLog(@"ZXLoginVC Doctor:%@", rStr);
+                
+                NSDictionary *docInfoDict = [NSJSONSerialization JSONObjectWithData:doctorObject options:0 error:nil];
+                
+                [account.mDocIDs removeAllObjects];
+                
+                for (NSDictionary *docDict in docInfoDict) {
+                    @autoreleasepool {
+                        NSString *docID = docDict[@"did"];
+                        [account.mDocIDs addObject:docID];
+                    }
+                }
+            } failureBlock:^(NSError *error) {
+                XZXLog(@"ZXLoginVC Doctor ERR:%@",error);
+            }];
+            
             [ZXAccountTool saveAccount:account];
             
             // 登录融云

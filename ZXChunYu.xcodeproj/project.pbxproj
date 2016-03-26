@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		668E3AB0736BAD9200B719C2 /* Pods_ZXChunYu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CFECE086347B3EFCBB5D /* Pods_ZXChunYu.framework */; };
 		E042F7B91C74AF960082D593 /* NSTimer+ZXBlockSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E042F7B81C74AF960082D593 /* NSTimer+ZXBlockSupport.m */; };
+		E05CF5181CA3D0AC00FACD00 /* ZXFolloweeTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E05CF5171CA3D0AC00FACD00 /* ZXFolloweeTVC.m */; };
 		E05F34F41C52277C00DC0EA4 /* ZXSearch4HosTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E05F34EE1C52277C00DC0EA4 /* ZXSearch4HosTVC.m */; };
 		E05F34F51C52277C00DC0EA4 /* ZXSearch4HosTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E05F34F21C52277C00DC0EA4 /* ZXSearch4HosTool.m */; };
 		E05F34FB1C522B6000DC0EA4 /* ZXSearchMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = E05F34FA1C522B6000DC0EA4 /* ZXSearchMenuView.m */; };
@@ -35,6 +36,8 @@
 		E08E04251C8F13C900FEEFA9 /* ZXVerticalButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E08E04241C8F13C900FEEFA9 /* ZXVerticalButton.m */; };
 		E08E04291C8F16E200FEEFA9 /* ZXHomeMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E08E04271C8F16E200FEEFA9 /* ZXHomeMainCell.m */; };
 		E08E042A1C8F16E200FEEFA9 /* ZXHomeMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E08E04281C8F16E200FEEFA9 /* ZXHomeMainCell.xib */; };
+		E0BA4F5E1CA66B090059C379 /* ZXUserEvaluation2Doc.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BA4F5D1CA66B090059C379 /* ZXUserEvaluation2Doc.m */; };
+		E0BA4F641CA67EE60059C379 /* ZXDocClinicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BA4F631CA67EE60059C379 /* ZXDocClinicTool.m */; };
 		E0BF591D1C8591630043AB78 /* ZXAd.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BF591C1C8591630043AB78 /* ZXAd.m */; };
 		E0BF59201C8591EB0043AB78 /* ZXAdTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BF591F1C8591EB0043AB78 /* ZXAdTool.m */; };
 		E0E928531C7AF70B009BB8F2 /* ZXButtomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E928521C7AF70B009BB8F2 /* ZXButtomCell.m */; };
@@ -127,6 +130,8 @@
 		9FC74826E7BDDF5B0FA7DD5A /* Pods-ZXChunYu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZXChunYu.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZXChunYu/Pods-ZXChunYu.release.xcconfig"; sourceTree = "<group>"; };
 		E042F7B71C74AF960082D593 /* NSTimer+ZXBlockSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+ZXBlockSupport.h"; sourceTree = "<group>"; };
 		E042F7B81C74AF960082D593 /* NSTimer+ZXBlockSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+ZXBlockSupport.m"; sourceTree = "<group>"; };
+		E05CF5161CA3D0AC00FACD00 /* ZXFolloweeTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXFolloweeTVC.h; sourceTree = "<group>"; };
+		E05CF5171CA3D0AC00FACD00 /* ZXFolloweeTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXFolloweeTVC.m; sourceTree = "<group>"; };
 		E05F34ED1C52277C00DC0EA4 /* ZXSearch4HosTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXSearch4HosTVC.h; sourceTree = "<group>"; };
 		E05F34EE1C52277C00DC0EA4 /* ZXSearch4HosTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXSearch4HosTVC.m; sourceTree = "<group>"; };
 		E05F34F11C52277C00DC0EA4 /* ZXSearch4HosTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXSearch4HosTool.h; sourceTree = "<group>"; };
@@ -174,6 +179,10 @@
 		E08E04261C8F16E200FEEFA9 /* ZXHomeMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXHomeMainCell.h; sourceTree = "<group>"; };
 		E08E04271C8F16E200FEEFA9 /* ZXHomeMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXHomeMainCell.m; sourceTree = "<group>"; };
 		E08E04281C8F16E200FEEFA9 /* ZXHomeMainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZXHomeMainCell.xib; sourceTree = "<group>"; };
+		E0BA4F5C1CA66B090059C379 /* ZXUserEvaluation2Doc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXUserEvaluation2Doc.h; sourceTree = "<group>"; };
+		E0BA4F5D1CA66B090059C379 /* ZXUserEvaluation2Doc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXUserEvaluation2Doc.m; sourceTree = "<group>"; };
+		E0BA4F621CA67EE60059C379 /* ZXDocClinicTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXDocClinicTool.h; sourceTree = "<group>"; };
+		E0BA4F631CA67EE60059C379 /* ZXDocClinicTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXDocClinicTool.m; sourceTree = "<group>"; };
 		E0BF591B1C8591630043AB78 /* ZXAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXAd.h; sourceTree = "<group>"; };
 		E0BF591C1C8591630043AB78 /* ZXAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXAd.m; sourceTree = "<group>"; };
 		E0BF591E1C8591EB0043AB78 /* ZXAdTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXAdTool.h; sourceTree = "<group>"; };
@@ -353,6 +362,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E05CF5141CA3D07500FACD00 /* Followee */ = {
+			isa = PBXGroup;
+			children = (
+				E05CF5151CA3D07500FACD00 /* FolloweeController */,
+			);
+			path = Followee;
+			sourceTree = "<group>";
+		};
+		E05CF5151CA3D07500FACD00 /* FolloweeController */ = {
+			isa = PBXGroup;
+			children = (
+				E05CF5161CA3D0AC00FACD00 /* ZXFolloweeTVC.h */,
+				E05CF5171CA3D0AC00FACD00 /* ZXFolloweeTVC.m */,
+			);
+			path = FolloweeController;
+			sourceTree = "<group>";
+		};
 		E05F34EB1C52277C00DC0EA4 /* Search4Hos */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +452,7 @@
 		E07BE4DF1C425F57001C4E72 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				E05CF5141CA3D07500FACD00 /* Followee */,
 				E06183451C5715930008B933 /* Model */,
 				E061833E1C5715390008B933 /* Tool */,
 				E07BE4E01C425F57001C4E72 /* Controller */,
@@ -995,6 +1022,8 @@
 			children = (
 				E9FF624A1C47862B006D05B0 /* ZXDoctorComment.h */,
 				E9FF624B1C47862B006D05B0 /* ZXDoctorComment.m */,
+				E0BA4F5C1CA66B090059C379 /* ZXUserEvaluation2Doc.h */,
+				E0BA4F5D1CA66B090059C379 /* ZXUserEvaluation2Doc.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1002,6 +1031,8 @@
 		E9FF624C1C47862B006D05B0 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				E0BA4F621CA67EE60059C379 /* ZXDocClinicTool.h */,
+				E0BA4F631CA67EE60059C379 /* ZXDocClinicTool.m */,
 				E9FF624D1C47862B006D05B0 /* ZXGetDocComments.h */,
 				E9FF624E1C47862B006D05B0 /* ZXGetDocComments.m */,
 				E9FF624F1C47862B006D05B0 /* ZXGetDocExtraInfo.h */,
@@ -1237,6 +1268,7 @@
 				E9D4F96B1C1024CC005A81BE /* ZXBadgeView.m in Sources */,
 				E0E928531C7AF70B009BB8F2 /* ZXButtomCell.m in Sources */,
 				E9FF626A1C47863E006D05B0 /* MBProgressHUD+MJ.m in Sources */,
+				E0BA4F641CA67EE60059C379 /* ZXDocClinicTool.m in Sources */,
 				E9CD8B701C3D04A800DF169C /* ZXRDTableViewCell.m in Sources */,
 				E9E5F1EF1C200E7500670B4A /* ZXLoginTool.m in Sources */,
 				E9D4F9721C1169CC005A81BE /* UIImage+ZX.m in Sources */,
@@ -1262,6 +1294,7 @@
 				E0BF591D1C8591630043AB78 /* ZXAd.m in Sources */,
 				E9CD8B8C1C43A3C100DF169C /* TYGSelectMenuEntity.m in Sources */,
 				E9E5F1F61C20113B00670B4A /* ZXAccountTool.m in Sources */,
+				E05CF5181CA3D0AC00FACD00 /* ZXFolloweeTVC.m in Sources */,
 				E9E5F1F91C213F7300670B4A /* ZXHTTPTool.m in Sources */,
 				E9FF625B1C47862B006D05B0 /* ZXUserEvaluationTVC.m in Sources */,
 				E06183181C560E4D0008B933 /* ZXPhoneNum4ResetVC.m in Sources */,
@@ -1290,6 +1323,7 @@
 				E9CD8B5B1C3BA4DF00DF169C /* NSString+ZX.m in Sources */,
 				E042F7B91C74AF960082D593 /* NSTimer+ZXBlockSupport.m in Sources */,
 				E0E928691C802BAC009BB8F2 /* ZXHorizonalTableViewController.m in Sources */,
+				E0BA4F5E1CA66B090059C379 /* ZXUserEvaluation2Doc.m in Sources */,
 				E061834C1C573A0B0008B933 /* ZXEditUserInfoVc.m in Sources */,
 				E9FF625D1C47862B006D05B0 /* ZXDoctorComment.m in Sources */,
 				E0E9286E1C802DB1009BB8F2 /* UIColor+ZX.m in Sources */,

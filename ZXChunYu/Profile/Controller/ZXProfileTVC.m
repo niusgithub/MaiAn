@@ -9,6 +9,7 @@
 #import "ZXProfileTVC.h"
 #import "ZXLoginVC.h"
 #import "ZXUserInfoTVC.h"
+#import "ZXFolloweeTVC.h"
 
 #import "ZXAccount.h"
 #import "ZXAccountTool.h"
@@ -18,6 +19,7 @@
 #import "UIImage+ZX.h"
 #import "UIImageView+ZXBorder.h"
 
+#import "MBProgressHUD+MJ.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
 static NSString *const mineCellIdentifier = @"MCellID";
@@ -126,22 +128,48 @@ static NSString *const mineCellIdentifier = @"MCellID";
 #pragma mark - TableView Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        
-        if (_hasLoggedIn) { // 已登录，跳转至个人中心
-            ZXUserInfoTVC *vc = [[ZXUserInfoTVC alloc] init];
-            vc.delegate = self;
-            [self.navigationController pushViewController:vc animated:YES];
-        } else { // 未登录，跳转至登录
-            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"ZXLoginStoryboard" bundle:nil];
-            _loginVC = [loginStoryboard instantiateInitialViewController];
-            _loginVC.delegate = self;
-            
-            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:_loginVC];
-            navi.navigationBarHidden = YES;
-            
-            [self presentViewController:navi animated:YES completion:nil];
+    switch (indexPath.section) {
+        case 0: {
+            if (_hasLoggedIn) { // 已登录，跳转至个人中心
+                ZXUserInfoTVC *vc = [[ZXUserInfoTVC alloc] init];
+                vc.delegate = self;
+                [self.navigationController pushViewController:vc animated:YES];
+            } else { // 未登录，跳转至登录
+                UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"ZXLoginStoryboard" bundle:nil];
+                _loginVC = [loginStoryboard instantiateInitialViewController];
+                _loginVC.delegate = self;
+                
+                UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:_loginVC];
+                navi.navigationBarHidden = YES;
+                
+                [self presentViewController:navi animated:YES completion:nil];
+            }
         }
+            break;
+            
+        case 1: {
+            if (_hasLoggedIn) {
+                switch (indexPath.row) {
+                    case 0: {
+                        ZXFolloweeTVC *tvc = [[ZXFolloweeTVC alloc] init];
+                        [self.navigationController pushViewController:tvc animated:YES];
+                    }
+                        break;
+                        
+                    case 1: {
+                    }
+                        break;
+                    
+                    case 2: {
+                    }
+                        break;
+                }
+            } else {
+                [MBProgressHUD showError:@"请先登录"];
+            }
+            
+        }
+            break;
     }
 }
 
@@ -159,6 +187,8 @@ static NSString *const mineCellIdentifier = @"MCellID";
     NSLog(@"selected image:%@", image);
     
     UIImage *newImage = [[image largestCenteredSquareImage] resizeToTargetSize:CGSizeMake(200, 200)];
+    
+    NSLog(@"new image:%@", newImage);
     NSData *imageData = UIImageJPEGRepresentation(newImage, 0.7);
     
     NSDateFormatter *formatter =[[NSDateFormatter alloc] init];

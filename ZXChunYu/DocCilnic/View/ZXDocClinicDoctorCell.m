@@ -17,6 +17,7 @@
 #import "UIColor+ZX.h"
 
 @interface ZXDocClinicDoctorCell ()
+
 @property (weak, nonatomic) IBOutlet UIImageView *docAvatarIV;
 @property (weak, nonatomic) IBOutlet UILabel *docNameTF;
 @property (weak, nonatomic) IBOutlet UILabel *docDepartmentTF;
