@@ -8,7 +8,7 @@
 
 #import "ZXGetDocExtraInfo.h"
 #import "ZXHTTPTool.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 
 @implementation ZXGetDocExtraInfo
 /**
@@ -20,7 +20,7 @@
  */
 + (void)getDoctorFollowerNumberWithDID:(NSString *)DID successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock {
     
-    [ZXHTTPTool GET:[NSString stringWithFormat:@"%@%@%lld", ZXChunYu_HTTP_REQUEST_PREFIX, getDocFollowerNumURL, [DID longLongValue]] params:nil success:^(id responseObj) {
+    [ZXHTTPTool GET:[NSString stringWithFormat:@"%@%@%lld", ZXMaiAn_HTTP_REQUEST_PREFIX, getDocFollowerNumURL, [DID longLongValue]] params:nil success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }
@@ -41,7 +41,7 @@
  */
 + (void)getDoctorServeNumberWithDID:(NSString *)DID successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock {
     
-    [ZXHTTPTool GET:[NSString stringWithFormat:@"%@%@%lld", ZXChunYu_HTTP_REQUEST_PREFIX, getDocServeNumURL, [DID longLongValue]] params:nil success:^(id responseObj) {
+    [ZXHTTPTool GET:[NSString stringWithFormat:@"%@%@%lld", ZXMaiAn_HTTP_REQUEST_PREFIX, getDocServeNumURL, [DID longLongValue]] params:nil success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }

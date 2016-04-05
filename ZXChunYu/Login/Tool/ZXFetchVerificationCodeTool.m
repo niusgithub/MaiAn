@@ -9,7 +9,7 @@
 #import "ZXFetchVerificationCodeTool.h"
 #import <SMS_SDK/SMSSDK.h>
 #import "MBProgressHUD+MJ.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 #import "ZXHTTPTool.h"
 
 @implementation ZXFetchVerificationCodeTool
@@ -66,7 +66,7 @@
                             @"username" : phoneCode
                             };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:isUserRegistered] params:param success:^(id responseObject) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:isUserRegistered] params:param success:^(id responseObject) {
         if (successBlock) {
             successBlock(responseObject);
         }

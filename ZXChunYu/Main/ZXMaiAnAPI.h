@@ -1,18 +1,18 @@
 //
-//  ZXChunYuAPI.h
+//  ZXMaiAnAPI.h
 //  ZXChunYu
 //
 //  Created by yunmu on 15/12/16.
 //  Copyright © 2015年 陈知行. All rights reserved.
 //
 
-#ifndef ZXChunYuAPI_h
-#define ZXChunYuAPI_h
+#ifndef ZXMaiAnAPI_h
+#define ZXMaiAnAPI_h
 
 // 请求
-static NSString *const ZXChunYu_HTTP_REQUEST_PREFIX = @"http://114.215.136.156/varix";
+static NSString *const ZXMaiAn_HTTP_REQUEST_PREFIX = @"http://114.215.136.156/varix";
 // 资源
-static NSString *const ZXChunYu_RESOURCE_PREFIX = @"http://114.215.136.156";
+static NSString *const ZXMaiAn_RESOURCE_PREFIX = @"http://114.215.136.156";
 
 // 医生
 static NSString *const getDocsByID = @"/doctor/getDoctorById.do";
@@ -43,6 +43,7 @@ static NSString *const updateUserPwd = @"/user/updateUserPasswdByUsername.do";
 static NSString *const userRegist = @"/user/register.do";
 static NSString *const uploadUserAvatar = @"/user/uploadUserPortrait.do";
 static NSString *const getFocusedDoc = @"/user/getFocusedDoctors.do?";
+static NSString *const getUserPortrait = @"/user/getUserPortraitById.do";
 
 // 资讯
 static NSString *const getArticlesByType = @"/encyclopedia/getArticlesByType.do";
@@ -55,4 +56,4 @@ static NSString *const getGoods = @"/goods/getGoods.do";
 static NSString *const getAds = @"/ads/getOnceAds.do"; // 广告
 static NSString *const selfCheckURL = @"http://114.215.136.156/html/jmqz_level/jmqz_djpd.html"; //
 
-#endif /* ZXChunYuAPI_h */
+#endif /* ZXMaiAnAPI_h */

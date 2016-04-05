@@ -8,14 +8,14 @@
 
 #import "ZXLoginTool.h"
 #import "ZXHTTPTool.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 
 @implementation ZXLoginTool
 
 + (void)getLoginInfoWithParam:(ZXLoginParams *)params
                  successBlock:(void(^)(id))successBlock
                  failureBlock:(void(^)(NSError *))failureBlock {
-    [ZXHTTPTool POST:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:LoginURL] params:params success:^(id responseObj) {
+    [ZXHTTPTool POST:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:LoginURL] params:params success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }
@@ -37,7 +37,7 @@
                              @"newPasswd" : newPassword
                              };
     
-    [ZXHTTPTool POST:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:updateUserPwd] params:params success:^(id responseObj) {
+    [ZXHTTPTool POST:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:updateUserPwd] params:params success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }
@@ -58,7 +58,7 @@
                              @"passwd" : password
                              };
     
-    [ZXHTTPTool POST:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:userRegist] params:params success:^(id responseObj) {
+    [ZXHTTPTool POST:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:userRegist] params:params success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }

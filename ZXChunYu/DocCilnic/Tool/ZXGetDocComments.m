@@ -8,7 +8,7 @@
 
 #import "ZXGetDocComments.h"
 #import "ZXHTTPTool.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 
 @implementation ZXGetDocComments
 
@@ -29,7 +29,7 @@
                              @"start_num" : startNum
                              };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getDocCommentsURL]
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getDocCommentsURL]
              params:params success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);

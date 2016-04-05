@@ -63,6 +63,7 @@ static NSString *const mineCellIdentifier = @"MCellID";
         if (_hasLoggedIn) {
             [cell configureUserProfileCellWithAccount:[ZXAccountTool shareAccount]];
         }
+//        [cell addObserver:self forKeyPath:@"u_portrait_path" options:0 context:(__bridge void*)self];
         return cell;
     }
     
@@ -198,11 +199,40 @@ static NSString *const mineCellIdentifier = @"MCellID";
     
     NSLog(@"imageName:%@",imageName);
     
-    [ZXProfileTool UploadAvatarWithAccount:[ZXAccountTool shareAccount] imageName:imageName imageData:imageData success:^(id responseObj) {
-//FIXME:要服务器返回新的头像地址
-        [self.tableView reloadData];
-    } failure:^(NSError *error) {
-    
+    [ZXProfileTool UploadAvatarWithAccount:[ZXAccountTool shareAccount]
+                                 imageName:imageName
+                                 imageData:imageData
+                              successBlock:^(id uploadAvatarResponseObj) {
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // 请求新的头像地址
+            [ZXProfileTool getUserPortraitByAccount:[ZXAccountTool shareAccount]
+                                       successBlock:^(id userPortraitResponseObject) {
+                                           NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:userPortraitResponseObject options:0 error:nil];
+                                           
+                                           NSString *avatarPath = resonpseDict[@"u_portrait_path"];
+                                           // 更新account中的头像地址
+                                           if (avatarPath) {
+                                               [ZXAccountTool shareAccount].u_portrait_path = avatarPath;
+                                               [ZXAccountTool shareAccount];
+                                           }
+                                           
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               [self.profileCell updateAvatar:avatarPath];
+                                               [MBProgressHUD showSuccess:@"新头像换好啦"];
+                                           });
+                                       } failureBlock:^(NSError *error) {
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               NSLog(@"ZXProfileTool getUserPortraitByAccount ERR:%@", error);
+                                               [MBProgressHUD showError:@"服务器返回头像地址失败"];
+                                           });
+                                           
+                                       }
+             ];
+        });
+    } failureBlock:^(NSError *error) {
+        NSLog(@"ZXProfileTool UploadAvatarWithAccount ERR:%@", error);
+        [MBProgressHUD showError:@"上传头像失败"];
     }];
 
     /*
@@ -281,5 +311,22 @@ static NSString *const mineCellIdentifier = @"MCellID";
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"更换头像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照选取", @"相册选取" ,nil];
     [sheet showInView:self.view];
 }
+
+//#pragma mark - KVO
+//
+//- (void)observeValueForKeyPath:(NSString *)keyPath
+//                      ofObject:(id)object
+//                        change:(NSDictionary<NSString *,id> *)change
+//                       context:(void *)context {
+//    if ((__bridge id)context == self) {
+//        NSLog(@"touxiang change");
+//    } else {
+//        [super observeValueForKeyPath:keyPath
+//                             ofObject:object
+//                               change:change
+//                              context:context];
+//    }
+//    
+//}
 
 @end

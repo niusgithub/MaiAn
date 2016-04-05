@@ -9,7 +9,7 @@
 #import "ZXDocClinicTool.h"
 #import "ZXAccount.h"
 #import "ZXHTTPTool.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 
 @implementation ZXDocClinicTool
 
@@ -27,7 +27,7 @@
                              @"did" : did
                              };
     
-    [ZXHTTPTool POST:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:followDoctor]
+    [ZXHTTPTool POST:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:followDoctor]
                  UID:accout.uid
                  KEY:accout.key
               params:params success:^(id responseObject) {
@@ -56,7 +56,7 @@
                              @"did" : did
                              };
     
-    [ZXHTTPTool POST:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:cancelFollowDoctor]
+    [ZXHTTPTool POST:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:cancelFollowDoctor]
                  UID:accout.uid
                  KEY:accout.key
               params:params success:^(id responseObject) {

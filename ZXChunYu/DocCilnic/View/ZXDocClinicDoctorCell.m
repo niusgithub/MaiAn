@@ -10,7 +10,7 @@
 #import "ZXDoctor.h"
 
 #import "ZXCommon.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #import "UIImageView+ZXBorder.h"
@@ -43,9 +43,9 @@
     //self.followBtn.layer.masksToBounds = YES;
     
     // 设置头像
-    // sdwebimage会从内存中查找后读取已经下载的图片 但或许应该换个直接读取的方法？
+    // sdwebimage会从缓存中查找后读取已经下载的图片 缓存type有none disk memory三种  keyPath是url？(不确定)
     if (doctor.dc_portrait_path) {
-        [self.docAvatarIV sd_setImageWithURL:[NSURL URLWithString:[ZXChunYu_RESOURCE_PREFIX stringByAppendingString:doctor.dc_portrait_path]] placeholderImage:[UIImage imageNamed:@"doctor"]];
+        [self.docAvatarIV sd_setImageWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:doctor.dc_portrait_path]] placeholderImage:[UIImage imageNamed:@"doctor"]];
     } else {
         [self.docAvatarIV setImage:[UIImage imageNamed:@"doctor"]];
     }
@@ -69,6 +69,14 @@
 // 关注医生
 - (IBAction)followADoctor {
     NSLog(@"关注医生--%@", self.doctor.dc_name);
+}
+
+- (void)setType:(ZXDocClinicDoctorCellType)type {
+    if (ZXDocClinicDoctorFollowed == type) {
+        
+    } else {
+        
+    }
 }
 
 - (void)awakeFromNib {

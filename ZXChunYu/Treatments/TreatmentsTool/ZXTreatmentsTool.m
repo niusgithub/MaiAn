@@ -8,7 +8,7 @@
 
 #import "ZXTreatmentsTool.h"
 #import "ZXHTTPTool.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 
 @implementation ZXTreatmentsTool
 
@@ -18,7 +18,7 @@
                              @"start_num" : startNum
                              };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getGoods] params:params success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getGoods] params:params success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }

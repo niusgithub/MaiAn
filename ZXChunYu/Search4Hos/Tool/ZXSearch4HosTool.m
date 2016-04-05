@@ -8,7 +8,7 @@
 
 #import "ZXSearch4HosTool.h"
 #import "ZXHTTPTool.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 
 @implementation ZXSearch4HosTool
 
@@ -18,7 +18,7 @@
                              @"start_num" : number
                              };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getHosByNum] params:params success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getHosByNum] params:params success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }
@@ -36,7 +36,7 @@
                                 @"start_num" : number
                                 };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getHosByName] params:s4hParams success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getHosByName] params:s4hParams success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }
@@ -55,7 +55,7 @@
                                 @"start_num" : number
                                 };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getHosByArea] params:s4hParams success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getHosByArea] params:s4hParams success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }
@@ -73,7 +73,7 @@
                                 @"start_num" : number
                                 };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getHosByTitle] params:s4hParams success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getHosByTitle] params:s4hParams success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }

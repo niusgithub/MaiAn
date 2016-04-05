@@ -286,7 +286,7 @@
 		E9E5F1F51C20113B00670B4A /* ZXAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXAccountTool.m; sourceTree = "<group>"; };
 		E9E5F1F71C213F7300670B4A /* ZXHTTPTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXHTTPTool.h; sourceTree = "<group>"; };
 		E9E5F1F81C213F7300670B4A /* ZXHTTPTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXHTTPTool.m; sourceTree = "<group>"; };
-		E9E5F1FA1C2144C200670B4A /* ZXChunYuAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXChunYuAPI.h; sourceTree = "<group>"; };
+		E9E5F1FA1C2144C200670B4A /* ZXMaiAnAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXMaiAnAPI.h; sourceTree = "<group>"; };
 		E9E5F1FB1C23E9DE00670B4A /* ZXGetDocsTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXGetDocsTool.h; sourceTree = "<group>"; };
 		E9E5F1FC1C23E9DE00670B4A /* ZXGetDocsTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXGetDocsTool.m; sourceTree = "<group>"; };
 		E9E5F2041C23F58B00670B4A /* ZXDoctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXDoctor.h; sourceTree = "<group>"; };
@@ -713,7 +713,7 @@
 			children = (
 				E0F645EE1BF9C42400534165 /* ZXAppDelegate.h */,
 				E0F645EF1BF9C42400534165 /* ZXAppDelegate.m */,
-				E9E5F1FA1C2144C200670B4A /* ZXChunYuAPI.h */,
+				E9E5F1FA1C2144C200670B4A /* ZXMaiAnAPI.h */,
 				E9DFB8261C07FF6A001148D4 /* ZXCommon.h */,
 				E9B5E3941C02B9EA00660774 /* ZXTabBarControllerConfig.h */,
 				E9B5E3951C02B9EA00660774 /* ZXTabBarControllerConfig.m */,
@@ -1416,7 +1416,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Aiping Tang (TWMC5J46PY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: JunYi Yu (59362S557A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1461,7 +1461,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Aiping Tang (TWMC5J46PY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: JunYi Yu (59362S557A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

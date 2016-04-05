@@ -8,7 +8,7 @@
 
 #import "ZXGetDocsTool.h"
 #import "ZXHTTPTool.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 #import "ZXAccount.h"
 
 @implementation ZXGetDocsTool
@@ -16,7 +16,7 @@
 + (void)getDocsInfoWithParam:(NSObject *)params
                 successBlock:(void(^)(id))successBlock
                 failureBlock:(void(^)(NSError *))failureBlock {
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getDocsURL]
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getDocsURL]
              params:params
             success:^(id responseObj) {
                 if (successBlock) {
@@ -41,7 +41,7 @@
                              @"start_num" : startNum
                              };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getFocusedDoc]
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getFocusedDoc]
                 UID:accout.uid
                 KEY:accout.key
              params:params success:^(id responseObj) {

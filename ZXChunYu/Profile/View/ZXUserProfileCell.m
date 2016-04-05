@@ -8,7 +8,7 @@
 
 #import "ZXUserProfileCell.h"
 #import "ZXAccount.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 
 #import "UIImageView+ZXBorder.h"
 
@@ -29,8 +29,22 @@ CGFloat const kUPCellHeight = 100;
     
     _userNameL.text = account.username;
     
+    //[self updateAvatar:account.u_portrait_path];
+    
     if (account.u_portrait_path) {
-        [_userAvatarIV sd_setImageWithURL:[NSURL URLWithString:[ZXChunYu_RESOURCE_PREFIX stringByAppendingString:account.u_portrait_path]] placeholderImage:[UIImage imageNamed:@"doctor"]];
+        [_userAvatarIV sd_setImageWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:account.u_portrait_path]] placeholderImage:[UIImage imageNamed:@"defaultAvatar"]];
+    } else {
+        [_userAvatarIV setImage:[UIImage imageNamed:@"defaultAvatar"]];
+    }
+    
+    [_userAvatarIV addRoundBorderWithColor:[UIColor lightGrayColor]];
+    
+    [_userAvatarIV addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAvatarSheet)]];
+}
+
+- (void)updateAvatar:(NSString *)imagePath {
+    if (imagePath) {
+        [_userAvatarIV sd_setImageWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:imagePath]] placeholderImage:[UIImage imageNamed:@"doctor"]];
     } else {
         [_userAvatarIV setImage:[UIImage imageNamed:@"doctor"]];
     }

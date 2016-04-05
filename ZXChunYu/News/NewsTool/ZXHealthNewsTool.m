@@ -8,7 +8,7 @@
 
 #import "ZXHealthNewsTool.h"
 #import "ZXHTTPTool.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 #import "NSString+ZX.h"
 
 @implementation ZXHealthNewsTool
@@ -20,7 +20,7 @@
                              @"start_num" : startNum
                              };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getArticlesByType] params:params success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getArticlesByType] params:params success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }

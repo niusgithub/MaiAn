@@ -11,7 +11,7 @@
 
 #import "NSString+ZX.h"
 
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
@@ -31,7 +31,7 @@ CGFloat const kHosMainCellHeight = 190;
 - (void)configureHMCellWithHospital:(ZXHospital *)hospital {
     if ([hospital.imagePaths firstObject]) {
         NSString *imgURL = [(NSString *)[hospital.imagePaths firstObject] stringTransToUTF8];
-        [self.hospitalIV sd_setImageWithURL:[NSURL URLWithString:[ZXChunYu_RESOURCE_PREFIX stringByAppendingString:imgURL]]];
+        [self.hospitalIV sd_setImageWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:imgURL]]];
     }
     self.hosptialTitleL.text = hospital.hs_title;
     self.hosptialTeleL.text = hospital.hs_phone;

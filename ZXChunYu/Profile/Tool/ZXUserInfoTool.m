@@ -8,7 +8,7 @@
 
 #import "ZXUserInfoTool.h"
 
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 #import "ZXHTTPTool.h"
 #import "ZXUserInfo.h"
 #import "ZXAccount.h"
@@ -20,7 +20,8 @@
 
 @implementation ZXUserInfoTool
 
-+ (void)getUserInfoWithSuccessBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock {
++ (void)getUserInfoWithSuccessBlock:(void(^)(id))successBlock
+                       failureBlock:(void(^)(NSError *))failureBlock {
     
     ZXAccount *account = [ZXAccountTool shareAccount];
     
@@ -29,7 +30,7 @@
                              @"uid" : account.uid,
                              };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getUserInfoByUID] UID:account.uid KEY:account.key params:params success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getUserInfoByUID] UID:account.uid KEY:account.key params:params success:^(id responseObj) {
         if (successBlock) {
                 successBlock(responseObj);
             }
@@ -40,7 +41,9 @@
         }];
 }
 
-+ (void)updateUserInfoWithUserInfo:(ZXUserInfo *)userInfo successBlock:(void(^)(id))successBlock failureBlock:(void(^)(NSError *))failureBlock {
++ (void)updateUserInfoWithUserInfo:(ZXUserInfo *)userInfo
+                      successBlock:(void(^)(id))successBlock
+                      failureBlock:(void(^)(NSError *))failureBlock {
     
     NSDictionary *params = @{
                              @"userInfo2" : [userInfo yy_modelToJSONString]
@@ -48,16 +51,22 @@
     
     ZXAccount *account = [ZXAccountTool shareAccount];
     
-    [ZXHTTPTool POST:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:updateUserInfo] UID:account.uid KEY:account.key params:params success:^(id responseObj) {
-        if (successBlock) {
-            successBlock(responseObj);
-        }
-    } failure:^(NSError * error) {
-        // [NSException raise:NSGenericException format:@"ZXLoginTool getLoginInfoWithParam ERR"];
-        if (failureBlock) {
-            failureBlock(error);
-        }
-    }];
+    [ZXHTTPTool POST:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:updateUserInfo]
+                 UID:account.uid
+                 KEY:account.key
+              params:params
+             success:^(id responseObj) {
+                 if (successBlock) {
+                     successBlock(responseObj);
+                 }
+             }
+             failure:^(NSError * error) {
+                 // [NSException raise:NSGenericException format:@"ZXLoginTool getLoginInfoWithParam ERR"];
+                 if (failureBlock) {
+                     failureBlock(error);
+                 }
+             }
+     ];
 }
 
 @end

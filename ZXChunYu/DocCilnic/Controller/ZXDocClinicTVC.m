@@ -11,9 +11,10 @@
 #import "ZXDocClinicTVC.h"
 #import "ZXUserEvaluationTVC.h"
 
+#import "ZXAccount.h"
+#import "ZXAccountTool.h"
 #import "ZXDoctor.h"
 #import "ZXDoctorComment.h"
-
 #import "ZXGetDocComments.h"
 
 #import "ZXDocClinicDoctorCell.h"
@@ -129,8 +130,24 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
         case 0: {
             ZXDocClinicDoctorCell *cell = (ZXDocClinicDoctorCell *)[self.tableView dequeueReusableCellWithIdentifier:kDocClinicDoctorCellIdentifier];
             
-            // 判断是否关注该医生
-            
+            // 查看登录状态
+            if ([ZXAccountTool shareAccount]) {
+                // 判断是否关注该医生
+                
+                //NSSet中did存储为NSNumber
+                NSNumber *didNum = [NSNumber numberWithInt:[self.doctor.did intValue]];
+                
+                if ([[ZXAccountTool shareAccount].mDocIDs containsObject:didNum]) {
+                    cell.type = ZXDocClinicDoctorFollowed;
+                    NSLog(@"关注过");
+                } else {
+                    cell.type = ZXDocClinicDoctorUnFollowed;
+                    NSLog(@"没有关注");
+                }
+            } else {
+                cell.type = ZXDocClinicDoctorUnFollowed;
+                NSLog(@"未关注");
+            }
             
             [cell configureDCDCellWithDoctor:self.doctor];
             

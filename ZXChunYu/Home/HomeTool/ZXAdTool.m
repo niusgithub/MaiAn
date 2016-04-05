@@ -8,13 +8,13 @@
 
 #import "ZXAdTool.h"
 #import "ZXHTTPTool.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 
 @implementation ZXAdTool
 
 + (void)getAdsWithSuccessBlock:(void(^)(id responseObject))successBlock failureBlock:(void(^)(NSError *error))failureBlock {
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getAds] params:nil success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getAds] params:nil success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }

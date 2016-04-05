@@ -22,6 +22,18 @@
  *  @param success   success block
  *  @param failure   failure block
  */
-+ (void)UploadAvatarWithAccount:(ZXAccount *)account imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure;
++ (void)UploadAvatarWithAccount:(ZXAccount *)account
+                      imageName:(NSString *)imageName
+                      imageData:(NSData *)imageData
+                   successBlock:(void(^)(id responseObject))successBlock
+                   failureBlock:(void(^)(NSError *error))failureBlock;
+/**
+ *  获取用户头像地址
+ *
+ *  @param account account
+ */
++ (void)getUserPortraitByAccount:(ZXAccount *)account
+                    successBlock:(void(^)(id responseObject))successBlock
+                    failureBlock:(void(^)(NSError *error))failureBlock;
 
 @end

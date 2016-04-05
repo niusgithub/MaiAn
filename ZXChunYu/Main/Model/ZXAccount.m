@@ -11,6 +11,13 @@
 
 @implementation ZXAccount
 
+- (instancetype)init {
+    if (self = [super init]) {
+        _mDocIDs = [[NSMutableSet alloc] init];
+    }
+    return self;
+}
+
 - (void)encodeWithCoder:(NSCoder *)aCoder { [self yy_modelEncodeWithCoder:aCoder]; }
 - (id)initWithCoder:(NSCoder *)aDecoder { self = [super init]; return [self yy_modelInitWithCoder:aDecoder]; }
 - (id)copyWithZone:(NSZone *)zone { return [self yy_modelCopy]; }

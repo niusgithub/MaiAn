@@ -17,5 +17,5 @@
 @property (nonatomic, copy) NSString *key;
 
 // 关注的医生的did
-@property (nonatomic, strong) NSMutableArray *mDocIDs;
+@property (nonatomic, strong) NSMutableSet *mDocIDs;
 @end

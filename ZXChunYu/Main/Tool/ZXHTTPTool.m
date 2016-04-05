@@ -114,8 +114,6 @@
 }
 
 
-
-// UID:(NSString *)uid KEY:(NSString *)key
 + (void)UploadImageWithURL:(NSString *)URL
                        UID:(NSString *)uid
                        KEY:(NSString *)key
@@ -154,8 +152,14 @@
          */
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"upload Success:%@", responseObject);
+        if (success) {
+            success(responseObject);
+        }
     } failure:^(NSURLSessionDataTask *task, NSError * error) {
         NSLog(@"upload failure:%@", error);
+        if (failure) {
+            failure(error);
+        }
     }];
 }
 

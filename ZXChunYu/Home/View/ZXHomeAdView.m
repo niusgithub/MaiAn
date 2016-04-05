@@ -13,7 +13,7 @@
 #import "UIColor+ZX.h"
 #import "NSTimer+ZXBlockSupport.h"
 #import "ZXCommon.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 
 #import <SafariServices/SafariServices.h>
 
@@ -60,7 +60,7 @@
             
             adImageView.userInteractionEnabled = YES;
             
-            NSString *adImageURL = [[ZXChunYu_RESOURCE_PREFIX stringByAppendingString:ad.img_path] stringTransToUTF8];
+            NSString *adImageURL = [[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:ad.img_path] stringTransToUTF8];
             
             [adImageView sd_setImageWithURL:[NSURL URLWithString:adImageURL] placeholderImage:nil];
             
@@ -94,7 +94,7 @@
     ZXAd *ad = _ads[_pageControl.currentPage];
     
     if (ad.html_path) {
-        NSString *adURL = [ZXChunYu_RESOURCE_PREFIX stringByAppendingString:ad.html_path];
+        NSString *adURL = [ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:ad.html_path];
         
         if ([self.delegate respondsToSelector:@selector(jumpAdPage:)]) {
             [self.delegate jumpAdPage:adURL];

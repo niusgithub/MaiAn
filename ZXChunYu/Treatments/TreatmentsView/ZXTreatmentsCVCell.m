@@ -9,7 +9,7 @@
 #import "ZXTreatmentsCVCell.h"
 #import "ZXTreatments.h"
 
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 #import "NSString+ZX.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -48,9 +48,10 @@ NSString *const kTreatmentsCellNibName = @"ZXTreatmentsCVCell";
     if (treatments.gs_icon_path) {
         
         // .....utf-8 -> GBK -> utf-8
-        NSString *GBK = [treatments.gs_icon_path stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        // NSString *GBK = [treatments.gs_icon_path stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
-        [_treatmentsIV sd_setImageWithURL:[NSURL URLWithString:[ZXChunYu_RESOURCE_PREFIX stringByAppendingString:[GBK stringTransToUTF8]]] placeholderImage:[UIImage imageNamed:@"hospital"]];
+        //[_treatmentsIV sd_setImageWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:[GBK stringTransToUTF8]]] placeholderImage:[UIImage imageNamed:@"hospital"]];
+        [_treatmentsIV sd_setImageWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:treatments.gs_icon_path]] placeholderImage:[UIImage imageNamed:@"hospital"]];
     } else {
         _treatmentsIV.image = nil;
     }

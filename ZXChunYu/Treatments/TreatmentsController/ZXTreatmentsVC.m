@@ -12,7 +12,7 @@
 #import "ZXTreatmentsTool.h"
 
 #import "ZXCommon.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 #import "UIColor+ZX.h"
 
 #import "YYModel.h"
@@ -115,10 +115,10 @@
     ZXTreatments *goods = self.treatments[indexPath.row];
     
     if (System_Version >= 9.0) {
-        SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:[ZXChunYu_RESOURCE_PREFIX stringByAppendingString:goods.gs_dtl_path]] entersReaderIfAvailable:YES];
+        SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:goods.gs_dtl_path]] entersReaderIfAvailable:YES];
         [self presentViewController:safariViewController animated:YES completion:nil];
     } else {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[ZXChunYu_RESOURCE_PREFIX stringByAppendingString:goods.gs_dtl_path]]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:goods.gs_dtl_path]]];
     }
 }
 

@@ -26,7 +26,7 @@
 #import "ZXGetDocExtraInfo.h"
 #import "ZXAdTool.h"
 
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 #import "ZXCommon.h"
 #import "UIColor+ZX.h"
 
@@ -166,8 +166,8 @@ const CGFloat kTitleCellHeight = 30;
     [self.recommendedDoctors removeAllObjects];
     
     [ZXGetDocsTool getDocsInfoWithParam:nil successBlock:^(id responseObject) {
-        NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"getDocs_responseObject:%@",rStr);
+//        NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        NSLog(@"getDocs_responseObject:%@",rStr);
     
         NSDictionary *docInfoJson = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         

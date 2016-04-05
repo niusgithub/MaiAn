@@ -26,4 +26,7 @@ extern CGFloat const kUPCellHeight;
 
 - (void)configureUserProfileCellWithAccount:(ZXAccount *)account;
 
+- (void)updateAvatar:(NSString *)imagePath;
+
+
 @end

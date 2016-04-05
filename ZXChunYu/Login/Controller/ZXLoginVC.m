@@ -111,9 +111,11 @@
         } else {
             // 登录成功，保存账号信息并更新个人中心的账户cell，然后退出当前界面
             // 获取关注的医生的ID并保存在accout中
-            [ZXGetDocsTool getUserFollowDoctorWithAccount:account startNumber:@0 successBlock:^(id doctorObject) {
-                NSString *rStr = [[NSString alloc] initWithData:doctorObject encoding:NSUTF8StringEncoding];
-                NSLog(@"ZXLoginVC Doctor:%@", rStr);
+            [ZXGetDocsTool getUserFollowDoctorWithAccount:account
+                                              startNumber:@0
+                                             successBlock:^(id doctorObject) {
+//                NSString *rStr = [[NSString alloc] initWithData:doctorObject encoding:NSUTF8StringEncoding];
+//                NSLog(@"ZXLoginVC Doctor:%@", rStr);
                 
                 NSDictionary *docInfoDict = [NSJSONSerialization JSONObjectWithData:doctorObject options:0 error:nil];
                 
@@ -125,11 +127,11 @@
                         [account.mDocIDs addObject:docID];
                     }
                 }
+                                                 
+                [ZXAccountTool saveAccount:account];
             } failureBlock:^(NSError *error) {
                 XZXLog(@"ZXLoginVC Doctor ERR:%@",error);
             }];
-            
-            [ZXAccountTool saveAccount:account];
             
             // 登录融云
             [[RCIM sharedRCIM] connectWithToken:account.token success:^(NSString *userId) {

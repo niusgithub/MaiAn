@@ -10,7 +10,14 @@
 
 @class ZXDoctor;
 
+typedef NS_ENUM(NSInteger, ZXDocClinicDoctorCellType) {
+    ZXDocClinicDoctorFollowed,
+    ZXDocClinicDoctorUnFollowed
+};
+
 @interface ZXDocClinicDoctorCell : UITableViewCell
+
+@property (nonatomic, assign) ZXDocClinicDoctorCellType type;
 
 - (void)configureDCDCellWithDoctor:(ZXDoctor *)doctor;
 

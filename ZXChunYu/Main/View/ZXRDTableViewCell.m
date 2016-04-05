@@ -15,7 +15,7 @@
 #import "UIImageView+ZXBorder.h"
 
 
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 NSString *const kRDCellIdentifier = @"RDCellID";
@@ -27,7 +27,7 @@ CGFloat const kRDTableCellHeight = 70;
 - (void)configureRDCellWithDoctor:(ZXDoctor *)doctor {
     
     if (doctor.dc_portrait_path) {
-        [self.RDAvatar sd_setImageWithURL:[NSURL URLWithString:[ZXChunYu_RESOURCE_PREFIX stringByAppendingString:doctor.dc_portrait_path]] placeholderImage:[UIImage imageNamed:@"doctor"]];
+        [self.RDAvatar sd_setImageWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:doctor.dc_portrait_path]] placeholderImage:[UIImage imageNamed:@"doctor"]];
     } else {
         [self.RDAvatar setImage:[UIImage imageNamed:@"doctor"]];
     }
@@ -43,7 +43,7 @@ CGFloat const kRDTableCellHeight = 70;
 - (void)configureRDCellWithHospital:(ZXHospital *)hospital {
     if (hospital.hs_icon_path) {
         // 图片路径含有中文        
-        [self.RDAvatar sd_setImageWithURL:[NSURL URLWithString:[ZXChunYu_RESOURCE_PREFIX stringByAppendingString:[hospital.hs_icon_path stringTransToUTF8]]] placeholderImage:[UIImage imageNamed:@"hospital"]];
+        [self.RDAvatar sd_setImageWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:[hospital.hs_icon_path stringTransToUTF8]]] placeholderImage:[UIImage imageNamed:@"hospital"]];
     } else {
         [self.RDAvatar setImage:[UIImage imageNamed:@"hospital"]];
     }

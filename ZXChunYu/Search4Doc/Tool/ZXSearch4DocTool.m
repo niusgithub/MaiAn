@@ -8,7 +8,7 @@
 
 #import "ZXSearch4DocTool.h"
 #import "ZXHTTPTool.h"
-#import "ZXChunYuAPI.h"
+#import "ZXMaiAnAPI.h"
 
 @implementation ZXSearch4DocTool
 
@@ -28,7 +28,7 @@
                                 @"start_num" : number
                                 };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getDocByNameURL] params:s4dParams success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getDocByNameURL] params:s4dParams success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }
@@ -56,7 +56,7 @@
                                 @"start_num" : number
                                 };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getDocByAreaURL] params:s4dParams success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getDocByAreaURL] params:s4dParams success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }
@@ -84,7 +84,7 @@
                                 @"start_num" : number
                                 };
     
-    [ZXHTTPTool GET:[ZXChunYu_HTTP_REQUEST_PREFIX stringByAppendingString:getDocByTitleURl] params:s4dParams success:^(id responseObj) {
+    [ZXHTTPTool GET:[ZXMaiAn_HTTP_REQUEST_PREFIX stringByAppendingString:getDocByTitleURl] params:s4dParams success:^(id responseObj) {
         if (successBlock) {
             successBlock(responseObj);
         }
