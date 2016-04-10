@@ -59,7 +59,7 @@ static NSString *kNewsCellID = @"NewsCell";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
+    [hud setLabelText:NSLocalizedString(@"loading", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [ZXHealthNewsTool getArticlesByType:self.typeString startNumber:@0 successBlock:^(id responseObject) {

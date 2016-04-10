@@ -56,7 +56,7 @@
 
 - (void)fetchTreatmentsData {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
+    [hud setLabelText:NSLocalizedString(@"loading", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [ZXTreatmentsTool getGoodsByStartNumber:@0 successBlock:^(id responseObject) {

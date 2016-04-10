@@ -8,14 +8,9 @@
 
 #import "ZXPhoneNum4ResetVC.h"
 #import "ZXCheckVerificationCodeVC.h"
-
-#import "ZXCommon.h"
-#import "UIColor+ZX.h"
-
-#import "JVFloatLabeledTextField.h"
-
 #import "ZXFetchVerificationCodeTool.h"
 
+#import "JVFloatLabeledTextField+ZX.h"
 #import "MBProgressHUD+MJ.h"
 
 @interface ZXPhoneNum4ResetVC ()
@@ -28,26 +23,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    UIColor *activeTextColor = [UIColor lightGrayColor];
-    
-    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
-    paragraphStyle.alignment = NSTextAlignmentCenter;
-    
-    _phoneCodeTF.font = [UIFont systemFontOfSize:kJVFieldFontSize];
-    _phoneCodeTF.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"phonecode", nil)
-                                    attributes:@{
-                                                 NSForegroundColorAttributeName: [UIColor darkGrayColor],
-                                                 NSParagraphStyleAttributeName : paragraphStyle
-                                                 }];
-    _phoneCodeTF.floatingLabelFont = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
-    _phoneCodeTF.floatingLabelTextColor = [UIColor themeColor];
-    _phoneCodeTF.floatingLabelActiveTextColor = activeTextColor;
-    _phoneCodeTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _phoneCodeTF.translatesAutoresizingMaskIntoConstraints = NO;
-    _phoneCodeTF.keepBaseline = YES;
+    [_phoneCodeTF defaultConfigurationWithPlaceHolder:@"phonecode"];
     _phoneCodeTF.keyboardType = UIKeyboardTypeNumberPad;
-    _phoneCodeTF.keyboardAppearance = UIKeyboardAppearanceAlert;
+    
+//    UIColor *activeTextColor = [UIColor lightGrayColor];
+//    
+//    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
+//    paragraphStyle.alignment = NSTextAlignmentCenter;
+//    
+//    _phoneCodeTF.font = [UIFont systemFontOfSize:kJVFieldFontSize];
+//    _phoneCodeTF.attributedPlaceholder =
+//    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"phonecode", nil)
+//                                    attributes:@{
+//                                                 NSForegroundColorAttributeName: [UIColor darkGrayColor],
+//                                                 NSParagraphStyleAttributeName : paragraphStyle
+//                                                 }];
+//    _phoneCodeTF.floatingLabelFont = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
+//    _phoneCodeTF.floatingLabelTextColor = [UIColor themeColor];
+//    _phoneCodeTF.floatingLabelActiveTextColor = activeTextColor;
+//    _phoneCodeTF.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    _phoneCodeTF.translatesAutoresizingMaskIntoConstraints = NO;
+//    _phoneCodeTF.keepBaseline = YES;
+//    _phoneCodeTF.keyboardType = UIKeyboardTypeNumberPad;
+//    _phoneCodeTF.keyboardAppearance = UIKeyboardAppearanceAlert;
 }
 
 

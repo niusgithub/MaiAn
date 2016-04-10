@@ -10,6 +10,7 @@
 #import "ZXLoginVC.h"
 #import "ZXUserInfoTVC.h"
 #import "ZXFolloweeTVC.h"
+#import "ZXSettingTVC.h"
 
 #import "ZXAccount.h"
 #import "ZXAccountTool.h"
@@ -115,7 +116,7 @@ static NSString *const mineCellIdentifier = @"MCellID";
     if (indexPath.section == 0) {
         return kUPCellHeight;
     }
-    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -132,7 +133,7 @@ static NSString *const mineCellIdentifier = @"MCellID";
     switch (indexPath.section) {
         case 0: {
             if (_hasLoggedIn) { // 已登录，跳转至个人中心
-                ZXUserInfoTVC *vc = [[ZXUserInfoTVC alloc] init];
+                ZXUserInfoTVC *vc = [[ZXUserInfoTVC alloc] initWithStyle:UITableViewStyleGrouped];
                 vc.delegate = self;
                 [self.navigationController pushViewController:vc animated:YES];
             } else { // 未登录，跳转至登录
@@ -152,16 +153,24 @@ static NSString *const mineCellIdentifier = @"MCellID";
             if (_hasLoggedIn) {
                 switch (indexPath.row) {
                     case 0: {
+                        // 我的关注的医生
                         ZXFolloweeTVC *tvc = [[ZXFolloweeTVC alloc] init];
                         [self.navigationController pushViewController:tvc animated:YES];
                     }
                         break;
                         
                     case 1: {
+                        // 我的提问
                     }
                         break;
                     
                     case 2: {
+                        ZXSettingTVC *tvc = [[ZXSettingTVC alloc] initWithStyle:UITableViewStyleGrouped];
+                        [self.navigationController pushViewController:tvc animated:YES];
+                        // 设置
+                        // 1.修改密码
+                        // 2.清除缓存
+                        // 3.关于
                     }
                         break;
                 }
@@ -185,7 +194,7 @@ static NSString *const mineCellIdentifier = @"MCellID";
     UIImage *image = info[UIImagePickerControllerOriginalImage];
     
     // 2.压缩图片
-    NSLog(@"selected image:%@", image);
+    // NSLog(@"selected image:%@", image);
     
     UIImage *newImage = [[image largestCenteredSquareImage] resizeToTargetSize:CGSizeMake(200, 200)];
     
@@ -197,7 +206,7 @@ static NSString *const mineCellIdentifier = @"MCellID";
     NSString *currentTime = [formatter stringFromDate:[NSDate date]];
     NSString *imageName = [NSString stringWithFormat:@"iOS_%@_%@.jpg", [ZXAccountTool shareAccount].uid, currentTime];
     
-    NSLog(@"imageName:%@",imageName);
+    // NSLog(@"imageName:%@",imageName);
     
     [ZXProfileTool UploadAvatarWithAccount:[ZXAccountTool shareAccount]
                                  imageName:imageName
@@ -206,29 +215,25 @@ static NSString *const mineCellIdentifier = @"MCellID";
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // 请求新的头像地址
-            [ZXProfileTool getUserPortraitByAccount:[ZXAccountTool shareAccount]
-                                       successBlock:^(id userPortraitResponseObject) {
-                                           NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:userPortraitResponseObject options:0 error:nil];
-                                           
-                                           NSString *avatarPath = resonpseDict[@"u_portrait_path"];
-                                           // 更新account中的头像地址
-                                           if (avatarPath) {
-                                               [ZXAccountTool shareAccount].u_portrait_path = avatarPath;
-                                               [ZXAccountTool shareAccount];
-                                           }
-                                           
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self.profileCell updateAvatar:avatarPath];
-                                               [MBProgressHUD showSuccess:@"新头像换好啦"];
-                                           });
-                                       } failureBlock:^(NSError *error) {
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                               NSLog(@"ZXProfileTool getUserPortraitByAccount ERR:%@", error);
-                                               [MBProgressHUD showError:@"服务器返回头像地址失败"];
-                                           });
-                                           
-                                       }
-             ];
+            [ZXProfileTool getUserPortraitByAccount:[ZXAccountTool shareAccount] successBlock:^(id userPortraitResponseObject) {
+                NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:userPortraitResponseObject options:0 error:nil];
+                NSString *avatarPath = resonpseDict[@"u_portrait_path"];
+                // 更新account中的头像地址
+                if (avatarPath) {
+                    ZXAccount *account = [ZXAccountTool shareAccount];
+                    account.u_portrait_path = avatarPath;
+                    [ZXAccountTool saveAccount:account];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.profileCell updateAvatar:avatarPath];
+                    [MBProgressHUD showSuccess:@"新头像换好啦"];
+                });
+            } failureBlock:^(NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSLog(@"ZXProfileTool getUserPortraitByAccount ERR:%@", error);
+                    [MBProgressHUD showError:@"服务器返回头像地址失败"];
+                });
+            }];
         });
     } failureBlock:^(NSError *error) {
         NSLog(@"ZXProfileTool UploadAvatarWithAccount ERR:%@", error);

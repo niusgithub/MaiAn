@@ -51,7 +51,7 @@ NSString *const kTreatmentsCellNibName = @"ZXTreatmentsCVCell";
         // NSString *GBK = [treatments.gs_icon_path stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         //[_treatmentsIV sd_setImageWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:[GBK stringTransToUTF8]]] placeholderImage:[UIImage imageNamed:@"hospital"]];
-        [_treatmentsIV sd_setImageWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:treatments.gs_icon_path]] placeholderImage:[UIImage imageNamed:@"hospital"]];
+        [_treatmentsIV sd_setImageWithURL:[NSURL URLWithString:[ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:treatments.gs_icon_path]] placeholderImage:[UIImage imageNamed:@"defaultTreatments"]];
     } else {
         _treatmentsIV.image = nil;
     }

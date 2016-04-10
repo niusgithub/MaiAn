@@ -36,12 +36,10 @@
 - (void)configureDCDCellWithDoctor:(ZXDoctor *)doctor {
     _doctor = doctor;
     
-    // 关注按钮加边框
+    // 关注按钮与边框样式
     self.followBtn.layer.borderWidth = 1.f;
     self.followBtn.layer.cornerRadius = 4.5;
-    [self.followBtn.layer setBorderColor:[[UIColor themeColor] CGColor]];
-    //self.followBtn.layer.masksToBounds = YES;
-    
+
     // 设置头像
     // sdwebimage会从缓存中查找后读取已经下载的图片 缓存type有none disk memory三种  keyPath是url？(不确定)
     if (doctor.dc_portrait_path) {
@@ -66,16 +64,27 @@
     self.recommendNumberL.text = doctor.dc_recommend;
 }
 
-// 关注医生
-- (IBAction)followADoctor {
-    NSLog(@"关注医生--%@", self.doctor.dc_name);
+- (void)setFollowed:(BOOL)followed {
+    _followed = followed;
+
+    if (followed) {
+        // 橙色
+        [self.followBtn setTitle:NSLocalizedString(@"Followed", nil) forState:UIControlStateNormal];
+        [self.followBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+        [self.followBtn.layer setBorderColor:[[UIColor orangeColor] CGColor]];
+    } else {
+        // 主题绿色
+        [self.followBtn setTitle:NSLocalizedString(@"unFollowed", nil) forState:UIControlStateNormal];
+        [self.followBtn setTitleColor:[UIColor themeColor] forState:UIControlStateNormal];
+        [self.followBtn.layer setBorderColor:[[UIColor themeColor] CGColor]];
+    }
 }
 
-- (void)setType:(ZXDocClinicDoctorCellType)type {
-    if (ZXDocClinicDoctorFollowed == type) {
-        
-    } else {
-        
+// 关注医生
+- (IBAction)followADoctor {
+    self.followed = !_followed;
+    if ([self.delegate respondsToSelector:@selector(changeFollowStatus:)]) {
+        [self.delegate changeFollowStatus:_followed];
     }
 }
 

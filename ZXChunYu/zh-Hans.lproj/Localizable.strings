@@ -12,12 +12,27 @@
 "MAN" = "男";
 "WOMAN" = "女";
 
+//Clinic
+"unFollowed" = "关注";
+"Followed" = "已关注";
+
 //Home
 "recommendedDoctors" = "推荐医生";
 "quickQuestions" = "快速提问";
 "search4Hos" = "找医院";
 "search4Doc" = "找医生";
 "selfDignose" = "自我评估";
+
+//Setting
+"setting" = "设置";
+"changePassword" = "修改密码";
+"wipeCache" = "清除缓存";
+"about" = "关于";
+"resetPassword" = "重置密码";
+"oldPassword" = "旧密码";
+"newPassword" = "新密码";
+"confirmPassword" = "确认密码";
+"enterPassword" = "输入密码";
 
 // SMS
 "welcome"="点击屏幕继续...";

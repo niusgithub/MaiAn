@@ -7,14 +7,10 @@
 //
 
 #import "ZXConfirmPasswordVC.h"
-
 #import "ZXLoginTool.h"
 
-#import "JVFloatLabeledTextField.h"
-
-#import "ZXCommon.h"
-#import "UIColor+ZX.h"
-
+#import "NSString+ZX.h"
+#import "JVFloatLabeledTextField+ZX.h"
 #import "MBProgressHUD+MJ.h"
 
 @interface ZXConfirmPasswordVC ()
@@ -43,11 +39,17 @@
             break;
     }
     
-    UIColor *activeTextColor = [UIColor lightGrayColor];
+//    UIColor *activeTextColor = [UIColor lightGrayColor];
+//    
+//    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
+//    paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
-    paragraphStyle.alignment = NSTextAlignmentCenter;
+    [_passwordTF defaultConfigurationWithPlaceHolder:@"enterPassword"];
+    _passwordTF.secureTextEntry = YES;
+    [_confirmPasswordTF defaultConfigurationWithPlaceHolder:@"confirmPassword"];
+    _confirmPasswordTF.secureTextEntry = YES;
     
+    /*
     _passwordTF.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     _passwordTF.attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:@"输入密码"
@@ -79,6 +81,7 @@
     _confirmPasswordTF.keepBaseline = YES;
     _confirmPasswordTF.secureTextEntry = YES;
     _confirmPasswordTF.keyboardAppearance = UIKeyboardAppearanceDefault;
+     */
 }
 
 
@@ -95,7 +98,7 @@
         
         switch (self.type) {
             case ZXConfirmPasswordVCReigst: {
-                [ZXLoginTool userRegistWithUsername:_phoneCode password:_passwordTF.text successBlock:^(id responseObject) {
+                [ZXLoginTool userRegistWithUsername:_phoneCode password:[_passwordTF.text MD5HexDigest] successBlock:^(id responseObject) {
                     // 注册成功返回 Map<"msg", "register success">
                     // 注册失败返回 Map<"msg", "register fail">
                     NSDictionary *responseString = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
@@ -115,7 +118,7 @@
                 break;
                 
             case ZXConfirmPasswordVCReset: {
-                [ZXLoginTool updateUserPasswordWithUsername:_phoneCode newPassword:_passwordTF.text successBlock:^(id responseObject) {
+                [ZXLoginTool updateUserPasswordWithUsername:_phoneCode newPassword:[_passwordTF.text MD5HexDigest] successBlock:^(id responseObject) {
                     // 添加成功返回 Map<"msg", "update success">
                     // 添加失败返回 Map<"msg", "update fail">
                     NSDictionary *responseString = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];

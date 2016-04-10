@@ -12,12 +12,27 @@
 "MAN" = "Male";
 "WOMAN" = "Female";
 
+//Clinic
+"unFollowed" = "unFollowed";
+"Followed" = "Followed";
+
 //Home
 "recommendedDoctors" = "Recommended Doctors";
 "quickQuestions" = "Q&A";
 "search4Hos" = "Find Hospitals";
 "search4Doc" = "Find Doctors";
 "selfDignose" = "Self Dignose";
+
+//Setting
+"setting" = "Setting";
+"changePassword" = "Change Password";
+"wipeCache" = "Wipe Cache";
+"about" = "About";
+"resetPassword" = "Reset Password";
+"oldPassword" = "Old Password";
+"newPassword" = "New Password";
+"confirmPassword" = "Comfirm Password";
+"enterPassword" = "Enter Password";
 
 // SMS
 "welcome"="Click on the screen to continue...";

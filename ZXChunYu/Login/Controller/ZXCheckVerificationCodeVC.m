@@ -7,15 +7,10 @@
 //
 
 #import "ZXCheckVerificationCodeVC.h"
-
-#import "JVFloatLabeledTextField.h"
-
 #import "ZXConfirmPasswordVC.h"
-
-#import "ZXCommon.h"
-#import "UIColor+ZX.h"
-
 #import "ZXFetchVerificationCodeTool.h"
+
+#import "JVFloatLabeledTextField+ZX.h"
 
 @interface ZXCheckVerificationCodeVC ()
 
@@ -29,26 +24,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIColor *activeTextColor = [UIColor lightGrayColor];
-    
-    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
-    paragraphStyle.alignment = NSTextAlignmentCenter;
-    
-    _verificationCodeTF.font = [UIFont systemFontOfSize:kJVFieldFontSize];
-    _verificationCodeTF.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Code", nil)
-                                    attributes:@{
-                                                 NSForegroundColorAttributeName: [UIColor darkGrayColor],
-                                                 NSParagraphStyleAttributeName : paragraphStyle
-                                                 }];
-    _verificationCodeTF.floatingLabelFont = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
-    _verificationCodeTF.floatingLabelTextColor = [UIColor themeColor];
-    _verificationCodeTF.floatingLabelActiveTextColor = activeTextColor;
-    _verificationCodeTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _verificationCodeTF.translatesAutoresizingMaskIntoConstraints = NO;
-    _verificationCodeTF.keepBaseline = YES;
+    [_verificationCodeTF defaultConfigurationWithPlaceHolder:@"Code"];
     _verificationCodeTF.keyboardType = UIKeyboardTypeNumberPad;
-    _verificationCodeTF.keyboardAppearance = UIKeyboardAppearanceAlert;
+    
+//    UIColor *activeTextColor = [UIColor lightGrayColor];
+//    
+//    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
+//    paragraphStyle.alignment = NSTextAlignmentCenter;
+//    
+//    _verificationCodeTF.font = [UIFont systemFontOfSize:kJVFieldFontSize];
+//    _verificationCodeTF.attributedPlaceholder =
+//    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Code", nil)
+//                                    attributes:@{
+//                                                 NSForegroundColorAttributeName: [UIColor darkGrayColor],
+//                                                 NSParagraphStyleAttributeName : paragraphStyle
+//                                                 }];
+//    _verificationCodeTF.floatingLabelFont = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
+//    _verificationCodeTF.floatingLabelTextColor = [UIColor themeColor];
+//    _verificationCodeTF.floatingLabelActiveTextColor = activeTextColor;
+//    _verificationCodeTF.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    _verificationCodeTF.translatesAutoresizingMaskIntoConstraints = NO;
+//    _verificationCodeTF.keepBaseline = YES;
+//    _verificationCodeTF.keyboardType = UIKeyboardTypeNumberPad;
+//    _verificationCodeTF.keyboardAppearance = UIKeyboardAppearanceAlert;
 }
 
 #pragma mark -

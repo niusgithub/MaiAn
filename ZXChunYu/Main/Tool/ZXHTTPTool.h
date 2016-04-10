@@ -16,8 +16,8 @@
          UID:(NSString *)uid
          KEY:(NSString *)key
       params:(NSObject *)paramsObj
-     success:(void (^)(id))success
-     failure:(void (^)(NSError *))failure;
+     success:(void(^)(id responseObj))success
+     failure:(void(^)(NSError *err))failure;
 
 + (void)GET:(NSString *)URL params:(NSObject *)paramsObj success:(void(^)(id))success failure:(void(^)(NSError *))failure;
 
@@ -25,10 +25,10 @@
         UID:(NSString *)uid
         KEY:(NSString *)key
      params:(NSObject *)paramsObj
-    success:(void(^)(id))success
-    failure:(void(^)(NSError *))failure;
+    success:(void(^)(id responseObj))success
+    failure:(void(^)(NSError *err))failure;
 
-+ (void)UploadImageWithURL:(NSString *)URL params:(NSObject *)paramsObj imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure;
+//+ (void)UploadImageWithURL:(NSString *)URL params:(NSObject *)paramsObj imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure;
 
 + (void)UploadImageWithURL:(NSString *)URL
                        UID:(NSString *)uid
@@ -36,7 +36,7 @@
                     params:(NSObject *)paramsObj
                  imageName:(NSString *)imageName
                  imageData:(NSData *)imageData
-                   success:(void(^)(id))success
-                   failure:(void(^)(NSError *))failure;
+                   success:(void(^)(id responseObj))success
+                   failure:(void(^)(NSError *err))failure;
 
 @end

@@ -29,6 +29,11 @@
 		E07BE4E81C425F58001C4E72 /* ZXUserProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E07BE4E51C425F57001C4E72 /* ZXUserProfileCell.m */; };
 		E07BE4E91C425F58001C4E72 /* ZXUserProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E07BE4E61C425F57001C4E72 /* ZXUserProfileCell.xib */; };
 		E07E2AF01C698C1C00D572B3 /* ZXProfileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E07E2AEF1C698C1C00D572B3 /* ZXProfileTool.m */; };
+		E08851401CB8F2D00042451D /* ZXSettingTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E088513F1CB8F2D00042451D /* ZXSettingTool.m */; };
+		E08851431CB92BC80042451D /* ZXSettingTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E08851421CB92BC80042451D /* ZXSettingTVC.m */; };
+		E08851471CBA1DF90042451D /* ZXChangePwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E08851451CBA1DF90042451D /* ZXChangePwdVC.m */; };
+		E08851481CBA1DF90042451D /* ZXChangePwdVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E08851461CBA1DF90042451D /* ZXChangePwdVC.xib */; };
+		E088514B1CBA2F6E0042451D /* JVFloatLabeledTextField+ZX.m in Sources */ = {isa = PBXBuildFile; fileRef = E088514A1CBA2F6E0042451D /* JVFloatLabeledTextField+ZX.m */; };
 		E08ADEC81C5502C900984867 /* ZXRegistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E08ADEC61C5502C900984867 /* ZXRegistVC.m */; };
 		E08ADEDB1C550D3B00984867 /* ZXConfirmPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E08ADEDA1C550D3B00984867 /* ZXConfirmPasswordVC.m */; };
 		E08C506A1C875DB70001F8E1 /* ZXChunYuUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E08C50681C875DB70001F8E1 /* ZXChunYuUITests.m */; };
@@ -166,6 +171,15 @@
 		E07BE4E61C425F57001C4E72 /* ZXUserProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZXUserProfileCell.xib; sourceTree = "<group>"; };
 		E07E2AEE1C698C1C00D572B3 /* ZXProfileTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXProfileTool.h; sourceTree = "<group>"; };
 		E07E2AEF1C698C1C00D572B3 /* ZXProfileTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXProfileTool.m; sourceTree = "<group>"; };
+		E088513E1CB8F2D00042451D /* ZXSettingTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXSettingTool.h; sourceTree = "<group>"; };
+		E088513F1CB8F2D00042451D /* ZXSettingTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXSettingTool.m; sourceTree = "<group>"; };
+		E08851411CB92BC80042451D /* ZXSettingTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXSettingTVC.h; sourceTree = "<group>"; };
+		E08851421CB92BC80042451D /* ZXSettingTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXSettingTVC.m; sourceTree = "<group>"; };
+		E08851441CBA1DF90042451D /* ZXChangePwdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXChangePwdVC.h; sourceTree = "<group>"; };
+		E08851451CBA1DF90042451D /* ZXChangePwdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXChangePwdVC.m; sourceTree = "<group>"; };
+		E08851461CBA1DF90042451D /* ZXChangePwdVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZXChangePwdVC.xib; sourceTree = "<group>"; };
+		E08851491CBA2F6E0042451D /* JVFloatLabeledTextField+ZX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JVFloatLabeledTextField+ZX.h"; sourceTree = "<group>"; };
+		E088514A1CBA2F6E0042451D /* JVFloatLabeledTextField+ZX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JVFloatLabeledTextField+ZX.m"; sourceTree = "<group>"; };
 		E08ADEC51C5502C900984867 /* ZXRegistVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXRegistVC.h; sourceTree = "<group>"; };
 		E08ADEC61C5502C900984867 /* ZXRegistVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXRegistVC.m; sourceTree = "<group>"; };
 		E08ADED91C550D3B00984867 /* ZXConfirmPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXConfirmPasswordVC.h; sourceTree = "<group>"; };
@@ -213,7 +227,7 @@
 		E0E928941C81F379009BB8F2 /* ZXTreatments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXTreatments.m; sourceTree = "<group>"; };
 		E0E928971C8220A6009BB8F2 /* ZXTreatmentsTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXTreatmentsTool.h; sourceTree = "<group>"; };
 		E0E928981C8220A6009BB8F2 /* ZXTreatmentsTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXTreatmentsTool.m; sourceTree = "<group>"; };
-		E0F645E81BF9C42400534165 /* ZXChunYu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZXChunYu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0F645E81BF9C42400534165 /* ZXMaiAn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZXMaiAn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F645EC1BF9C42400534165 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E0F645EE1BF9C42400534165 /* ZXAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZXAppDelegate.h; path = ../ZXAppDelegate.h; sourceTree = "<group>"; };
 		E0F645EF1BF9C42400534165 /* ZXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ZXAppDelegate.m; path = ../ZXAppDelegate.m; sourceTree = "<group>"; };
@@ -436,6 +450,8 @@
 				E06183431C5715780008B933 /* ZXUserInfoTool.m */,
 				E07E2AEE1C698C1C00D572B3 /* ZXProfileTool.h */,
 				E07E2AEF1C698C1C00D572B3 /* ZXProfileTool.m */,
+				E088513E1CB8F2D00042451D /* ZXSettingTool.h */,
+				E088513F1CB8F2D00042451D /* ZXSettingTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -452,6 +468,7 @@
 		E07BE4DF1C425F57001C4E72 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				E08851361CB8EF700042451D /* Setting */,
 				E05CF5141CA3D07500FACD00 /* Followee */,
 				E06183451C5715930008B933 /* Model */,
 				E061833E1C5715390008B933 /* Tool */,
@@ -483,6 +500,18 @@
 				E07BE4E61C425F57001C4E72 /* ZXUserProfileCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		E08851361CB8EF700042451D /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				E08851411CB92BC80042451D /* ZXSettingTVC.h */,
+				E08851421CB92BC80042451D /* ZXSettingTVC.m */,
+				E08851441CBA1DF90042451D /* ZXChangePwdVC.h */,
+				E08851451CBA1DF90042451D /* ZXChangePwdVC.m */,
+				E08851461CBA1DF90042451D /* ZXChangePwdVC.xib */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		E08C50661C875DB70001F8E1 /* ZXChunYuUITests */ = {
@@ -626,7 +655,7 @@
 		E0F645E91BF9C42400534165 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E0F645E81BF9C42400534165 /* ZXChunYu.app */,
+				E0F645E81BF9C42400534165 /* ZXMaiAn.app */,
 				E0F646011BF9C42500534165 /* ZXChunYuTests.xctest */,
 				E0F6460C1BF9C42500534165 /* ZXChunYuUITests.xctest */,
 			);
@@ -888,6 +917,8 @@
 				E042F7B81C74AF960082D593 /* NSTimer+ZXBlockSupport.m */,
 				E0E9286C1C802DB1009BB8F2 /* UIColor+ZX.h */,
 				E0E9286D1C802DB1009BB8F2 /* UIColor+ZX.m */,
+				E08851491CBA2F6E0042451D /* JVFloatLabeledTextField+ZX.h */,
+				E088514A1CBA2F6E0042451D /* JVFloatLabeledTextField+ZX.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1087,7 +1118,7 @@
 			);
 			name = ZXChunYu;
 			productName = ZXChunYu;
-			productReference = E0F645E81BF9C42400534165 /* ZXChunYu.app */;
+			productReference = E0F645E81BF9C42400534165 /* ZXMaiAn.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E0F646001BF9C42500534165 /* ZXChunYuTests */ = {
@@ -1175,6 +1206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9CD8B8B1C43A3C100DF169C /* TYGSelectMenuCellTableViewCell.xib in Resources */,
+				E08851481CBA1DF90042451D /* ZXChangePwdVC.xib in Resources */,
 				E9FF62631C47862B006D05B0 /* ZXDocClinicServiceCell.xib in Resources */,
 				E9D24B391C50B14C009020E8 /* ZXHosMainCell.xib in Resources */,
 				E061832C1C563D290008B933 /* Localizable.strings in Resources */,
@@ -1265,6 +1297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9D4F95A1C0EE3AF005A81BE /* ZXBasicStaticTableView.m in Sources */,
+				E08851401CB8F2D00042451D /* ZXSettingTool.m in Sources */,
 				E9D4F96B1C1024CC005A81BE /* ZXBadgeView.m in Sources */,
 				E0E928531C7AF70B009BB8F2 /* ZXButtomCell.m in Sources */,
 				E9FF626A1C47863E006D05B0 /* MBProgressHUD+MJ.m in Sources */,
@@ -1317,6 +1350,8 @@
 				E0F645F01BF9C42400534165 /* ZXAppDelegate.m in Sources */,
 				E9FF625E1C47862B006D05B0 /* ZXGetDocComments.m in Sources */,
 				E07E2AF01C698C1C00D572B3 /* ZXProfileTool.m in Sources */,
+				E08851431CB92BC80042451D /* ZXSettingTVC.m in Sources */,
+				E088514B1CBA2F6E0042451D /* JVFloatLabeledTextField+ZX.m in Sources */,
 				E05F34F51C52277C00DC0EA4 /* ZXSearch4HosTool.m in Sources */,
 				E061831E1C560EF40008B933 /* ZXCheckVerificationCodeVC.m in Sources */,
 				E0E928951C81F379009BB8F2 /* ZXTreatments.m in Sources */,
@@ -1324,6 +1359,7 @@
 				E042F7B91C74AF960082D593 /* NSTimer+ZXBlockSupport.m in Sources */,
 				E0E928691C802BAC009BB8F2 /* ZXHorizonalTableViewController.m in Sources */,
 				E0BA4F5E1CA66B090059C379 /* ZXUserEvaluation2Doc.m in Sources */,
+				E08851471CBA1DF90042451D /* ZXChangePwdVC.m in Sources */,
 				E061834C1C573A0B0008B933 /* ZXEditUserInfoVc.m in Sources */,
 				E9FF625D1C47862B006D05B0 /* ZXDoctorComment.m in Sources */,
 				E0E9286E1C802DB1009BB8F2 /* UIColor+ZX.m in Sources */,
@@ -1416,8 +1452,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: JunYi Yu (59362S557A)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1461,7 +1497,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: JunYi Yu (59362S557A)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1488,12 +1524,12 @@
 			baseConfigurationReference = E147E8ED2A7E33BB9DE20E00 /* Pods-ZXChunYu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Aiping Tang (TWMC5J46PY)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: JunYi Yu (RM9FX5THZ8)";
 				INFOPLIST_FILE = ZXChunYu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zx.ZXChunYu;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ruangsc.ZXMaiAn;
+				PRODUCT_NAME = ZXMaiAn;
 			};
 			name = Debug;
 		};
@@ -1502,12 +1538,12 @@
 			baseConfigurationReference = 9FC74826E7BDDF5B0FA7DD5A /* Pods-ZXChunYu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Aiping Tang (TWMC5J46PY)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: JunYi Yu (RM9FX5THZ8)";
 				INFOPLIST_FILE = ZXChunYu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zx.ZXChunYu;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ruangsc.ZXMaiAn;
+				PRODUCT_NAME = ZXMaiAn;
 			};
 			name = Release;
 		};

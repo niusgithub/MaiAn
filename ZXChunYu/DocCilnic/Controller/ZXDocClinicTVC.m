@@ -21,6 +21,8 @@
 #import "ZXDocClinicServiceCell.h"
 #import "ZXDocClinicTitleCell.h"
 
+#import "ZXDocClinicTool.h"
+
 #import "NSString+ZX.h"
 
 #import "YYModel.h"
@@ -32,12 +34,20 @@ NSString *const kDocClinicServiceCellNibName = @"ZXDocClinicServiceCell";
 NSString *const kDocClinicTitleCellIdentifier = @"DCTCellID";
 NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
 
-@interface ZXDocClinicTVC ()
+@interface ZXDocClinicTVC () <ZXDocClinicDoctorCellDelegate>
 @property (nonatomic, strong) ZXDoctor *doctor;
 @property (nonatomic, strong) NSMutableArray *doctorComments;
 @end
 
 @implementation ZXDocClinicTVC
+
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    if (self) {
+        self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableView.bounds.size.width, 0.01f)];
+    }
+    return self;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -130,6 +140,8 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
         case 0: {
             ZXDocClinicDoctorCell *cell = (ZXDocClinicDoctorCell *)[self.tableView dequeueReusableCellWithIdentifier:kDocClinicDoctorCellIdentifier];
             
+            cell.delegate = self;
+            
             // 查看登录状态
             if ([ZXAccountTool shareAccount]) {
                 // 判断是否关注该医生
@@ -138,14 +150,12 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
                 NSNumber *didNum = [NSNumber numberWithInt:[self.doctor.did intValue]];
                 
                 if ([[ZXAccountTool shareAccount].mDocIDs containsObject:didNum]) {
-                    cell.type = ZXDocClinicDoctorFollowed;
-                    NSLog(@"关注过");
+                    cell.followed = YES;
                 } else {
-                    cell.type = ZXDocClinicDoctorUnFollowed;
-                    NSLog(@"没有关注");
+                    cell.followed = NO;
                 }
             } else {
-                cell.type = ZXDocClinicDoctorUnFollowed;
+                cell.followed = NO;
                 NSLog(@"未关注");
             }
             
@@ -176,7 +186,6 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
                 
                 return cell;
             }
-            
         }
             
         case 3: {
@@ -215,7 +224,6 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
             }
         }
     }
-    
     return nil;
 }
 
@@ -248,15 +256,16 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section != 0) {
-        return 10;
+        return 5;
     }
     return 0;
 }
 
+
 #pragma mark - TableView Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // 医生详情由于信息不足 暂不实现
+    // 医生详情 由于信息不足 暂不实现
     
     // 评论列表
     if (indexPath.section == 3) {
@@ -266,6 +275,59 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
             tvc.comments = self.doctorComments;
             [self.navigationController pushViewController:tvc animated:YES];
         }
+    }
+}
+
+
+#pragma mark - ZXDocClinicDoctorCell Delegate
+
+-(void)changeFollowStatus:(BOOL)stauts {
+    // 更新Account中的关注列表
+    NSNumber *didNum = [NSNumber numberWithInt:[self.doctor.did intValue]];
+    ZXAccount *account = [ZXAccountTool shareAccount];
+    
+    if (stauts) {
+        [account.mDocIDs addObject:didNum];
+        [ZXAccountTool saveAccount:account];
+        
+        // 添加成功返回Map<"msg", "add focus success">
+        // 添加失败返回Map("msg", "add talk fail")
+        [ZXDocClinicTool followDoctorWithAccout:[ZXAccountTool shareAccount]
+                                            DID:_doctor.did
+                                   successBlock:^(id responseObject) {
+                                       NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+                                       if ([resonpseDict[@"msg"] isEqualToString:@"add focus success"]) {
+                                           //[MBProgressHUD showSuccess:@"关注成功"];
+                                           NSLog(@"关注成功");
+                                       } else if ([resonpseDict[@"msg"] isEqualToString:@"add talk fail"]) {
+                                           NSLog(@"关注失败");
+                                       }
+                                   }
+                                   failureBlock:^(NSError *error) {
+                                       NSLog(@"Follow Doctor ERR:%@",error);
+                                   }
+         ];
+    } else {
+        [account.mDocIDs removeObject:didNum];
+        [ZXAccountTool saveAccount:account];
+        
+        // 添加成功返回Map<"msg", "del focus success">
+        // 添加失败返回Map("msg", "del focus fail")
+        [ZXDocClinicTool cancelFollowDoctorWithAccout:[ZXAccountTool shareAccount]
+                                                  DID:_doctor.did
+                                         successBlock:^(id responseObject) {
+                                             NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+                                             if ([resonpseDict[@"msg"] isEqualToString:@"del focus success"]) {
+                                                 //[MBProgressHUD showSuccess:@"修改成功"];
+                                                 NSLog(@"取消关注成功");
+                                             } else if ([resonpseDict[@"msg"] isEqualToString:@"del focus fail"]) {
+                                                 NSLog(@"取消关注失败");
+                                             }
+                                         }
+                                         failureBlock:^(NSError *error) {
+                                             NSLog(@"Cancel Follow Doctor ERR:%@",error);
+                                         }
+         ];
     }
 }
 

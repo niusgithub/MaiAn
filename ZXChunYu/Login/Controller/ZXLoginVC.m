@@ -8,8 +8,7 @@
 
 #import "ZXLoginVC.h"
 
-#import "ZXCommon.h"
-#import "UIColor+ZX.h"
+#import "NSString+ZX.h"
 #import "ZXLoginParams.h"
 #import "ZXLoginTool.h"
 #import "ZXAccount.h"
@@ -19,7 +18,7 @@
 #import "ZXRegistVC.h"
 
 #import "YYModel.h"
-#import "JVFloatLabeledTextField.h"
+#import "JVFloatLabeledTextField+ZX.h"
 #import "MBProgressHUD+MJ.h"
 #import <RongIMKit/RongIMKit.h>
 
@@ -41,13 +40,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap)]];
+//    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap)]];
     
-    UIColor *activeTextColor = [UIColor lightGrayColor];
+//    UIColor *activeTextColor = [UIColor lightGrayColor];
+//    
+//    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
+//    paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
-    paragraphStyle.alignment = NSTextAlignmentCenter;
+    [_accountTF defaultConfigurationWithPlaceHolder:@"phonecode"];
+    _accountTF.keyboardType = UIKeyboardTypeNumberPad;
+    [_passwordTF defaultConfigurationWithPlaceHolder:@"password"];
+    _passwordTF.secureTextEntry = YES;
     
+    /*
     _accountTF.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     _accountTF.attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:NSLocalizedString(@"phonecode", nil)
@@ -79,12 +84,18 @@
     _passwordTF.keepBaseline = YES;
     _passwordTF.secureTextEntry = YES;
     _passwordTF.keyboardAppearance = UIKeyboardAppearanceAlert;
+     */
 }
 
 
 #pragma mark - Button Click
 
-- (void)singleTap {
+//- (void)singleTap {
+//    [self.accountTF endEditing:YES];
+//    [self.passwordTF endEditing:YES];
+//}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.accountTF endEditing:YES];
     [self.passwordTF endEditing:YES];
 }
@@ -95,43 +106,44 @@
     [self.view endEditing:YES];
     
     self.username = self.accountTF.text;
-    self.password = self.passwordTF.text;
+    self.password = [self.passwordTF.text MD5HexDigest];
     
     ZXLoginParams *loginParams = [[ZXLoginParams alloc] init];
     loginParams.username = self.accountTF.text;
-    loginParams.passwd = self.passwordTF.text;
+    loginParams.passwd = [self.passwordTF.text MD5HexDigest];
     
     [ZXLoginTool getLoginInfoWithParam:[loginParams yy_modelToJSONObject] successBlock:^(id responseObject) {
 //        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 //        NSLog(@"ZXLoginVC:%@",responseStr);
         ZXAccount *account = [ZXAccount yy_modelWithJSON:responseObject];
         if ([account.uid isEqualToString:@"-1"]) {
-            XZXLog(@"账号/密码错误");
             [MBProgressHUD showError:@"账号/密码错误"];
         } else {
             // 登录成功，保存账号信息并更新个人中心的账户cell，然后退出当前界面
-            // 获取关注的医生的ID并保存在accout中
-            [ZXGetDocsTool getUserFollowDoctorWithAccount:account
-                                              startNumber:@0
-                                             successBlock:^(id doctorObject) {
-//                NSString *rStr = [[NSString alloc] initWithData:doctorObject encoding:NSUTF8StringEncoding];
-//                NSLog(@"ZXLoginVC Doctor:%@", rStr);
-                
-                NSDictionary *docInfoDict = [NSJSONSerialization JSONObjectWithData:doctorObject options:0 error:nil];
-                
-                [account.mDocIDs removeAllObjects];
-                
-                for (NSDictionary *docDict in docInfoDict) {
-                    @autoreleasepool {
-                        NSString *docID = docDict[@"did"];
-                        [account.mDocIDs addObject:docID];
+            [ZXAccountTool saveAccount:account];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                // 获取关注的医生的ID并保存在accout中
+                [ZXGetDocsTool getUserFollowDoctorWithAccount:account startNumber:@0 successBlock:^(id doctorObject) {
+                    //                NSString *rStr = [[NSString alloc] initWithData:doctorObject encoding:NSUTF8StringEncoding];
+                    //                NSLog(@"ZXLoginVC Doctor:%@", rStr);
+                                                     
+                    NSDictionary *docInfoDict = [NSJSONSerialization JSONObjectWithData:doctorObject options:0 error:nil];
+                                                     
+                    [account.mDocIDs removeAllObjects];
+                                                     
+                    for (NSDictionary *docDict in docInfoDict) {
+                        @autoreleasepool {
+                            NSString *docID = docDict[@"did"];
+                            [account.mDocIDs addObject:docID];
+                        }
                     }
-                }
-                                                 
-                [ZXAccountTool saveAccount:account];
-            } failureBlock:^(NSError *error) {
-                XZXLog(@"ZXLoginVC Doctor ERR:%@",error);
-            }];
+                    
+                    [ZXAccountTool saveAccount:account];
+                } failureBlock:^(NSError *error) {
+                    NSLog(@"ZXLoginVC Doctor ERR:%@",error);
+                }];
+            });
             
             // 登录融云
             [[RCIM sharedRCIM] connectWithToken:account.token success:^(NSString *userId) {
@@ -151,26 +163,12 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     } failureBlock:^(NSError *err) {
-        XZXLog(@"ZXLoginVC ERR:%@",err);
+        NSLog(@"ZXLoginVC ERR:%@",err);
     }];
 }
 
 - (IBAction)cancelButtonClick:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (IBAction)ResetPassword {
-//    ZXLabelButtonVC *vc = [[ZXLabelButtonVC alloc] init];
-//    vc.labelText = @"重置密码";
-//    vc.placeholderText = @"手机号";
-//    vc.buttonText = @"获取验证码";
-//    vc.buttonOnClick = ^(NSString *str){
-//        NSLog(@"手机号:%@",str);
-//    };
-//    [self.navigationController pushViewController:vc animated:YES];
-}
-
-
-
 
 @end

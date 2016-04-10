@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZXChangePwdVC">
+            <connections>
+                <outlet property="changePwdL" destination="bCT-7p-42d" id="C0S-nH-h4J"/>
+                <outlet property="changedPwdTF" destination="Raa-tv-qIh" id="icR-66-ciq"/>
+                <outlet property="comfirmPwdTF" destination="njb-IK-IY2" id="rQx-Wt-P0X"/>
+                <outlet property="oldPwdTF" destination="293-0y-9cv" id="1EK-OY-UFg"/>
+                <outlet property="view" destination="cr7-He-LFf" id="0Es-u8-z3P"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="cr7-He-LFf">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6f-0P-LSq" userLabel="cancelBtn">
+                    <rect key="frame" x="35" y="35" width="60" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="r2s-gd-l3x"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="取消">
+                        <color key="titleColor" red="0.46274509800000002" green="0.7843137255" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelBtnClick" destination="-1" eventType="touchUpInside" id="kPa-NW-Pui"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCT-7p-42d" userLabel="changePwdL">
+                    <rect key="frame" x="183" y="120" width="235" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="235" id="uLI-PI-V9m"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="293-0y-9cv" userLabel="oldPasswordTF" customClass="JVFloatLabeledTextField">
+                    <rect key="frame" x="183" y="196" width="235" height="36"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Raa-tv-qIh" userLabel="newPasswordTF" customClass="JVFloatLabeledTextField">
+                    <rect key="frame" x="183" y="272" width="235" height="36"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njb-IK-IY2" userLabel="comfirmPasswordTF" customClass="JVFloatLabeledTextField">
+                    <rect key="frame" x="183" y="348" width="235" height="36"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kjE-91-yxs" userLabel="comfirmBtn">
+                    <rect key="frame" x="183" y="424" width="235" height="36"/>
+                    <color key="backgroundColor" red="0.46274509800000002" green="0.7843137255" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="确认">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="comfirmBtnClick" destination="-1" eventType="touchUpInside" id="Ybl-Uz-wke"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tR-1L-GHp" userLabel="View1">
+                    <rect key="frame" x="183" y="231" width="235" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="235" id="ql3-FI-iH7"/>
+                        <constraint firstAttribute="height" constant="1" id="wSF-jS-c7A"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCT-9K-xOe" userLabel="View2">
+                    <rect key="frame" x="183" y="307" width="235" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="235" id="SZA-fj-9kf"/>
+                        <constraint firstAttribute="height" constant="1" id="tqh-93-JK2"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fLQ-IT-5yO" userLabel="View3">
+                    <rect key="frame" x="183" y="383" width="235" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Cw0-3A-alv"/>
+                        <constraint firstAttribute="width" constant="235" id="WrT-TC-mL4"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="fLQ-IT-5yO" firstAttribute="bottom" secondItem="njb-IK-IY2" secondAttribute="bottom" id="1nQ-hX-CBb"/>
+                <constraint firstItem="4tR-1L-GHp" firstAttribute="centerX" secondItem="cr7-He-LFf" secondAttribute="centerX" id="1sL-wR-J6o"/>
+                <constraint firstItem="kjE-91-yxs" firstAttribute="centerX" secondItem="cr7-He-LFf" secondAttribute="centerX" id="6FD-KF-FIU"/>
+                <constraint firstItem="Raa-tv-qIh" firstAttribute="top" secondItem="293-0y-9cv" secondAttribute="bottom" constant="40" id="6z4-FM-2Mr"/>
+                <constraint firstItem="iCT-9K-xOe" firstAttribute="bottom" secondItem="Raa-tv-qIh" secondAttribute="bottom" id="8Au-2O-fpM"/>
+                <constraint firstItem="njb-IK-IY2" firstAttribute="centerX" secondItem="cr7-He-LFf" secondAttribute="centerX" id="A3T-23-eCD"/>
+                <constraint firstItem="4tR-1L-GHp" firstAttribute="bottom" secondItem="293-0y-9cv" secondAttribute="bottom" id="Iuk-I6-9Vr"/>
+                <constraint firstItem="fLQ-IT-5yO" firstAttribute="centerX" secondItem="cr7-He-LFf" secondAttribute="centerX" id="KGY-F2-4od"/>
+                <constraint firstItem="293-0y-9cv" firstAttribute="centerX" secondItem="cr7-He-LFf" secondAttribute="centerX" id="QJC-Q5-zDu"/>
+                <constraint firstItem="Raa-tv-qIh" firstAttribute="width" secondItem="bCT-7p-42d" secondAttribute="width" id="R3Y-D9-Pk1"/>
+                <constraint firstItem="kjE-91-yxs" firstAttribute="top" secondItem="njb-IK-IY2" secondAttribute="bottom" constant="40" id="Rmv-3P-VAz"/>
+                <constraint firstItem="njb-IK-IY2" firstAttribute="top" secondItem="Raa-tv-qIh" secondAttribute="bottom" constant="40" id="RwG-WY-W6s"/>
+                <constraint firstItem="fLQ-IT-5yO" firstAttribute="height" secondItem="iCT-9K-xOe" secondAttribute="height" id="TLy-MK-51h"/>
+                <constraint firstItem="fLQ-IT-5yO" firstAttribute="width" secondItem="iCT-9K-xOe" secondAttribute="width" id="Vla-4B-7KS"/>
+                <constraint firstItem="bCT-7p-42d" firstAttribute="top" secondItem="cr7-He-LFf" secondAttribute="top" constant="120" id="Ytt-zj-1wi"/>
+                <constraint firstItem="Raa-tv-qIh" firstAttribute="centerX" secondItem="cr7-He-LFf" secondAttribute="centerX" id="bgX-7R-Gft"/>
+                <constraint firstItem="293-0y-9cv" firstAttribute="top" secondItem="bCT-7p-42d" secondAttribute="bottom" constant="40" id="cGI-FL-UX2" userLabel="oldPasswordTF.top = changePwdL.bottom + 40"/>
+                <constraint firstItem="Raa-tv-qIh" firstAttribute="height" secondItem="bCT-7p-42d" secondAttribute="height" id="dDf-LB-QVL"/>
+                <constraint firstItem="kjE-91-yxs" firstAttribute="width" secondItem="bCT-7p-42d" secondAttribute="width" id="e2W-Hg-CiH"/>
+                <constraint firstItem="O6f-0P-LSq" firstAttribute="leading" secondItem="cr7-He-LFf" secondAttribute="leading" constant="35" id="fHL-hl-goR"/>
+                <constraint firstItem="293-0y-9cv" firstAttribute="height" secondItem="bCT-7p-42d" secondAttribute="height" id="fn5-9p-wHK"/>
+                <constraint firstItem="bCT-7p-42d" firstAttribute="centerX" secondItem="cr7-He-LFf" secondAttribute="centerX" id="gfM-gh-1YO"/>
+                <constraint firstItem="njb-IK-IY2" firstAttribute="height" secondItem="bCT-7p-42d" secondAttribute="height" id="kDh-T6-3HU"/>
+                <constraint firstItem="kjE-91-yxs" firstAttribute="height" secondItem="bCT-7p-42d" secondAttribute="height" id="m5A-dB-5kD"/>
+                <constraint firstItem="O6f-0P-LSq" firstAttribute="top" secondItem="cr7-He-LFf" secondAttribute="top" constant="35" id="mOz-7B-iIs"/>
+                <constraint firstItem="njb-IK-IY2" firstAttribute="width" secondItem="bCT-7p-42d" secondAttribute="width" id="qYu-an-8kF"/>
+                <constraint firstItem="iCT-9K-xOe" firstAttribute="centerX" secondItem="cr7-He-LFf" secondAttribute="centerX" id="uNk-rl-0vn"/>
+                <constraint firstItem="293-0y-9cv" firstAttribute="width" secondItem="bCT-7p-42d" secondAttribute="width" id="uqc-sl-g90"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

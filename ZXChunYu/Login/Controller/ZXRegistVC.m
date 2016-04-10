@@ -7,18 +7,11 @@
 //
 
 #import "ZXRegistVC.h"
-
-#import "JVFloatLabeledTextField.h"
-#import "JVFloatLabeledTextView.h"
-
-#import "ZXCommon.h"
-#import "UIColor+ZX.h"
-
 #import "ZXLoginVC.h"
 #import "ZXCheckVerificationCodeVC.h"
-
 #import "ZXFetchVerificationCodeTool.h"
 
+#import "JVFloatLabeledTextField+ZX.h"
 #import "MBProgressHUD+MJ.h"
 #import <SMS_SDK/SMSSDK.h>
 
@@ -32,24 +25,27 @@
 
 - (void)viewDidLoad {
     
-    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
-    paragraphStyle.alignment = NSTextAlignmentCenter;
+//    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
+//    paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    _phoneNumTF.font = [UIFont systemFontOfSize:kJVFieldFontSize];
-    _phoneNumTF.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"phonecode", nil)
-                                    attributes:@{
-                                                 NSForegroundColorAttributeName : [UIColor darkGrayColor],
-                                                 NSParagraphStyleAttributeName : paragraphStyle
-                                                 }];
-    _phoneNumTF.floatingLabelFont = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
-    _phoneNumTF.floatingLabelTextColor = [UIColor themeColor];
-    _phoneNumTF.floatingLabelActiveTextColor = [UIColor lightGrayColor];
-    _phoneNumTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _phoneNumTF.translatesAutoresizingMaskIntoConstraints = NO;
-    _phoneNumTF.keepBaseline = YES;
+    [_phoneNumTF defaultConfigurationWithPlaceHolder:@"phonecode"];
     _phoneNumTF.keyboardType = UIKeyboardTypeNumberPad;
-    _phoneNumTF.keyboardAppearance = UIKeyboardAppearanceDark;
+    
+//    _phoneNumTF.font = [UIFont systemFontOfSize:kJVFieldFontSize];
+//    _phoneNumTF.attributedPlaceholder =
+//    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"phonecode", nil)
+//                                    attributes:@{
+//                                                 NSForegroundColorAttributeName : [UIColor darkGrayColor],
+//                                                 NSParagraphStyleAttributeName : paragraphStyle
+//                                                 }];
+//    _phoneNumTF.floatingLabelFont = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
+//    _phoneNumTF.floatingLabelTextColor = [UIColor themeColor];
+//    _phoneNumTF.floatingLabelActiveTextColor = [UIColor lightGrayColor];
+//    _phoneNumTF.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    _phoneNumTF.translatesAutoresizingMaskIntoConstraints = NO;
+//    _phoneNumTF.keepBaseline = YES;
+//    _phoneNumTF.keyboardType = UIKeyboardTypeNumberPad;
+//    _phoneNumTF.keyboardAppearance = UIKeyboardAppearanceDark;
 }
 
 

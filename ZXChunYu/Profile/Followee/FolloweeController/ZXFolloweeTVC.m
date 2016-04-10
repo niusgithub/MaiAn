@@ -38,7 +38,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Loading";
+    [hud setLabelText:NSLocalizedString(@"loading", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [ZXGetDocsTool getUserFollowDoctorWithAccount:[ZXAccountTool shareAccount]
@@ -123,6 +123,11 @@
         [cell configureRDCellWithDoctor:doc];
     }
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
 }
 
 @end

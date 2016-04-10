@@ -57,7 +57,7 @@
         UIViewController *goodsNC = [[UINavigationController alloc] initWithRootViewController:goods];
         
         // 个人中心
-        ZXProfileTVC *profile = [[ZXProfileTVC alloc] init];
+        ZXProfileTVC *profile = [[ZXProfileTVC alloc] initWithStyle:UITableViewStyleGrouped];
         //profile.view.backgroundColor = [UIColor purpleColor];
         UIViewController *profileNC = [[UINavigationController alloc] initWithRootViewController:profile];
         

@@ -69,7 +69,7 @@ static NSString *reuseCellId = @"userInfoCellId";
 - (void)getUserInfoData {
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
+    [hud setLabelText:NSLocalizedString(@"loading", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [ZXUserInfoTool getUserInfoWithSuccessBlock:^(id responseObject) {

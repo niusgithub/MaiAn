@@ -104,7 +104,7 @@
     [self.hospitals removeAllObjects];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
+    [hud setLabelText:NSLocalizedString(@"loading", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [ZXSearch4HosTool getHospitalsByNumber:@0 successBlock:^(id responseObject) {
@@ -226,7 +226,7 @@
         [self.hospitals removeAllObjects];
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.labelText = @"Loading";
+        [hud setLabelText:NSLocalizedString(@"loading", nil)];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             [ZXSearch4HosTool getHospitalsByName:self.searchController.searchBar.text andStartNum:@0 successBlock:^(id responseObject) {
@@ -266,7 +266,7 @@
     [self.hospitals removeAllObjects];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
+    [hud setLabelText:NSLocalizedString(@"loading", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [ZXSearch4HosTool getHospitalsByArea:area andStartNum:@0 successBlock:^(id responseObject) {
@@ -298,7 +298,7 @@
     [self.hospitals removeAllObjects];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
+    [hud setLabelText:NSLocalizedString(@"loading", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [ZXSearch4HosTool getHospitalsByTitle:title andStartNum:@0 successBlock:^(id responseObject) {
             

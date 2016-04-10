@@ -8,9 +8,8 @@
 
 #import "ZXHTTPTool.h"
 #import "ZXLoginParams.h"
-
 #import "AFNetworking.h"
-#import "MBProgressHUD+MJ.h"
+
 
 @implementation ZXHTTPTool
 
@@ -39,8 +38,8 @@
          UID:(NSString *)uid
          KEY:(NSString *)key
       params:(NSObject *)paramsObj
-     success:(void (^)(id))success
-     failure:(void (^)(NSError *))failure {
+     success:(void(^)(id responseObj))success
+     failure:(void(^)(NSError *err))failure; {
     
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     
@@ -120,8 +119,8 @@
                     params:(NSObject *)paramsObj
                  imageName:(NSString *)imageName
                  imageData:(NSData *)imageData
-                   success:(void(^)(id))success
-                   failure:(void(^)(NSError *))failure {
+                   success:(void(^)(id responseObj))success
+                   failure:(void(^)(NSError *err))failure; {
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     
@@ -139,11 +138,11 @@
         
         //多用途互联网邮件扩展（MIME，Multipurpose Internet Mail Extensions）
     } progress:^(NSProgress *uploadProgress) {
-        NSLog(@"uploadProgress--%@", uploadProgress);
+        // NSLog(@"uploadProgress--%@", uploadProgress);
         /*
          MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
          hud.mode = MBProgressHUDModeAnnularDeterminate;
-         hud.labelText = @"Loading";
+         [hud setLabelText:NSLocalizedString(@"loading", nil)];
          [self doSomethingInBackgroundWithProgressCallback:^(float progress) {
          hud.progress = progress;
          } completionCallback:^{
@@ -151,35 +150,35 @@
          }];
          */
     } success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"upload Success:%@", responseObject);
+        // NSLog(@"upload Success:%@", responseObject);
         if (success) {
             success(responseObject);
         }
     } failure:^(NSURLSessionDataTask *task, NSError * error) {
-        NSLog(@"upload failure:%@", error);
+        // NSLog(@"upload failure:%@", error);
         if (failure) {
             failure(error);
         }
     }];
 }
 
-+ (void)UploadImageWithURL:(NSString *)URL params:(NSObject *)paramsObj imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure {
-    
-    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
-    
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-    [manager POST:URL parameters:paramsObj constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:imageData name:imageName fileName:imageName mimeType:@"image/*"];
-    } progress:^(NSProgress *uploadProgress) {
-        NSLog(@"uploadProgress--%@", uploadProgress);
-    } success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"upload Success:%@", responseObject);
-    } failure:^(NSURLSessionDataTask *task, NSError * error) {
-        NSLog(@"upload failure:%@", error);
-    }];
-}
+//+ (void)UploadImageWithURL:(NSString *)URL params:(NSObject *)paramsObj imageName:(NSString *)imageName imageData:(NSData *)imageData success:(void(^)(id))success failure:(void(^)(NSError *))failure {
+//    
+//    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+//    
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    
+//    [manager POST:URL parameters:paramsObj constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        [formData appendPartWithFileData:imageData name:imageName fileName:imageName mimeType:@"image/*"];
+//    } progress:^(NSProgress *uploadProgress) {
+//        NSLog(@"uploadProgress--%@", uploadProgress);
+//    } success:^(NSURLSessionDataTask *task, id responseObject) {
+//        NSLog(@"upload Success:%@", responseObject);
+//    } failure:^(NSURLSessionDataTask *task, NSError * error) {
+//        NSLog(@"upload failure:%@", error);
+//    }];
+//}
 
 @end
 

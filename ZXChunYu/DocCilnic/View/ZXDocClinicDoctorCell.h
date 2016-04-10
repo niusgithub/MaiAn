@@ -10,14 +10,16 @@
 
 @class ZXDoctor;
 
-typedef NS_ENUM(NSInteger, ZXDocClinicDoctorCellType) {
-    ZXDocClinicDoctorFollowed,
-    ZXDocClinicDoctorUnFollowed
-};
+@protocol ZXDocClinicDoctorCellDelegate <NSObject>
+
+- (void)changeFollowStatus:(BOOL)stauts;
+
+@end
 
 @interface ZXDocClinicDoctorCell : UITableViewCell
 
-@property (nonatomic, assign) ZXDocClinicDoctorCellType type;
+@property (nonatomic, assign, getter=isFollowed) BOOL followed;
+@property (nonatomic, weak) id<ZXDocClinicDoctorCellDelegate> delegate;
 
 - (void)configureDCDCellWithDoctor:(ZXDoctor *)doctor;
 

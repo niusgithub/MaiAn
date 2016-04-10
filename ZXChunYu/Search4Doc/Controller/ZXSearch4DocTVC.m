@@ -243,7 +243,7 @@
         [self.recommendedDoctors removeAllObjects];
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.labelText = @"Loading";
+        [hud setLabelText:NSLocalizedString(@"loading", nil)];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             [ZXSearch4DocTool getDoctorWithName:self.searchController.searchBar.text andStartNum:@0 successBlock:^(id responseObject) {
@@ -282,7 +282,7 @@
     [self.recommendedDoctors removeAllObjects];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
+    [hud setLabelText:NSLocalizedString(@"loading", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [ZXSearch4DocTool getDoctorWithArea:area andStartNum:@0 successBlock:^(id responseObject) {
@@ -314,7 +314,7 @@
     [self.recommendedDoctors removeAllObjects];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
+    [hud setLabelText:NSLocalizedString(@"loading", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [ZXSearch4DocTool getDoctorWithTitle:title andStartNum:@0 successBlock:^(id responseObject) {
             

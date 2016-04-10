@@ -44,6 +44,7 @@ static NSString *const userRegist = @"/user/register.do";
 static NSString *const uploadUserAvatar = @"/user/uploadUserPortrait.do";
 static NSString *const getFocusedDoc = @"/user/getFocusedDoctors.do?";
 static NSString *const getUserPortrait = @"/user/getUserPortraitById.do";
+static NSString *const changePwd = @"/user/updateUserPasswd.do";
 
 // 资讯
 static NSString *const getArticlesByType = @"/encyclopedia/getArticlesByType.do";
@@ -52,7 +53,6 @@ static NSString *const getArticlesByType = @"/encyclopedia/getArticlesByType.do"
 static NSString *const getGoods = @"/goods/getGoods.do";
 
 // 首页
-
 static NSString *const getAds = @"/ads/getOnceAds.do"; // 广告
 static NSString *const selfCheckURL = @"http://114.215.136.156/html/jmqz_level/jmqz_djpd.html"; //
 

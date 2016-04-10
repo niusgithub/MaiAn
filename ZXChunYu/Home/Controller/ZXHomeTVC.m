@@ -33,10 +33,8 @@
 #import "YYModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-
-#import "ZXDocClinicTool.h"
-#import "ZXAccountTool.h"
-
+#import "NSString+ZX.h"
+#import "ZXSettingTool.h"
 
 const CGFloat kTitleCellHeight = 30;
 
@@ -61,59 +59,14 @@ const CGFloat kTitleCellHeight = 30;
     [self fetchAdsData];
     
     
-    /*
-    // 添加成功返回Map<"msg", "add focus success">
-    // 添加失败返回Map("msg", "add talk fail")
-    [ZXDocClinicTool followDoctorWithAccout:[ZXAccountTool shareAccount] DID:@"1000000046"
-                               successBlock:^(id responseObject) {
-                                   NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-                                   if ([resonpseDict[@"msg"] isEqualToString:@"add focus success"]) {
-                                       //[MBProgressHUD showSuccess:@"修改成功"];
-                                       NSLog(@"关注成功");
-                                   } else if ([resonpseDict[@"msg"] isEqualToString:@"add talk fail"]) {
-                                       NSLog(@"关注失败");
-                                   }
-                               }
-                               failureBlock:^(NSError *error) {
-                                   NSLog(@"Follow Doctor ERR:%@",error);
-                               }
-     ];
-    
-    [ZXDocClinicTool followDoctorWithAccout:[ZXAccountTool shareAccount] DID:@"1000000008"
-                               successBlock:^(id responseObject) {
-                                   NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-                                   if ([resonpseDict[@"msg"] isEqualToString:@"add focus success"]) {
-                                       //[MBProgressHUD showSuccess:@"修改成功"];
-                                       NSLog(@"关注成功");
-                                   } else if ([resonpseDict[@"msg"] isEqualToString:@"add talk fail"]) {
-                                       NSLog(@"关注失败");
-                                   }
-                               }
-                               failureBlock:^(NSError *error) {
-                               }
-     ];
-     */
-    
-    
-    // 添加成功返回Map<"msg", "del focus success">
-    // 添加失败返回Map("msg", "del focus fail")
-//    [ZXDocClinicTool cancelFollowDoctorWithAccout:[ZXAccountTool shareAccount]
-//                                              DID:@"1000000008"
-//                                     successBlock:^(id responseObject) {
-//                                         NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-//                                         if ([resonpseDict[@"msg"] isEqualToString:@"del focus success"]) {
-//                                             //[MBProgressHUD showSuccess:@"修改成功"];
-//                                             NSLog(@"取消关注成功");
-//                                         } else if ([resonpseDict[@"msg"] isEqualToString:@"del focus fail"]) {
-//                                             NSLog(@"取消关注失败");
-//                                         }
-//                                     }
-//                                     failureBlock:^(NSError *error) {
-//                                         NSLog(@"Cancel Follow Doctor ERR:%@",error);
-//                                     }
-//     ];
-    
-    
+//    [ZXSettingTool changeUserPassword:[@"qwerty" MD5HexDigest]
+//                         successBlock:^(id responseObject) {
+//                             NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//                             NSLog(@"xiugaimima:%@",str);
+//                         }
+//                         failureBlock:^(NSError *error) {
+//                             NSLog(@"ZXSettingTool changeUserPassword ERR:%@", error);
+//                         }];
 }
 
 
@@ -324,8 +277,8 @@ const CGFloat kTitleCellHeight = 30;
             titleLabel.font = [UIFont systemFontOfSize:15];
             titleLabel.textColor = [UIColor darkGrayColor];
             
-            UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, kTitleCellHeight -1, Main_Screen_Width, 1)];
-            seperator.backgroundColor = [UIColor blackColor];
+            UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, kTitleCellHeight, Main_Screen_Width, 1)];
+            seperator.backgroundColor = [UIColor lightGrayColor];
             seperator.alpha = 0.25;
             
             [titleLabel addSubview:seperator];

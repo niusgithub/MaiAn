@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <CommonCrypto/CommonDigest.h>
 
 @interface NSString (ZX)
 
 - (CGSize)sizeWithFont:(UIFont *)font maxSize:(CGSize)maxSize;
 
 - (NSString *)stringTransToUTF8;
+
+- (NSString *)MD5HexDigest;
 
 @end
