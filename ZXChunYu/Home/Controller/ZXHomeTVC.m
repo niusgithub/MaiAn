@@ -69,6 +69,11 @@ const CGFloat kTitleCellHeight = 30;
 //                         }];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.hidesBottomBarWhenPushed = NO;
+}
+
 
 #pragma mark - init
 

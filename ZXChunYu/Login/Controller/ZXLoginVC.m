@@ -13,14 +13,15 @@
 #import "ZXLoginTool.h"
 #import "ZXAccount.h"
 #import "ZXAccountTool.h"
+#import "ZXMaiAnAPI.h"
 #import "ZXGetDocsTool.h"
-
 #import "ZXRegistVC.h"
+#import "ZXAppDelegate.h"
 
 #import "YYModel.h"
 #import "JVFloatLabeledTextField+ZX.h"
 #import "MBProgressHUD+MJ.h"
-#import <RongIMKit/RongIMKit.h>
+#import <RongIMLib/RCUserInfo.h>
 
 @interface ZXLoginVC ()
 
@@ -123,11 +124,18 @@
             [ZXAccountTool saveAccount:account];
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                // 融云userInfo
+                RCUserInfo *rcUserInfo = [[RCUserInfo alloc]init];
+                rcUserInfo.userId = account.uid;
+                rcUserInfo.name = account.username;
+                rcUserInfo.portraitUri = [ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:account.u_portrait_path];
+                account.rcUserInfo = rcUserInfo;
+                
                 // 获取关注的医生的ID并保存在accout中
                 [ZXGetDocsTool getUserFollowDoctorWithAccount:account startNumber:@0 successBlock:^(id doctorObject) {
-                    //                NSString *rStr = [[NSString alloc] initWithData:doctorObject encoding:NSUTF8StringEncoding];
-                    //                NSLog(@"ZXLoginVC Doctor:%@", rStr);
-                                                     
+//                                    NSString *rStr = [[NSString alloc] initWithData:doctorObject encoding:NSUTF8StringEncoding];
+//                                    NSLog(@"ZXLoginVC Doctor:%@", rStr);
+                    
                     NSDictionary *docInfoDict = [NSJSONSerialization JSONObjectWithData:doctorObject options:0 error:nil];
                                                      
                     [account.mDocIDs removeAllObjects];
@@ -146,8 +154,11 @@
             });
             
             // 登录融云
-            [[RCIM sharedRCIM] connectWithToken:account.token success:^(NSString *userId) {
+            RCIM *rcim = [RCIM sharedRCIM];
+            [rcim connectWithToken:account.token success:^(NSString *userId) {
                 NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+                rcim.enableTypingStatus = YES;
+                [rcim setUserInfoDataSource:(ZXAppDelegate *)[[UIApplication sharedApplication] delegate]];
             } error:^(RCConnectErrorCode status) {
                 NSLog(@"登陆的错误码为:%ld", (long)status);
             } tokenIncorrect:^{

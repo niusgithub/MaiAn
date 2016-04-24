@@ -8,13 +8,16 @@
 
 #import "ZXDocClinicDoctorCell.h"
 #import "ZXDoctor.h"
-
+#import "ZXAccount.h"
+#import "ZXAccountTool.h"
 #import "ZXCommon.h"
 #import "ZXMaiAnAPI.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
+#import "MBProgressHUD+MJ.h"
 #import "UIImageView+ZXBorder.h"
 #import "UIColor+ZX.h"
+
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ZXDocClinicDoctorCell ()
 
@@ -82,10 +85,15 @@
 
 // 关注医生
 - (IBAction)followADoctor {
-    self.followed = !_followed;
-    if ([self.delegate respondsToSelector:@selector(changeFollowStatus:)]) {
-        [self.delegate changeFollowStatus:_followed];
+    if ([ZXAccountTool shareAccount]) {
+        self.followed = !_followed;
+        if ([self.delegate respondsToSelector:@selector(changeFollowStatus:)]) {
+            [self.delegate changeFollowStatus:_followed];
+        }
+    } else {
+        [MBProgressHUD showError:@"请先登录"];
     }
+    
 }
 
 - (void)awakeFromNib {

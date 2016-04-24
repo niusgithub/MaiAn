@@ -22,8 +22,11 @@
 #import "ZXDocClinicTitleCell.h"
 
 #import "ZXDocClinicTool.h"
+#import "ZXDoctorRCUITool.h"
 
 #import "NSString+ZX.h"
+#import "ZXDocClinicTVC+ZXRCChat.h"
+#import "ZXMaiAnAPI.h"
 
 #import "YYModel.h"
 
@@ -34,8 +37,7 @@ NSString *const kDocClinicServiceCellNibName = @"ZXDocClinicServiceCell";
 NSString *const kDocClinicTitleCellIdentifier = @"DCTCellID";
 NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
 
-@interface ZXDocClinicTVC () <ZXDocClinicDoctorCellDelegate>
-@property (nonatomic, strong) ZXDoctor *doctor;
+@interface ZXDocClinicTVC () <ZXDocClinicDoctorCellDelegate, ZXDocClinicServiceCellDelegate>
 @property (nonatomic, strong) NSMutableArray *doctorComments;
 @end
 
@@ -49,15 +51,8 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self.tableView registerNib:[UINib nibWithNibName:kDocClinicDoctorCellNibName bundle:nil] forCellReuseIdentifier:kDocClinicDoctorCellIdentifier];
-    [self.tableView registerNib:[UINib nibWithNibName:kDocClinicServiceCellNibName bundle:nil] forCellReuseIdentifier:kDocClinicServiceCellIdentifier];
-    [self.tableView registerNib:[UINib nibWithNibName:kDocClinicTitleCellNibName bundle:nil] forCellReuseIdentifier:kDocClinicTitleCellIdentifier];
-    
-    [self getDoctorComments];
-}
+
+#pragma mark - view
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -67,6 +62,17 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
     UIBarButtonItem *btn = [[UIBarButtonItem alloc] init];
     btn.title = @"返回";
     self.navigationItem.backBarButtonItem = btn;
+    
+    [self.tableView registerNib:[UINib nibWithNibName:kDocClinicDoctorCellNibName bundle:nil] forCellReuseIdentifier:kDocClinicDoctorCellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:kDocClinicServiceCellNibName bundle:nil] forCellReuseIdentifier:kDocClinicServiceCellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:kDocClinicTitleCellNibName bundle:nil] forCellReuseIdentifier:kDocClinicTitleCellIdentifier];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+
+    [self getDoctorComments];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,7 +80,8 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - 
+
+#pragma mark - Fetch Data
 
 - (void)getDoctorComments {
     [ZXGetDocComments getDoctorCommentsWithDID:self.doctor.did startNum:@0 successBlock:^(id responseObject) {
@@ -113,6 +120,7 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
     }
     return self;
 }
+
 
 #pragma mark - TableView DataSource
 
@@ -156,16 +164,22 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
                 }
             } else {
                 cell.followed = NO;
-                NSLog(@"未关注");
+                NSLog(@"未登录");
             }
             
             [cell configureDCDCellWithDoctor:self.doctor];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             return cell;
         }
             
         case 1: {
             ZXDocClinicServiceCell *cell = (ZXDocClinicServiceCell *)[self.tableView dequeueReusableCellWithIdentifier:kDocClinicServiceCellIdentifier];
+            
+            cell.delegate = self;
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             return cell;
         }
@@ -174,6 +188,8 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
             if (indexPath.row == 0) {
                 ZXDocClinicTitleCell *cell = (ZXDocClinicTitleCell *)[self.tableView dequeueReusableCellWithIdentifier:kDocClinicTitleCellIdentifier];
                 [cell configureDCTCellWithTitle:@"医生详情" andMore:@"查看全部"];
+                
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 return cell;
             } else {
@@ -184,6 +200,8 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
                 cell.textLabel.numberOfLines = 3;
                 cell.textLabel.text = self.doctor.dc_desc;
                 
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
                 return cell;
             }
         }
@@ -192,6 +210,8 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
             if (indexPath.row == 0) {
                 ZXDocClinicTitleCell *cell = (ZXDocClinicTitleCell *)[self.tableView dequeueReusableCellWithIdentifier:kDocClinicTitleCellIdentifier];
                 [cell configureDCTCellWithTitle:@"用户评价" andMore:@"全部评论"];
+                
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
             } else {
                 // 原版此处根据简介内容多少调整cell高度
@@ -220,6 +240,8 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
                         [cell.contentView addSubview:seperator];
                     }
                 }
+                
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
             }
         }
@@ -281,7 +303,7 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
 
 #pragma mark - ZXDocClinicDoctorCell Delegate
 
--(void)changeFollowStatus:(BOOL)stauts {
+- (void)changeFollowStatus:(BOOL)stauts {
     // 更新Account中的关注列表
     NSNumber *didNum = [NSNumber numberWithInt:[self.doctor.did intValue]];
     ZXAccount *account = [ZXAccountTool shareAccount];
@@ -329,6 +351,27 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
                                          }
          ];
     }
+}
+
+
+#pragma mark - ZXDocClinicServiceCell Delegate
+
+- (void)contactWithDoctor {
+    self.tabBarController.tabBar.hidden = YES;
+    
+    RCUserInfo *docInfo = [[RCUserInfo alloc] init];
+    docInfo.userId = _doctor.did;
+    docInfo.name = _doctor.dc_name;
+    docInfo.portraitUri = [ZXMaiAn_RESOURCE_PREFIX stringByAppendingString:_doctor.dc_portrait_path];
+    
+//    NSData *doctorInfoData = [NSKeyedArchiver archivedDataWithRootObject:docInfo];
+//    
+//    NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
+//    [accountDefaults setObject:doctorInfoData forKey:_doctor.did];
+    
+    [ZXDoctorRCUITool writeDoctorRCUI:_doctor.did docInfo:docInfo];
+    
+    [self chatWithDoctor:self.doctor.did doctorName:self.doctor.dc_name];
 }
 
 @end

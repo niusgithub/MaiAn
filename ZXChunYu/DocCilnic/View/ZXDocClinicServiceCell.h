@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ZXDocClinicServiceCellDelegate <NSObject>
+
+- (void)contactWithDoctor;
+
+@end
+
 @interface ZXDocClinicServiceCell : UITableViewCell
+
+@property (nonatomic, weak) id<ZXDocClinicServiceCellDelegate> delegate;
 
 @end

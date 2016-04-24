@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -22,9 +22,6 @@
                         <rect key="frame" x="250" y="10" width="1" height="80"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clinic_talk_enable" translatesAutoresizingMaskIntoConstraints="NO" id="nSB-ct-a2J">
-                        <rect key="frame" x="43" y="30" width="40" height="40"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="电话咨询" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEe-N5-q45">
                         <rect key="frame" x="125" y="8" width="126" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -57,12 +54,23 @@
                             <color key="titleColor" red="0.30588235289999999" green="0.81960784310000001" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
-                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clinic_telephone_enable" translatesAutoresizingMaskIntoConstraints="NO" id="DAo-7K-268">
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbx-ZL-crI" userLabel="talk">
+                        <rect key="frame" x="43" y="30" width="40" height="40"/>
+                        <state key="normal" image="clinic_talk_enable"/>
+                        <connections>
+                            <action selector="talkToDoctor:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eoQ-XG-fXh"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIL-mO-3M3" userLabel="telephone">
                         <rect key="frame" x="167" y="30" width="40" height="40"/>
-                    </imageView>
+                        <state key="normal" image="clinic_telephone_enable"/>
+                        <connections>
+                            <action selector="callTheDoctor:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Pgs-2e-Nct"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="717.5" y="428"/>
+            <point key="canvasLocation" x="493.5" y="242"/>
         </tableViewCell>
     </objects>
     <resources>

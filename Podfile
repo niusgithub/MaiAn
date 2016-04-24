@@ -9,6 +9,8 @@ pod "JVFloatLabeledTextField"
 pod "MOBFoundation_IDFA"
 pod "SMSSDK"
 pod "MJRefresh"
+pod "Pgyer"
+pod "PgyUpdate"
 pod 'SDWebImage', '~> 3.7'
 pod 'AFNetworking', '~> 3.0'
 pod 'MBProgressHUD', '~> 0.9.2'

@@ -9,14 +9,17 @@
 #import "ZXAppDelegate.h"
 #import "ZXTabBarControllerConfig.h"
 #import "ZXCommon.h"
+#import "ZXAccount.h"
+#import "ZXAccountTool.h"
+#import "ZXDoctorRCUITool.h"
 #import "UIColor+ZX.h"
 
 #import "ZXNetworkStatusTool.h"
 
 #import <SMS_SDK/SMSSDK.h>  
-#import <RongIMKit/RongIMKit.h>
 
-@interface ZXAppDelegate ()
+
+@interface ZXAppDelegate () 
 
 @end
 
@@ -40,8 +43,26 @@
     [SMSSDK registerApp:@"f1adcdff4476" withSecret:@"40466fd4cdc05b2a676b62bb32aed1c5"];
     
     // RongCloud
-    //[[RCIM sharedRCIM] initWithAppKey:@"sfci50a7cbzii"];//z3v5yqkbvtcr0
-    [[RCIM sharedRCIM] initWithAppKey:@"x18ywvqf80c3c"];
+    RCIM *rcim = [RCIM sharedRCIM];
+    [rcim initWithAppKey:@"x18ywvqf80c3c"];
+    
+    ZXAccount *account = [ZXAccountTool shareAccount];
+    
+    if (account) {
+        // 登录融云
+        [rcim connectWithToken:account.token success:^(NSString *userId) {
+            NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+            rcim.enableTypingStatus = YES;
+            [[RCIM sharedRCIM] setUserInfoDataSource:self];
+        } error:^(RCConnectErrorCode status) {
+            NSLog(@"登陆的错误码为:%ld", (long)status);
+        } tokenIncorrect:^{
+            //token过期或者不正确。
+            //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
+            //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
+            NSLog(@"token错误");
+        }];
+    }
     
     ZXNetworkStatusTool *networkStatusTool = [[ZXNetworkStatusTool alloc] init];
     [networkStatusTool startMonitor];
@@ -123,6 +144,26 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion {
+    NSLog(@"getUserInfoWithUserId:%@",userId);
+    
+    ZXAccount *account = [ZXAccountTool shareAccount];
+    
+    if ([account.uid isEqual:userId]) {
+        return completion(account.rcUserInfo);
+    }
+    
+    return completion([ZXDoctorRCUITool readDoctorRCUI:userId]);
+    
+//    NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
+//    
+//    if ([accountDefaults objectForKey:userId]) {
+//        NSData *doctorInfoData = [accountDefaults objectForKey:userId];
+//        RCUserInfo *docInfo = [NSKeyedUnarchiver unarchiveObjectWithData:doctorInfoData];
+//        return completion(docInfo);
+//    }
 }
 
 @end

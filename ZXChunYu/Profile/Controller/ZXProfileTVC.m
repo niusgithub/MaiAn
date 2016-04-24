@@ -11,6 +11,7 @@
 #import "ZXUserInfoTVC.h"
 #import "ZXFolloweeTVC.h"
 #import "ZXSettingTVC.h"
+#import "ZXRCConversationListVC.h"
 
 #import "ZXAccount.h"
 #import "ZXAccountTool.h"
@@ -53,6 +54,10 @@ static NSString *const mineCellIdentifier = @"MCellID";
     [self.tableView registerNib:[UINib nibWithNibName:kUPCellNibName bundle:nil] forCellReuseIdentifier:kUPCellIdentifier];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
 
 #pragma mark - TableView DataSource
 
@@ -130,6 +135,9 @@ static NSString *const mineCellIdentifier = @"MCellID";
 #pragma mark - TableView Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.tabBarController.tabBar.hidden = YES;
+    
     switch (indexPath.section) {
         case 0: {
             if (_hasLoggedIn) { // 已登录，跳转至个人中心
@@ -161,6 +169,8 @@ static NSString *const mineCellIdentifier = @"MCellID";
                         
                     case 1: {
                         // 我的提问
+                        ZXRCConversationListVC *chatList = [[ZXRCConversationListVC alloc] init];
+                        [self.navigationController pushViewController:chatList animated:YES];
                     }
                         break;
                     

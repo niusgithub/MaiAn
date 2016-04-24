@@ -12,6 +12,8 @@
 
 @interface ZXDocClinicTVC : ZXBasicDynamicTVC
 
+@property (nonatomic, strong) ZXDoctor *doctor;
+
 - (instancetype)initClinicWithDoctor:(ZXDoctor *)doctor;
 
 @end

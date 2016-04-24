@@ -45,6 +45,9 @@
 		E0BA4F641CA67EE60059C379 /* ZXDocClinicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BA4F631CA67EE60059C379 /* ZXDocClinicTool.m */; };
 		E0BF591D1C8591630043AB78 /* ZXAd.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BF591C1C8591630043AB78 /* ZXAd.m */; };
 		E0BF59201C8591EB0043AB78 /* ZXAdTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BF591F1C8591EB0043AB78 /* ZXAdTool.m */; };
+		E0E762581CC9F25F00E10330 /* ZXDocClinicTVC+ZXRCChat.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E762571CC9F25F00E10330 /* ZXDocClinicTVC+ZXRCChat.m */; };
+		E0E7625C1CCA08C700E10330 /* ZXRCConversationListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E7625B1CCA08C700E10330 /* ZXRCConversationListVC.m */; };
+		E0E762651CCD0EB400E10330 /* ZXDoctorRCUITool.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E762641CCD0EB400E10330 /* ZXDoctorRCUITool.m */; };
 		E0E928531C7AF70B009BB8F2 /* ZXButtomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E928521C7AF70B009BB8F2 /* ZXButtomCell.m */; };
 		E0E928691C802BAC009BB8F2 /* ZXHorizonalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E928641C802BAC009BB8F2 /* ZXHorizonalTableViewController.m */; };
 		E0E9286A1C802BAC009BB8F2 /* ZXSwipableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E928661C802BAC009BB8F2 /* ZXSwipableViewController.m */; };
@@ -201,6 +204,12 @@
 		E0BF591C1C8591630043AB78 /* ZXAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXAd.m; sourceTree = "<group>"; };
 		E0BF591E1C8591EB0043AB78 /* ZXAdTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXAdTool.h; sourceTree = "<group>"; };
 		E0BF591F1C8591EB0043AB78 /* ZXAdTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXAdTool.m; sourceTree = "<group>"; };
+		E0E762561CC9F25F00E10330 /* ZXDocClinicTVC+ZXRCChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZXDocClinicTVC+ZXRCChat.h"; sourceTree = "<group>"; };
+		E0E762571CC9F25F00E10330 /* ZXDocClinicTVC+ZXRCChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZXDocClinicTVC+ZXRCChat.m"; sourceTree = "<group>"; };
+		E0E7625A1CCA08C700E10330 /* ZXRCConversationListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXRCConversationListVC.h; sourceTree = "<group>"; };
+		E0E7625B1CCA08C700E10330 /* ZXRCConversationListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXRCConversationListVC.m; sourceTree = "<group>"; };
+		E0E762631CCD0EB400E10330 /* ZXDoctorRCUITool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXDoctorRCUITool.h; sourceTree = "<group>"; };
+		E0E762641CCD0EB400E10330 /* ZXDoctorRCUITool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXDoctorRCUITool.m; sourceTree = "<group>"; };
 		E0E928511C7AF70B009BB8F2 /* ZXButtomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXButtomCell.h; sourceTree = "<group>"; };
 		E0E928521C7AF70B009BB8F2 /* ZXButtomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXButtomCell.m; sourceTree = "<group>"; };
 		E0E928631C802BAC009BB8F2 /* ZXHorizonalTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXHorizonalTableViewController.h; sourceTree = "<group>"; };
@@ -468,6 +477,7 @@
 		E07BE4DF1C425F57001C4E72 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				E0E762591CCA08A800E10330 /* ConversationList */,
 				E08851361CB8EF700042451D /* Setting */,
 				E05CF5141CA3D07500FACD00 /* Followee */,
 				E06183451C5715930008B933 /* Model */,
@@ -539,6 +549,15 @@
 				E0BF591F1C8591EB0043AB78 /* ZXAdTool.m */,
 			);
 			path = HomeTool;
+			sourceTree = "<group>";
+		};
+		E0E762591CCA08A800E10330 /* ConversationList */ = {
+			isa = PBXGroup;
+			children = (
+				E0E7625A1CCA08C700E10330 /* ZXRCConversationListVC.h */,
+				E0E7625B1CCA08C700E10330 /* ZXRCConversationListVC.m */,
+			);
+			path = ConversationList;
 			sourceTree = "<group>";
 		};
 		E0E928621C802BAC009BB8F2 /* SwipableViewController */ = {
@@ -990,6 +1009,8 @@
 				E9E5F1FC1C23E9DE00670B4A /* ZXGetDocsTool.m */,
 				E9CD1FE81C4E112B006947EF /* ZXNetworkStatusTool.h */,
 				E9CD1FE91C4E112B006947EF /* ZXNetworkStatusTool.m */,
+				E0E762631CCD0EB400E10330 /* ZXDoctorRCUITool.h */,
+				E0E762641CCD0EB400E10330 /* ZXDoctorRCUITool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1011,6 +1032,8 @@
 				E9FF62411C47862B006D05B0 /* UserEvaluation */,
 				E9FF62471C47862B006D05B0 /* ZXDocClinicTVC.h */,
 				E9FF62481C47862B006D05B0 /* ZXDocClinicTVC.m */,
+				E0E762561CC9F25F00E10330 /* ZXDocClinicTVC+ZXRCChat.h */,
+				E0E762571CC9F25F00E10330 /* ZXDocClinicTVC+ZXRCChat.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1169,6 +1192,7 @@
 				TargetAttributes = {
 					E0F645E71BF9C42400534165 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = RM9FX5THZ8;
 					};
 					E0F646001BF9C42500534165 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -1303,6 +1327,7 @@
 				E9FF626A1C47863E006D05B0 /* MBProgressHUD+MJ.m in Sources */,
 				E0BA4F641CA67EE60059C379 /* ZXDocClinicTool.m in Sources */,
 				E9CD8B701C3D04A800DF169C /* ZXRDTableViewCell.m in Sources */,
+				E0E762651CCD0EB400E10330 /* ZXDoctorRCUITool.m in Sources */,
 				E9E5F1EF1C200E7500670B4A /* ZXLoginTool.m in Sources */,
 				E9D4F9721C1169CC005A81BE /* UIImage+ZX.m in Sources */,
 				E08E04291C8F16E200FEEFA9 /* ZXHomeMainCell.m in Sources */,
@@ -1365,6 +1390,7 @@
 				E0E9286E1C802DB1009BB8F2 /* UIColor+ZX.m in Sources */,
 				E9E5F1F21C2010D800670B4A /* ZXAccount.m in Sources */,
 				E08ADEDB1C550D3B00984867 /* ZXConfirmPasswordVC.m in Sources */,
+				E0E762581CC9F25F00E10330 /* ZXDocClinicTVC+ZXRCChat.m in Sources */,
 				E9B5E3961C02B9EA00660774 /* ZXTabBarControllerConfig.m in Sources */,
 				E0E9288A1C819FD1009BB8F2 /* ZXTreatmentsVC.m in Sources */,
 				E9A571491C19701F00537BE5 /* ZXSearch4DocTVC.m in Sources */,
@@ -1378,6 +1404,7 @@
 				E0E928901C81BB51009BB8F2 /* ZXTreatmentsCVCell.m in Sources */,
 				E06183481C5715A30008B933 /* ZXUserInfo.m in Sources */,
 				E9E5F1FD1C23E9DE00670B4A /* ZXGetDocsTool.m in Sources */,
+				E0E7625C1CCA08C700E10330 /* ZXRCConversationListVC.m in Sources */,
 				E9FF62601C47862B006D05B0 /* ZXDocClinicDoctorCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1524,12 +1551,14 @@
 			baseConfigurationReference = E147E8ED2A7E33BB9DE20E00 /* Pods-ZXChunYu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: JunYi Yu (RM9FX5THZ8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ZXChunYu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruangsc.ZXMaiAn;
 				PRODUCT_NAME = ZXMaiAn;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1538,12 +1567,14 @@
 			baseConfigurationReference = 9FC74826E7BDDF5B0FA7DD5A /* Pods-ZXChunYu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: JunYi Yu (RM9FX5THZ8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ZXChunYu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruangsc.ZXMaiAn;
 				PRODUCT_NAME = ZXMaiAn;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
