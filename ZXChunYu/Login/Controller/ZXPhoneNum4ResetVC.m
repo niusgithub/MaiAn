@@ -56,18 +56,23 @@
 #pragma mark - Button Click
 
 - (IBAction)fetchVerifyCode4Reset {
+    __weak __typeof(self) weakSelf = self;
+    
     [ZXFetchVerificationCodeTool hasPhoneCodeRegistered:_phoneCodeTF.text successBlock:^(id responseObject) {
+        
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        
         NSDictionary *hasRegistered = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         // followerNum[@"num"] 类型为NSNumber 可以打印 不能赋值给NSString
         if ([hasRegistered[@"flag"] boolValue]) {
             NSLog(@"已经注册");
-            [ZXFetchVerificationCodeTool fetchVerificationCodeByPhoneCode:_phoneCodeTF.text successBlock:^{
+            [ZXFetchVerificationCodeTool fetchVerificationCodeByPhoneCode:strongSelf.phoneCodeTF.text successBlock:^{
                 
                 UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"ZXLoginStoryboard" bundle:nil];
                 
                 // vc id : checkVerifyCodeVC
                 ZXCheckVerificationCodeVC *checkVC = [loginStoryboard instantiateViewControllerWithIdentifier:@"checkVerifyCodeVC"];
-                checkVC.phoneCode = _phoneCodeTF.text;
+                checkVC.phoneCode = strongSelf.phoneCodeTF.text;
                 checkVC.type = ZXCheckVC4ResetPassword;
                 [self.navigationController pushViewController:checkVC animated:YES];
             }];

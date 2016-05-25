@@ -18,7 +18,8 @@
     [super viewDidLoad];
     
     self.title = @"我的提问";
-    self.conversationListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //self..separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.conversationListTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     self.tabBarController.tabBar.hidden = YES;
     
     //设置需要显示哪些类型的会话

@@ -68,12 +68,16 @@
                                               otherButtonTitles:nil, nil];
         [alert show];
     } else {
+        __weak __typeof(self) weakSelf = self;
+        
         [ZXFetchVerificationCodeTool comfirmVerificationCodeWithVerifyCode:_verificationCodeTF.text phoneCode:_phoneCode successBlock:^{
+            
+            __strong __typeof(weakSelf) strongSelf = weakSelf;
             
             UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ZXLoginStoryboard" bundle:nil];
             
             ZXConfirmPasswordVC *vc = [sb instantiateViewControllerWithIdentifier:@"confirmPasswordVC"];
-            vc.phoneCode = _phoneCode;
+            vc.phoneCode = strongSelf.phoneCode;
             
             if (self.type == ZXCheckVC4Regist) {
                 vc.type = ZXConfirmPasswordVCReigst;

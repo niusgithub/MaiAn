@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -24,8 +24,11 @@
                         <rect key="frame" x="10" y="30" width="355" height="1"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjO-TD-RLa">
-                        <rect key="frame" x="267" y="6" width="75" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjO-TD-RLa">
+                        <rect key="frame" x="242" y="6" width="100" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="2z0-Wz-FMI"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -34,7 +37,13 @@ bW9yZRBEZXRhaWw
 </string>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="kjO-TD-RLa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="kCS-2T-UPj"/>
+                </constraints>
             </tableViewCellContentView>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="kjO-TD-RLa" secondAttribute="trailing" constant="33" id="eJZ-c4-eHC"/>
+            </constraints>
             <connections>
                 <outlet property="moreL" destination="kjO-TD-RLa" id="7G1-B2-i4I"/>
                 <outlet property="titleL" destination="gSz-VQ-0jo" id="vsV-db-XzJ"/>

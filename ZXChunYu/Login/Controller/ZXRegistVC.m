@@ -24,6 +24,7 @@
 #pragma mark - View
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     
 //    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
 //    paragraphStyle.alignment = NSTextAlignmentCenter;
@@ -65,20 +66,25 @@
 
 - (IBAction)getVerificationCode {
     
+    __weak __typeof(self) weakSelf = self;
+    
     [ZXFetchVerificationCodeTool hasPhoneCodeRegistered:_phoneNumTF.text successBlock:^(id responseObject) {
+        
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        
         NSDictionary *hasRegistered = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         // followerNum[@"num"] 类型为NSNumber 可以打印 不能赋值给NSString
         if ([hasRegistered[@"flag"] boolValue]) {
             [MBProgressHUD showError:@"该号码已经注册"];
         } else {
-            [ZXFetchVerificationCodeTool fetchVerificationCodeByPhoneCode:_phoneNumTF.text successBlock:^{
+            [ZXFetchVerificationCodeTool fetchVerificationCodeByPhoneCode:strongSelf.phoneNumTF.text successBlock:^{
                 
                 UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"ZXLoginStoryboard" bundle:nil];
                 
                 // vc id : checkVerifyCodeVC
                 ZXCheckVerificationCodeVC *checkVC = [loginStoryboard instantiateViewControllerWithIdentifier:@"checkVerifyCodeVC"];
                 // ZXCheckVerificationCodeVC *checkVC = [[ZXCheckVerificationCodeVC alloc] init]; // 无法加载VC
-                checkVC.phoneCode =  _phoneNumTF.text;
+                checkVC.phoneCode =  strongSelf.phoneNumTF.text;
                 checkVC.type = ZXCheckVC4Regist;
                 [self.navigationController pushViewController:checkVC animated:YES];
             }];

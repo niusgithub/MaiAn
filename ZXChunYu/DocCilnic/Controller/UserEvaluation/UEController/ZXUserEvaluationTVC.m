@@ -16,6 +16,8 @@
 @implementation ZXUserEvaluationTVC
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    
     self.title = @"用户评价";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 不显示多余空白cell

@@ -17,6 +17,7 @@
 #import "ZXAccountTool.h"
 #import "ZXUserProfileCell.h"
 #import "ZXProfileTool.h"
+#import "ZXRCIMManager.h"
 
 #import "UIImage+ZX.h"
 #import "UIImageView+ZXBorder.h"
@@ -26,10 +27,11 @@
 
 static NSString *const mineCellIdentifier = @"MCellID";
 
-@interface ZXProfileTVC () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, ZXLoginVCDidLoggedInDelegate, ZXUserInfoTVCDelegate, ZXUserProfileCellDelegate>
+@interface ZXProfileTVC () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, ZXLoginVCDidLoggedInDelegate, ZXUserInfoTVCDelegate, ZXUserProfileCellDelegate, ZXRCIMManagerDelegate>
 
 @property (nonatomic, strong) ZXLoginVC *loginVC;
 @property (nonatomic, strong) ZXUserProfileCell *profileCell;
+@property (nonatomic, weak) UITableViewCell *questionCell;
 @property BOOL hasLoggedIn;
 
 @end
@@ -52,11 +54,14 @@ static NSString *const mineCellIdentifier = @"MCellID";
     }
     
     [self.tableView registerNib:[UINib nibWithNibName:kUPCellNibName bundle:nil] forCellReuseIdentifier:kUPCellIdentifier];
+    
+    [ZXRCIMManager sharedManager].msgDelegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+    self.questionCell.accessoryView.hidden = [ZXRCIMManager sharedManager].messageCount > 0 ? NO : YES;
 }
 
 #pragma mark - TableView DataSource
@@ -88,7 +93,15 @@ static NSString *const mineCellIdentifier = @"MCellID";
             UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mineCellIdentifier];
             [cell.imageView setImage:[UIImage imageNamed:@"mineQuestion"]];
             cell.textLabel.text = @"我的提问";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            UIView *redView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+            redView.layer.cornerRadius = 5;
+            redView.backgroundColor = [UIColor redColor];
+            
+            cell.accessoryView = redView;
+            cell.accessoryView.hidden = [ZXRCIMManager sharedManager].messageCount > 0 ? NO : YES;
+            
+            self.questionCell = cell;
             
             return cell;
         }
@@ -169,6 +182,10 @@ static NSString *const mineCellIdentifier = @"MCellID";
                         
                     case 1: {
                         // 我的提问
+                        _questionCell.accessoryView.hidden = YES;
+                        //[self.navigationController.tabBarItem setBadgeValue:nil];
+                        [ZXRCIMManager sharedManager].messageCount = 0;
+                        
                         ZXRCConversationListVC *chatList = [[ZXRCConversationListVC alloc] init];
                         [self.navigationController pushViewController:chatList animated:YES];
                     }
@@ -304,7 +321,7 @@ static NSString *const mineCellIdentifier = @"MCellID";
 }
 
 
-#pragma mark - ZXLoginVCDidLoggedInDelegate
+#pragma mark - ZXLoginVCDidLoggedIn Delegate
 
 - (void)didLoggedIn {
     self.hasLoggedIn = YES;
@@ -312,7 +329,7 @@ static NSString *const mineCellIdentifier = @"MCellID";
 }
 
 
-#pragma mark - ZXUserInfoTVCDelegate
+#pragma mark - ZXUserInfoTVC Delegate
 
 - (void)toLogoutStatus {
      self.hasLoggedIn = NO;
@@ -320,11 +337,19 @@ static NSString *const mineCellIdentifier = @"MCellID";
 }
 
 
-#pragma mark - ZXUserProfileCellDelegate
+#pragma mark - ZXUserProfileCell Delegate
 
 - (void)changeUserAvatar {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"更换头像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照选取", @"相册选取" ,nil];
     [sheet showInView:self.view];
+}
+
+#pragma mark - ZXRCIMManager Delegate
+
+- (void)receiveNewMsg {
+    NSLog(@"receiveNewMsg");
+    self.questionCell.accessoryView.hidden = NO;
+    //[self.navigationController.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%ld", [ZXRCIMManager sharedManager].messageCount]];
 }
 
 //#pragma mark - KVO

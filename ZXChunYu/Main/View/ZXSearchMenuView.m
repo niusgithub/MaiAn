@@ -17,7 +17,8 @@
 @property (nonatomic, strong) TYGSelectMenu *areaMenu;
 @property (nonatomic, strong) TYGSelectMenu *titleMenu;
 
-@property BOOL isOpen;
+@property BOOL isAreaBtnOpen;
+@property BOOL isTitleBtnOpen;
 
 @end
 
@@ -28,7 +29,8 @@
         
         self.type = type;
         
-        self.isOpen = NO;
+        self.isAreaBtnOpen = NO;
+        self.isTitleBtnOpen = NO;
         
         CGFloat halfWight = frame.size.width / 2;
         
@@ -89,17 +91,24 @@
     NSDictionary *rootDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
     NSArray *areaDicts = rootDict[@"area"];
     
+    
+    
     _areaMenu = [[TYGSelectMenu alloc] init];
+    
+    __weak TYGSelectMenu *weakAreaMenu = _areaMenu;
     [areaDicts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        TYGSelectMenu *strongAreaMenu = weakAreaMenu;
+        
         TYGSelectMenuEntity *provinceMenu = [[TYGSelectMenuEntity alloc] init];
         provinceMenu.title = (NSString *)obj[@"province"];
-        [_areaMenu addChildSelectMenu:provinceMenu forParent:nil];
+        [strongAreaMenu addChildSelectMenu:provinceMenu forParent:nil];
         
         NSArray *cityDicts = obj[@"cities"];
         [cityDicts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             TYGSelectMenuEntity *cityMenu = [[TYGSelectMenuEntity alloc] init];
             cityMenu.title = (NSString *)obj;
-            [_areaMenu addChildSelectMenu:cityMenu forParent:provinceMenu];
+            [strongAreaMenu addChildSelectMenu:cityMenu forParent:provinceMenu];
         }];
     }];
     
@@ -112,7 +121,16 @@
 }
 
 - (void)filterBtnOnClick:(UIButton *)sender {
-    self.isOpen = !self.isOpen;
+    
+    if (1 == sender.tag) {
+        self.isAreaBtnOpen = !self.isAreaBtnOpen;
+        self.isTitleBtnOpen = NO;
+    }
+    
+    if (2 == sender.tag) {
+        self.isTitleBtnOpen = !self.isTitleBtnOpen;
+        self.isAreaBtnOpen = NO;
+    }
     
     switch (sender.tag) {
         case 1: {
@@ -123,7 +141,7 @@
             //block回调
             [self.areaMenu selectAtMenu:^(NSMutableArray *selectedMenuArray) {
                 
-                self.isOpen = NO;
+                self.isAreaBtnOpen = NO;
                 
                 NSMutableString *area = [NSMutableString string];
                 NSString *title;
@@ -148,7 +166,7 @@
             //block回调
             [self.titleMenu selectAtMenu:^(NSMutableArray *selectedMenuArray) {
                 
-                self.isOpen = NO;
+                self.isTitleBtnOpen = NO;
                 
                 NSMutableString *title = [NSMutableString string];
                 for (TYGSelectMenuEntity *tempMenu in selectedMenuArray) {
@@ -166,7 +184,7 @@
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    if (self.isOpen) {
+    if (self.isAreaBtnOpen || self.isTitleBtnOpen) {
         return YES;
     } else {
         return CGRectContainsPoint(self.bounds, point);

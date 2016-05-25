@@ -68,15 +68,19 @@ static NSString *reuseCellId = @"userInfoCellId";
 
 - (void)getUserInfoData {
     
+    __weak __typeof(self) weakSelf = self;
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:NSLocalizedString(@"loading", nil)];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
         
         [ZXUserInfoTool getUserInfoWithSuccessBlock:^(id responseObject) {
 //            NSString *rStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 //            NSLog(@"getUserInfoData:%@",rStr);
             NSDictionary *userInfoDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-            _userInfo = [ZXUserInfo yy_modelWithDictionary:userInfoDict];
+            strongSelf.userInfo = [ZXUserInfo yy_modelWithDictionary:userInfoDict];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadSections:[[NSIndexSet alloc] initWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];

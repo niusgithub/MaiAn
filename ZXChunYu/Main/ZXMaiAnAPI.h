@@ -24,9 +24,13 @@ static NSString *const getDocByNameURL = @"/doctor/getDoctorsByName.do?";
 static NSString *const getDocByAreaURL = @"/doctor/getDoctorsByArea.do?";
 static NSString *const getDocByTitleURl = @"/doctor/getDoctorsByTitle.do?";
 
-//
+// 关注
 static NSString *const followDoctor = @"/user2doctor/addFocus.do";
 static NSString *const cancelFollowDoctor = @"/user2doctor/delFocus.do";
+
+// 快速提问
+static NSString *const freeQuestion = @"/question/uploadFreeQ.do";
+static NSString *const payQuestion = @"/question/uploadPayQ.do";
 
 // 医院
 static NSString *const getHosByNum = @"/hospital/getHospitalsByNum.do?";

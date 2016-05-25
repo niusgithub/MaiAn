@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TYGSelectMenuEntity.h"
 
-@interface TYGSelectMenu : UIView<UITableViewDataSource,UITableViewDelegate>{
+@interface TYGSelectMenu : UIView <UITableViewDataSource,UITableViewDelegate> {
     void(^selectedMenu)(NSMutableArray *selectedMenuArray);
 }
 

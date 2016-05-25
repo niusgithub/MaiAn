@@ -26,7 +26,12 @@
         CGFloat buttonWidth = frame.size.width / titles.count;
         CGFloat buttonHeight = frame.size.height;
         
+        __weak __typeof(self) weakSelf = self;
+        
         [titles enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL *stop) {
+            
+            __strong __typeof(weakSelf) strongSelf = weakSelf;
+            
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.backgroundColor = [UIColor titleBarColor];
             button.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -37,7 +42,7 @@
             button.tag = idx;
             [button addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
             
-            [_titleButtons addObject:button];
+            [strongSelf.titleButtons addObject:button];
             [self addSubview:button];
             [self sendSubviewToBack:button];
         }];

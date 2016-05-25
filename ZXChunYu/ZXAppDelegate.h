@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <RongIMKit/RongIMKit.h>
 
-@interface ZXAppDelegate : UIResponder <UIApplicationDelegate, RCIMUserInfoDataSource>
+@interface ZXAppDelegate : UIResponder <UIApplicationDelegate, RCIMUserInfoDataSource, RCIMConnectionStatusDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

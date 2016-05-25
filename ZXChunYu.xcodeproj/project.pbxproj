@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		668E3AB0736BAD9200B719C2 /* Pods_ZXChunYu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CFECE086347B3EFCBB5D /* Pods_ZXChunYu.framework */; };
+		E01311F31CCDB30C009DB84E /* ZXFreeQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = E01311F21CCDB30C009DB84E /* ZXFreeQuestion.m */; };
+		E01311F61CCDBDB0009DB84E /* ZXQuickQuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E01311F51CCDBDB0009DB84E /* ZXQuickQuestionVC.m */; };
+		E01311F91CCDBF56009DB84E /* UIBarButtonItem+ZX.m in Sources */ = {isa = PBXBuildFile; fileRef = E01311F81CCDBF56009DB84E /* UIBarButtonItem+ZX.m */; };
+		E01311FC1CCDC037009DB84E /* UIView+XZX.m in Sources */ = {isa = PBXBuildFile; fileRef = E01311FB1CCDC037009DB84E /* UIView+XZX.m */; };
+		E030FEAD1CD3213B00ADED1C /* ZXRCIMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E030FEAC1CD3213B00ADED1C /* ZXRCIMManager.m */; };
 		E042F7B91C74AF960082D593 /* NSTimer+ZXBlockSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E042F7B81C74AF960082D593 /* NSTimer+ZXBlockSupport.m */; };
 		E05CF5181CA3D0AC00FACD00 /* ZXFolloweeTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E05CF5171CA3D0AC00FACD00 /* ZXFolloweeTVC.m */; };
 		E05F34F41C52277C00DC0EA4 /* ZXSearch4HosTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E05F34EE1C52277C00DC0EA4 /* ZXSearch4HosTVC.m */; };
@@ -44,7 +49,7 @@
 		E0BA4F5E1CA66B090059C379 /* ZXUserEvaluation2Doc.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BA4F5D1CA66B090059C379 /* ZXUserEvaluation2Doc.m */; };
 		E0BA4F641CA67EE60059C379 /* ZXDocClinicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BA4F631CA67EE60059C379 /* ZXDocClinicTool.m */; };
 		E0BF591D1C8591630043AB78 /* ZXAd.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BF591C1C8591630043AB78 /* ZXAd.m */; };
-		E0BF59201C8591EB0043AB78 /* ZXAdTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BF591F1C8591EB0043AB78 /* ZXAdTool.m */; };
+		E0BF59201C8591EB0043AB78 /* ZXHomeTVCTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BF591F1C8591EB0043AB78 /* ZXHomeTVCTool.m */; };
 		E0E762581CC9F25F00E10330 /* ZXDocClinicTVC+ZXRCChat.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E762571CC9F25F00E10330 /* ZXDocClinicTVC+ZXRCChat.m */; };
 		E0E7625C1CCA08C700E10330 /* ZXRCConversationListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E7625B1CCA08C700E10330 /* ZXRCConversationListVC.m */; };
 		E0E762651CCD0EB400E10330 /* ZXDoctorRCUITool.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E762641CCD0EB400E10330 /* ZXDoctorRCUITool.m */; };
@@ -136,6 +141,16 @@
 
 /* Begin PBXFileReference section */
 		9FC74826E7BDDF5B0FA7DD5A /* Pods-ZXChunYu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZXChunYu.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZXChunYu/Pods-ZXChunYu.release.xcconfig"; sourceTree = "<group>"; };
+		E01311F11CCDB30C009DB84E /* ZXFreeQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXFreeQuestion.h; sourceTree = "<group>"; };
+		E01311F21CCDB30C009DB84E /* ZXFreeQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXFreeQuestion.m; sourceTree = "<group>"; };
+		E01311F41CCDBDB0009DB84E /* ZXQuickQuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXQuickQuestionVC.h; sourceTree = "<group>"; };
+		E01311F51CCDBDB0009DB84E /* ZXQuickQuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXQuickQuestionVC.m; sourceTree = "<group>"; };
+		E01311F71CCDBF56009DB84E /* UIBarButtonItem+ZX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+ZX.h"; sourceTree = "<group>"; };
+		E01311F81CCDBF56009DB84E /* UIBarButtonItem+ZX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+ZX.m"; sourceTree = "<group>"; };
+		E01311FA1CCDC037009DB84E /* UIView+XZX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XZX.h"; sourceTree = "<group>"; };
+		E01311FB1CCDC037009DB84E /* UIView+XZX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XZX.m"; sourceTree = "<group>"; };
+		E030FEAB1CD3213B00ADED1C /* ZXRCIMManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXRCIMManager.h; sourceTree = "<group>"; };
+		E030FEAC1CD3213B00ADED1C /* ZXRCIMManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXRCIMManager.m; sourceTree = "<group>"; };
 		E042F7B71C74AF960082D593 /* NSTimer+ZXBlockSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+ZXBlockSupport.h"; sourceTree = "<group>"; };
 		E042F7B81C74AF960082D593 /* NSTimer+ZXBlockSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+ZXBlockSupport.m"; sourceTree = "<group>"; };
 		E05CF5161CA3D0AC00FACD00 /* ZXFolloweeTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXFolloweeTVC.h; sourceTree = "<group>"; };
@@ -202,8 +217,8 @@
 		E0BA4F631CA67EE60059C379 /* ZXDocClinicTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXDocClinicTool.m; sourceTree = "<group>"; };
 		E0BF591B1C8591630043AB78 /* ZXAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXAd.h; sourceTree = "<group>"; };
 		E0BF591C1C8591630043AB78 /* ZXAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXAd.m; sourceTree = "<group>"; };
-		E0BF591E1C8591EB0043AB78 /* ZXAdTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXAdTool.h; sourceTree = "<group>"; };
-		E0BF591F1C8591EB0043AB78 /* ZXAdTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXAdTool.m; sourceTree = "<group>"; };
+		E0BF591E1C8591EB0043AB78 /* ZXHomeTVCTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXHomeTVCTool.h; sourceTree = "<group>"; };
+		E0BF591F1C8591EB0043AB78 /* ZXHomeTVCTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXHomeTVCTool.m; sourceTree = "<group>"; };
 		E0E762561CC9F25F00E10330 /* ZXDocClinicTVC+ZXRCChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZXDocClinicTVC+ZXRCChat.h"; sourceTree = "<group>"; };
 		E0E762571CC9F25F00E10330 /* ZXDocClinicTVC+ZXRCChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZXDocClinicTVC+ZXRCChat.m"; sourceTree = "<group>"; };
 		E0E7625A1CCA08C700E10330 /* ZXRCConversationListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXRCConversationListVC.h; sourceTree = "<group>"; };
@@ -538,6 +553,8 @@
 			children = (
 				E0BF591B1C8591630043AB78 /* ZXAd.h */,
 				E0BF591C1C8591630043AB78 /* ZXAd.m */,
+				E01311F11CCDB30C009DB84E /* ZXFreeQuestion.h */,
+				E01311F21CCDB30C009DB84E /* ZXFreeQuestion.m */,
 			);
 			path = HomeModel;
 			sourceTree = "<group>";
@@ -545,8 +562,8 @@
 		E0BF591A1C8590FE0043AB78 /* HomeTool */ = {
 			isa = PBXGroup;
 			children = (
-				E0BF591E1C8591EB0043AB78 /* ZXAdTool.h */,
-				E0BF591F1C8591EB0043AB78 /* ZXAdTool.m */,
+				E0BF591E1C8591EB0043AB78 /* ZXHomeTVCTool.h */,
+				E0BF591F1C8591EB0043AB78 /* ZXHomeTVCTool.m */,
 			);
 			path = HomeTool;
 			sourceTree = "<group>";
@@ -685,7 +702,6 @@
 			isa = PBXGroup;
 			children = (
 				E9B5E3931C02B97000660774 /* Main */,
-				E9D4F96C1C103125005A81BE /* Category */,
 				E9FF623F1C47862B006D05B0 /* DocCilnic */,
 				E9CD1FFB1C4E2668006947EF /* Hospital */,
 				E9B5E3C31C05B2F400660774 /* Home */,
@@ -769,6 +785,7 @@
 				E9D4F95B1C0EE817005A81BE /* Model */,
 				E9E5F1F31C20112200670B4A /* Tool */,
 				E9D4F9621C0EEADD005A81BE /* View */,
+				E9D4F96C1C103125005A81BE /* Category */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -789,6 +806,8 @@
 			children = (
 				E9D4F9731C118F56005A81BE /* ZXHomeTVC.h */,
 				E9D4F9741C118F56005A81BE /* ZXHomeTVC.m */,
+				E01311F41CCDBDB0009DB84E /* ZXQuickQuestionVC.h */,
+				E01311F51CCDBDB0009DB84E /* ZXQuickQuestionVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -893,6 +912,8 @@
 				E9D4F9601C0EE885005A81BE /* ZXTableViewGroup.m */,
 				E9D4F9661C0EEB59005A81BE /* ZXTableViewItem.h */,
 				E9D4F9671C0EEB59005A81BE /* ZXTableViewItem.m */,
+				E030FEAB1CD3213B00ADED1C /* ZXRCIMManager.h */,
+				E030FEAC1CD3213B00ADED1C /* ZXRCIMManager.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -938,8 +959,13 @@
 				E0E9286D1C802DB1009BB8F2 /* UIColor+ZX.m */,
 				E08851491CBA2F6E0042451D /* JVFloatLabeledTextField+ZX.h */,
 				E088514A1CBA2F6E0042451D /* JVFloatLabeledTextField+ZX.m */,
+				E01311FA1CCDC037009DB84E /* UIView+XZX.h */,
+				E01311FB1CCDC037009DB84E /* UIView+XZX.m */,
+				E01311F71CCDBF56009DB84E /* UIBarButtonItem+ZX.h */,
+				E01311F81CCDBF56009DB84E /* UIBarButtonItem+ZX.m */,
 			);
-			path = Category;
+			name = Category;
+			path = ../Category;
 			sourceTree = "<group>";
 		};
 		E9E5F1DE1C20011400670B4A /* Login */ = {
@@ -1339,12 +1365,16 @@
 				E08E041A1C8F007700FEEFA9 /* ZXInsetLabel.m in Sources */,
 				E9FF62621C47862B006D05B0 /* ZXDocClinicServiceCell.m in Sources */,
 				E05F34FB1C522B6000DC0EA4 /* ZXSearchMenuView.m in Sources */,
+				E01311F91CCDBF56009DB84E /* UIBarButtonItem+ZX.m in Sources */,
 				E9D4F9681C0EEB59005A81BE /* ZXTableViewItem.m in Sources */,
 				E08ADEC81C5502C900984867 /* ZXRegistVC.m in Sources */,
+				E030FEAD1CD3213B00ADED1C /* ZXRCIMManager.m in Sources */,
 				E9D4F9651C0EEB08005A81BE /* ZXTableViewCell.m in Sources */,
+				E01311F61CCDBDB0009DB84E /* ZXQuickQuestionVC.m in Sources */,
 				E07BE4E81C425F58001C4E72 /* ZXUserProfileCell.m in Sources */,
 				E0E9287F1C8051C7009BB8F2 /* ZXHealthNews.m in Sources */,
 				E0E9287A1C805143009BB8F2 /* ZXHealthNewsTVC.m in Sources */,
+				E01311FC1CCDC037009DB84E /* UIView+XZX.m in Sources */,
 				E05F34F41C52277C00DC0EA4 /* ZXSearch4HosTVC.m in Sources */,
 				E9E5F1EB1C200CE400670B4A /* ZXLoginParams.m in Sources */,
 				E9A571301C16DDE600537BE5 /* ZXHomeAdView.m in Sources */,
@@ -1364,7 +1394,7 @@
 				E9D4F9611C0EE885005A81BE /* ZXTableViewGroup.m in Sources */,
 				E05F35001C5263D000DC0EA4 /* ZXHosTitleCell.m in Sources */,
 				E9CD1FEA1C4E112B006947EF /* ZXNetworkStatusTool.m in Sources */,
-				E0BF59201C8591EB0043AB78 /* ZXAdTool.m in Sources */,
+				E0BF59201C8591EB0043AB78 /* ZXHomeTVCTool.m in Sources */,
 				E9D4F96F1C1031AF005A81BE /* UIView+ZX.m in Sources */,
 				E9FF623E1C4746DB006D05B0 /* UIImageView+ZXBorder.m in Sources */,
 				E0E928991C8220A6009BB8F2 /* ZXTreatmentsTool.m in Sources */,
@@ -1404,6 +1434,7 @@
 				E0E928901C81BB51009BB8F2 /* ZXTreatmentsCVCell.m in Sources */,
 				E06183481C5715A30008B933 /* ZXUserInfo.m in Sources */,
 				E9E5F1FD1C23E9DE00670B4A /* ZXGetDocsTool.m in Sources */,
+				E01311F31CCDB30C009DB84E /* ZXFreeQuestion.m in Sources */,
 				E0E7625C1CCA08C700E10330 /* ZXRCConversationListVC.m in Sources */,
 				E9FF62601C47862B006D05B0 /* ZXDocClinicDoctorCell.m in Sources */,
 			);
@@ -1551,6 +1582,7 @@
 			baseConfigurationReference = E147E8ED2A7E33BB9DE20E00 /* Pods-ZXChunYu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ZXChunYu/Info.plist;
@@ -1567,6 +1599,7 @@
 			baseConfigurationReference = 9FC74826E7BDDF5B0FA7DD5A /* Pods-ZXChunYu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ZXChunYu/Info.plist;

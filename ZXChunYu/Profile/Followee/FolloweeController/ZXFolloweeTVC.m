@@ -27,6 +27,7 @@
     self.title = @"我的医生";
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     
     [self.tableView registerNib:[UINib nibWithNibName:kRDTableCellNibName bundle:nil] forCellReuseIdentifier:kRDCellIdentifier];
     

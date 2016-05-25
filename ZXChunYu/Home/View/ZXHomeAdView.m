@@ -106,9 +106,10 @@
     // 创建定时器（两种方式：timerWithTimeInterval）
     // self.timer = [NSTimer scheduledTimerWithTimeInterval:1.f target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
 //    self.timer = [NSTimer timerWithTimeInterval:5.f target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
-    __weak ZXHomeAdView *weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
+    
     _timer = [NSTimer ZXScheduledTimerWithTimeInterval:5.f block:^{
-        ZXHomeAdView *strongSelf = weakSelf;
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf nextPage];
     } repeats:YES];
     
@@ -124,7 +125,7 @@
 - (void)nextPage {
     NSInteger currentPage = self.pageControl.currentPage;
     currentPage++;
-    if (currentPage == 3) {
+    if (currentPage == _ads.count) {
         currentPage = 0;
     }
     

@@ -14,6 +14,7 @@
 #import "ZXDoctorRCUITool.h"
 #import "UIColor+ZX.h"
 
+#import "ZXRCIMManager.h"
 #import "ZXNetworkStatusTool.h"
 
 #import <SMS_SDK/SMSSDK.h>  
@@ -29,9 +30,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // 设置主窗口,并设置跟控制器
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    ZXTabBarControllerConfig *tabBarControllerConfig = [[ZXTabBarControllerConfig alloc] init];
     
+    ZXTabBarControllerConfig *tabBarControllerConfig = [[ZXTabBarControllerConfig alloc] init];
     self.window.rootViewController = tabBarControllerConfig.tabBarController;
+    
     [self.window makeKeyAndVisible];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -53,6 +55,7 @@
         [rcim connectWithToken:account.token success:^(NSString *userId) {
             NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
             rcim.enableTypingStatus = YES;
+//            rcim.receiveMessageDelegate = self;
             [[RCIM sharedRCIM] setUserInfoDataSource:self];
         } error:^(RCConnectErrorCode status) {
             NSLog(@"登陆的错误码为:%ld", (long)status);
@@ -63,6 +66,9 @@
             NSLog(@"token错误");
         }];
     }
+    
+    // 开启manager
+    [ZXRCIMManager sharedManager];
     
     ZXNetworkStatusTool *networkStatusTool = [[ZXNetworkStatusTool alloc] init];
     [networkStatusTool startMonitor];
@@ -146,17 +152,25 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(nonnull NSData *)deviceToken {
+    NSString *token = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    [[RCIMClient sharedRCIMClient] setDeviceToken:token];
+}
+
+#pragma mark - RCIMUserInfoDataSource
+
 - (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion {
-    NSLog(@"getUserInfoWithUserId:%@",userId);
     
     ZXAccount *account = [ZXAccountTool shareAccount];
     
     if ([account.uid isEqual:userId]) {
         return completion(account.rcUserInfo);
+    } else {
+        return completion([ZXDoctorRCUITool readDoctorRCUI:userId]);
     }
-    
-    return completion([ZXDoctorRCUITool readDoctorRCUI:userId]);
-    
+  
 //    NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
 //    
 //    if ([accountDefaults objectForKey:userId]) {
@@ -164,6 +178,29 @@
 //        RCUserInfo *docInfo = [NSKeyedUnarchiver unarchiveObjectWithData:doctorInfoData];
 //        return completion(docInfo);
 //    }
+}
+
+
+#pragma mark - RCIMReceiveMessage Delegate
+
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
+    //[self.navigationController.tabBarItem setBadgeValue:@"123"];
+}
+
+
+#pragma mark - RCIMConnectionStatus Delegate
+
+- (void)onRCIMConnectionStatusChanged:(RCConnectionStatus)status {
+    if (status == ConnectionStatus_KICKED_OFFLINE_BY_OTHER_CLIENT) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"提示"
+                              message:@"您"
+                              @"的帐号在别的设备上登录，您被迫下线！"
+                              delegate:nil
+                              cancelButtonTitle:@"知道了"
+                              otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 
 @end

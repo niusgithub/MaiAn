@@ -320,7 +320,6 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
                                        NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
                                        if ([resonpseDict[@"msg"] isEqualToString:@"add focus success"]) {
                                            //[MBProgressHUD showSuccess:@"关注成功"];
-                                           NSLog(@"关注成功");
                                        } else if ([resonpseDict[@"msg"] isEqualToString:@"add talk fail"]) {
                                            NSLog(@"关注失败");
                                        }
@@ -341,7 +340,6 @@ NSString *const kDocClinicTitleCellNibName = @"ZXDocClinicTitleCell";
                                              NSDictionary *resonpseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
                                              if ([resonpseDict[@"msg"] isEqualToString:@"del focus success"]) {
                                                  //[MBProgressHUD showSuccess:@"修改成功"];
-                                                 NSLog(@"取消关注成功");
                                              } else if ([resonpseDict[@"msg"] isEqualToString:@"del focus fail"]) {
                                                  NSLog(@"取消关注失败");
                                              }

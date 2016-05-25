@@ -16,25 +16,27 @@
 #import "ZXDocClinicTVC.h"
 #import "ZXInsetLabel.h"
 #import "ZXHomeMainCell.h"
-
-#import <SafariServices/SafariServices.h>
-
 #import "ZXDoctor.h"
 #import "ZXAd.h"
+#import "ZXQuickQuestionVC.h"
 
 #import "ZXGetDocsTool.h"
 #import "ZXGetDocExtraInfo.h"
-#import "ZXAdTool.h"
+#import "ZXHomeTVCTool.h"
+#import "ZXHomeTVCTool.h"
 
 #import "ZXMaiAnAPI.h"
 #import "ZXCommon.h"
+#import "ZXAccount.h"
+#import "ZXAccountTool.h"
+
+#import "NSString+ZX.h"
 #import "UIColor+ZX.h"
 
 #import "YYModel.h"
+#import "MBProgressHUD+MJ.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-
-#import "NSString+ZX.h"
-#import "ZXSettingTool.h"
+#import <SafariServices/SafariServices.h>
 
 const CGFloat kTitleCellHeight = 30;
 
@@ -97,7 +99,7 @@ const CGFloat kTitleCellHeight = 30;
 - (void)fetchAdsData {
     [self.ads removeAllObjects];
     
-    [ZXAdTool getAdsWithSuccessBlock:^(id responseObject) {
+    [ZXHomeTVCTool getAdsWithSuccessBlock:^(id responseObject) {
         NSDictionary *adInfoJson = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         
         for (NSDictionary *adDict in adInfoJson) {
@@ -175,21 +177,25 @@ const CGFloat kTitleCellHeight = 30;
             
             [cell.questionBtn setImage:[UIImage imageNamed:@"question"] forState:UIControlStateNormal];
             [cell.questionBtn setTitle:NSLocalizedString(@"quickQuestions", nil) forState:UIControlStateNormal];
+            [cell.questionBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
             [cell.questionBtn setTag:1];
             [cell.questionBtn addTarget:self action:@selector(mainCellBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             
             [cell.search4HosBtn setImage:[UIImage imageNamed:@"hospital"] forState:UIControlStateNormal];
             [cell.search4HosBtn setTitle:NSLocalizedString(@"search4Hos", nil) forState:UIControlStateNormal];
+            [cell.search4HosBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
             [cell.search4HosBtn setTag:2];
             [cell.search4HosBtn addTarget:self action:@selector(mainCellBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             
             [cell.search4DocBtn setImage:[UIImage imageNamed:@"doctor"] forState:UIControlStateNormal];
             [cell.search4DocBtn setTitle:NSLocalizedString(@"search4Doc", nil) forState:UIControlStateNormal];
+            [cell.search4DocBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
             [cell.search4DocBtn setTag:3];
             [cell.search4DocBtn addTarget:self action:@selector(mainCellBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             
             [cell.selfDigonseBtn setImage:[UIImage imageNamed:@"selfCheck"] forState:UIControlStateNormal];
             [cell.selfDigonseBtn setTitle:NSLocalizedString(@"selfDignose", nil) forState:UIControlStateNormal];
+            [cell.selfDigonseBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
             [cell.selfDigonseBtn setTag:4];
             [cell.selfDigonseBtn addTarget:self action:@selector(mainCellBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -303,8 +309,14 @@ const CGFloat kTitleCellHeight = 30;
 - (void)mainCellBtnClick:(ZXVerticalButton *)btn {
     switch (btn.tag) {
         case 1: {
-            // TODO:完成快速提问功能
-            NSLog(@"快速提问");
+            if ([ZXAccountTool shareAccount]) {
+                ZXQuickQuestionVC *qqVC = [[ZXQuickQuestionVC alloc] init];
+                qqVC.view.backgroundColor = [UIColor whiteColor];
+                [self.navigationController pushViewController:qqVC animated:YES];
+                NSLog(@"快速提问");
+            } else {
+                [MBProgressHUD showError:@"请先登录"];
+            }
         }
             break;
             

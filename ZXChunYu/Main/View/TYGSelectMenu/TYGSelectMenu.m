@@ -143,11 +143,16 @@
         mainView.backgroundColor = [UIColor clearColor];
         
         mainView.frame = CGRectMake(menuX, menuY, menuW, 0);
+        
+        __weak UIView *weakView = mainView;
+        
         [UIView animateWithDuration:0.24 animations:^{
             
-            mainView.frame = mainViewFrame;
-//FIXME:superview
-            [view.superview addSubview:mainView];
+            UIView *strongView = weakView;
+            
+            strongView.frame = mainViewFrame;
+            
+            [view.superview addSubview:strongView];
 
         } completion:^(BOOL finished) {
             
@@ -170,12 +175,9 @@
         }
     }
     
-    CGFloat scrollOffset_v = 1;
-    CGFloat scrollOffset_h = 1;
-
     CGFloat scrollX = 0;
-    CGFloat scrollY = scrollOffset_v;
-    CGFloat scrollW = (CGRectGetWidth(mainView.frame) + scrollOffset_h) / totalLevel - scrollOffset_h;
+    CGFloat scrollY = 0;;
+    CGFloat scrollW = CGRectGetWidth(mainView.frame) / totalLevel;
     CGFloat scrollH = CGRectGetHeight(mainView.frame) - scrollY;
     
     for (int i = 0; i < totalLevel; i ++) {
@@ -193,15 +195,15 @@
         [mainView addSubview:tableView];
         
         // 蒙板
-        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(scrollX-1, scrollY, scrollW+1, scrollH)]; //有个缝😂
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(scrollX, scrollY, scrollW, scrollH)];
         v.backgroundColor = [UIColor blackColor];
         v.alpha = 0.8f;
-        [v  addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disMiss)]];
+        [v addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disMiss)]];
         [mainView insertSubview:v belowSubview:tableView];
         
         tableView.backgroundColor = [UIColor whiteColor];
 
-        scrollX = CGRectGetMaxX(tableView.frame) + scrollOffset_h;
+        scrollX = CGRectGetMaxX(tableView.frame);
     }
     return mainView;
 }
@@ -211,16 +213,20 @@
  */
 - (void)disMiss {
     
+    __weak UIView *weakView = mainView;
+    
     if (mainView) {
         
-        CGRect mainViewFrame = mainView.frame;
+        UIView *strongView = weakView;
+        
+        CGRect mainViewFrame = strongView.frame;
         mainViewFrame.size.height = 0;
 
         [UIView animateWithDuration:0.24 animations:^{
-            mainView.frame = mainViewFrame;
+            strongView.frame = mainViewFrame;
         } completion:^(BOOL finished) {
-            [mainView removeFromSuperview];
-            mainView = nil;
+            [strongView removeFromSuperview];
+            self->mainView = nil;
         }];
     }
 }
@@ -233,7 +239,9 @@
     selectedMenu = selectedMenu2;
 }
 
-#pragma mark - UITableViewDataSource
+
+#pragma mark - UITableView DataSource
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
     NSInteger num = 0;
@@ -366,7 +374,9 @@
     return view;
 }
 
-#pragma mark - UITableViewDelegate
+
+#pragma mark - UITableView Delegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     //获取选中的节点
